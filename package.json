@@ -1,0 +1,68 @@
+{
+  "name": "@zendeskgarden/tool-shed",
+  "description": "Garden Tool Shed",
+  "license": "Apache-2.0",
+  "author": "Zendesk Garden <garden@zendesk.com>",
+  "homepage": "https://garden.zendesk.com/",
+  "repository": "https://github.com/zendeskgarden/tool-shed",
+  "bugs": {
+    "url": "https://github.com/zendeskgarden/tool-shed/issues"
+  },
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "bin": {
+    "garden": "bin/index.js"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn tsc",
+    "format": "prettier-package-json --write && yarn format:all --write",
+    "format:all": "prettier --loglevel warn '**/*.{js,ts,json,md}' '!dist/**' '!.github/ISSUE_TEMPLATE.md'",
+    "lint": "yarn lint:js && yarn lint:md",
+    "lint:js": "eslint bin/ src/ --ext js,ts --max-warnings 0",
+    "lint:md": "markdownlint ./*.md ./**/*.md",
+    "prepare": "yarn build",
+    "start": "bin/index.js",
+    "test": "prettier-package-json --list-different && yarn format:all --check && yarn lint",
+    "watch": "yarn tsc --watch"
+  },
+  "dependencies": {
+    "@octokit/rest": "17.1.4",
+    "@zendeskgarden/react-theming": "8.4.1",
+    "chalk": "4.0.0",
+    "commander": "5.0.0",
+    "envalid": "6.0.1",
+    "figlet": "1.3.0",
+    "netlify": "4.0.3"
+  },
+  "devDependencies": {
+    "@types/figlet": "1.2.0",
+    "@types/node": "13.11.0",
+    "@typescript-eslint/eslint-plugin": "2.26.0",
+    "@typescript-eslint/parser": "2.26.0",
+    "@zendeskgarden/eslint-config": "11.0.3",
+    "babel-eslint": "10.1.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-notice": "0.8.9",
+    "eslint-plugin-prettier": "3.1.2",
+    "markdownlint": "0.19.0",
+    "prettier": "2.0.2",
+    "prettier-package-json": "2.1.3",
+    "react": "16.13.1",
+    "styled-components": "5.0.1",
+    "typescript": "3.8.3"
+  },
+  "keywords": [
+    "cli",
+    "garden",
+    "tools",
+    "zendesk"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
