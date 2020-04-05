@@ -5,5 +5,8 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { deployment as githubDeployment } from './github';
+export {
+  deployment as githubDeployment,
+  deploymentStatus as githubDeploymentStatus
+} from './github';
 export { deploy as netlifyDeploy } from './netlify';

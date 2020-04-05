@@ -6,3 +6,7 @@
  */
 
 export { default as deploymentCommand, execute as deployment } from './deployment';
+export {
+  default as deploymentStatusCommand,
+  execute as deploymentStatus
+} from './deploymentStatus';

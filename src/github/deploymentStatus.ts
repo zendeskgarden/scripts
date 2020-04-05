@@ -12,20 +12,24 @@ export const execute = (
   token: string,
   owner: string,
   repo: string,
-  ref: string,
-  environment?: 'staging' | 'production',
+  deploymentId: number,
+  state: 'success' | 'pending' | 'error',
+  url: string,
+  logUrl?: string,
+  environment?: 'production' | 'staging',
   description?: string
 ) => {
   const github = new Octokit({ auth: token });
 
-  return github.repos.createDeployment({
+  return github.repos.createDeploymentStatus({
     owner,
     repo,
-    ref,
+    deployment_id: deploymentId,
+    state,
+    environment_url: url,
+    log_url: logUrl,
     environment,
-    description,
-    required_contexts: [],
-    transient_environment: (environment && environment !== 'production') || undefined
+    description
   });
 };
 
@@ -35,7 +39,10 @@ async function action(command: Command) {
       command.token,
       command.owner,
       command.repo,
-      command.commit,
+      command.id,
+      command.state,
+      command.url,
+      command.log_url,
       command.env,
       command.desc
     );
@@ -48,7 +55,7 @@ async function action(command: Command) {
 }
 
 export default () => {
-  const command = new Command('github-deployment');
+  const command = new Command('github-deployment-status');
   let ownerDefault;
   let repoDefault;
 
@@ -63,13 +70,12 @@ export default () => {
     .requiredOption('-t, --token <token>', 'access token', process.env.GITHUB_TOKEN)
     .requiredOption('-o, --owner <owner>', 'github owner', ownerDefault)
     .requiredOption('-r, --repo <repo>', 'github repo', repoDefault)
-    .requiredOption(
-      '-c, --commit <commit>',
-      'commit SHA or ref to deploy',
-      process.env.CIRCLE_SHA1 || process.env.TRAVIS_COMMIT
-    )
+    .requiredOption('-i, --id <id>', 'deployment ID')
+    .requiredOption('-s, --state <state>', 'state (success, pending, error)')
+    .requiredOption('-u, --url <url>', 'deployment URL')
+    .option('-l, --log [log]', 'deployment log URL')
     .option('-e, --env [env]', 'environment (staging, production)')
-    .option('-d, --desc [desc]', 'deployment description')
+    .option('-d, --desc [desc]', 'deployment status description')
     .action((_command: Command) => {
       action(_command);
     });

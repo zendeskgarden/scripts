@@ -22,5 +22,6 @@ const netlify = require('../dist/netlify');
 program
   .version(version)
   .addCommand(github.deploymentCommand())
+  .addCommand(github.deploymentStatusCommand())
   .addCommand(netlify.deployCommand())
   .parse(process.argv);
