@@ -7,6 +7,7 @@
 
 export {
   deployment as githubDeployment,
-  deploymentStatus as githubDeploymentStatus
+  deploymentStatus as githubDeploymentStatus,
+  pages as githubPages
 } from './github';
 export { deploy as netlifyDeploy } from './netlify';

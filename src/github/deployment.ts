@@ -7,20 +7,21 @@
 
 import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
+import { execSync } from 'child_process';
 
 export const execute = (
   token: string,
-  owner: string,
-  repo: string,
   ref: string,
+  owner?: string,
+  repo?: string,
   environment?: 'staging' | 'production',
   description?: string
 ) => {
   const github = new Octokit({ auth: token });
 
   return github.repos.createDeployment({
-    owner,
-    repo,
+    owner: owner || 'zendeskgarden',
+    repo: repo || execSync('basename `git rev-parse --show-toplevel`').toString(),
     ref,
     environment,
     description,
@@ -43,22 +44,22 @@ export default () => {
 
   return command
     .requiredOption('-t, --token <token>', 'access token', process.env.GITHUB_TOKEN)
-    .requiredOption('-o, --owner <owner>', 'github owner', ownerDefault)
-    .requiredOption('-r, --repo <repo>', 'github repo', repoDefault)
     .requiredOption(
       '-c, --commit <commit>',
       'commit SHA or ref to deploy',
       process.env.CIRCLE_SHA1 || process.env.TRAVIS_COMMIT
     )
+    .option('-o, --owner [owner]', 'github owner', ownerDefault)
+    .option('-r, --repo [repo]', 'github repo', repoDefault)
     .option('-e, --env [env]', 'environment (staging, production)')
     .option('-d, --desc [desc]', 'deployment description')
     .action(async function action() {
       try {
         const response = await execute(
           command.token,
+          command.commit,
           command.owner,
           command.repo,
-          command.commit,
           command.env,
           command.desc
         );

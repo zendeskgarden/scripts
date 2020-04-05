@@ -7,14 +7,15 @@
 
 import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
+import { execSync } from 'child_process';
 
 export const execute = (
   token: string,
-  owner: string,
-  repo: string,
   deploymentId: number,
   state: 'success' | 'pending' | 'error',
   url: string,
+  owner?: string,
+  repo?: string,
   logUrl?: string,
   environment?: 'production' | 'staging',
   description?: string
@@ -22,8 +23,8 @@ export const execute = (
   const github = new Octokit({ auth: token });
 
   return github.repos.createDeploymentStatus({
-    owner,
-    repo,
+    owner: owner || 'zendeskgarden',
+    repo: repo || execSync('basename `git rev-parse --show-toplevel`').toString(),
     deployment_id: deploymentId,
     state,
     environment_url: url,
@@ -47,11 +48,11 @@ export default () => {
 
   return command
     .requiredOption('-t, --token <token>', 'access token', process.env.GITHUB_TOKEN)
-    .requiredOption('-o, --owner <owner>', 'github owner', ownerDefault)
-    .requiredOption('-r, --repo <repo>', 'github repo', repoDefault)
     .requiredOption('-i, --id <id>', 'deployment ID')
     .requiredOption('-s, --state <state>', 'state (success, pending, error)')
     .requiredOption('-u, --url <url>', 'deployment URL')
+    .option('-o, --owner [owner]', 'github owner', ownerDefault)
+    .option('-r, --repo [repo]', 'github repo', repoDefault)
     .option('-l, --log [log]', 'deployment log URL')
     .option('-e, --env [env]', 'environment (staging, production)')
     .option('-d, --desc [desc]', 'deployment status description')
@@ -59,11 +60,11 @@ export default () => {
       try {
         const response = await execute(
           command.token,
-          command.owner,
-          command.repo,
           command.id,
           command.state,
           command.url,
+          command.owner,
+          command.repo,
           command.log_url,
           command.env,
           command.desc

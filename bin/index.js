@@ -23,5 +23,6 @@ program
   .version(version)
   .addCommand(github.deploymentCommand())
   .addCommand(github.deploymentStatusCommand())
+  .addCommand(github.pagesCommand())
   .addCommand(netlify.deployCommand())
   .parse(process.argv);

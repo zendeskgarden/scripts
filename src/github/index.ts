@@ -10,3 +10,4 @@ export {
   default as deploymentStatusCommand,
   execute as deploymentStatus
 } from './deploymentStatus';
+export { default as pagesCommand, execute as pages } from './pages';
