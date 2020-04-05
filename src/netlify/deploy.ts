@@ -23,35 +23,6 @@ export const execute = (
   });
 };
 
-async function action(command: Command) {
-  /*
-  const env = cleanEnv(process.env, {
-    NETLIFY_TOKEN: str({
-      desc: 'Netlify access token',
-      docs: 'https://app.netlify.com/user/applications'
-    }),
-    NETLIFY_SITE_ID: str({
-      desc: 'Netlify site API ID',
-      docs: 'https://docs.netlify.com/api/get-started/#get-site'
-    })
-  });
-  */
-  try {
-    const response = await execute(
-      command.token,
-      command.id,
-      command.dir,
-      !command.production,
-      command.message
-    );
-
-    console.log(response.deploy.deploy_ssl_url);
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
-  }
-}
-
 export default () => {
   const command = new Command('netlify-deploy');
 
@@ -61,7 +32,20 @@ export default () => {
     .requiredOption('-i, --id <id>', 'site API ID', process.env.NETLIFY_SITE_ID)
     .option('-p, --production', 'production deploy')
     .option('-m, --message [message]', 'deploy message')
-    .action((_command: Command) => {
-      action(_command);
+    .action(async function action() {
+      try {
+        const response = await execute(
+          command.token,
+          command.id,
+          command.dir,
+          !command.production,
+          command.message
+        );
+
+        console.log(response.deploy.deploy_ssl_url);
+      } catch (error) {
+        console.error(error);
+        process.exit(1);
+      }
     });
 };

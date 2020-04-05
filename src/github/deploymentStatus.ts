@@ -33,27 +33,6 @@ export const execute = (
   });
 };
 
-async function action(command: Command) {
-  try {
-    const response = await execute(
-      command.token,
-      command.owner,
-      command.repo,
-      command.id,
-      command.state,
-      command.url,
-      command.log_url,
-      command.env,
-      command.desc
-    );
-
-    console.log(response.data.id);
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
-  }
-}
-
 export default () => {
   const command = new Command('github-deployment-status');
   let ownerDefault;
@@ -76,7 +55,24 @@ export default () => {
     .option('-l, --log [log]', 'deployment log URL')
     .option('-e, --env [env]', 'environment (staging, production)')
     .option('-d, --desc [desc]', 'deployment status description')
-    .action((_command: Command) => {
-      action(_command);
+    .action(async function action() {
+      try {
+        const response = await execute(
+          command.token,
+          command.owner,
+          command.repo,
+          command.id,
+          command.state,
+          command.url,
+          command.log_url,
+          command.env,
+          command.desc
+        );
+
+        console.log(response.data.id);
+      } catch (error) {
+        console.error(error);
+        process.exit(1);
+      }
     });
 };
