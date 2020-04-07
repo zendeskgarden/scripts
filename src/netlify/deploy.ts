@@ -5,46 +5,71 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { siteId as getSiteId, token as getToken } from '.';
 import { Command } from 'commander';
 import NetlifyAPI from 'netlify';
+import { red } from 'chalk';
 
-export const execute = (
-  token: string,
-  siteId: string,
-  dir: string,
-  draft: boolean,
-  message?: string
-) => {
-  const client = new NetlifyAPI(token);
+type ARGS = {
+  dir: string;
+  production: boolean;
+  token?: string;
+  siteId?: string;
+  message?: string;
+};
 
-  return client.deploy(siteId, dir, {
-    draft,
-    message
-  });
+/**
+ * Execute the `netlify-deploy` command.
+ *
+ * @param {string} args.dir Folder to deploy.
+ * @param {string} args.production Determine whether this is a production deploy.
+ * @param {string} [args.message] Deploy message.
+ * @param {string} [args.token] Netlify personal access token.
+ * @param {string} [args.siteId] Netlify site API ID.
+ */
+export const execute = async (
+  args: ARGS = { dir: '', production: false }
+): Promise<string | undefined> => {
+  try {
+    const token = args.token || (await getToken());
+    const client = new NetlifyAPI(token);
+    const siteId = args.siteId || (await getSiteId());
+
+    /* https://open-api.netlify.com/#operation/createSiteDeploy */
+    const response = await client.deploy(siteId, args.dir, {
+      draft: !args.production,
+      message: args.message
+    });
+
+    return response.deploy.deploy_ssl_url;
+  } catch (error) {
+    console.error(red(error));
+  }
 };
 
 export default () => {
   const command = new Command('netlify-deploy');
 
   return command
-    .requiredOption('-d, --dir <dir>', 'folder to deploy')
-    .requiredOption('-t, --token <token>', 'access token', process.env.NETLIFY_TOKEN)
-    .requiredOption('-i, --id <id>', 'site API ID', process.env.NETLIFY_SITE_ID)
+    .description('deploy to a Netlify site')
+    .arguments('<dir>')
+    .option('-t, --token <token>', 'access token')
+    .option('-i, --id <id>', 'site API ID')
     .option('-p, --production', 'production deploy')
     .option('-m, --message [message]', 'deploy message')
-    .action(async function action() {
-      try {
-        const response = await execute(
-          command.token,
-          command.id,
-          command.dir,
-          !command.production,
-          command.message
-        );
+    .action(async dir => {
+      const url = await execute({
+        dir,
+        production: command.production,
+        token: command.token,
+        siteId: command.id,
+        message: command.message
+      });
 
-        console.log(response.deploy.deploy_ssl_url);
-      } catch (error) {
-        console.error(error);
+      if (url) {
+        console.log(url);
+      } else {
+        console.error(red(`Unable to deploy ${dir}`));
         process.exit(1);
       }
     });

@@ -10,4 +10,9 @@ export {
   default as deploymentStatusCommand,
   execute as deploymentStatus
 } from './deploymentStatus';
+export { default as branchCommand, execute as branch } from './branch';
+export { default as commitCommand, execute as commit } from './commit';
+export { default as ownerCommand, execute as owner } from './owner';
 export { default as pagesCommand, execute as pages } from './pages';
+export { default as repoCommand, execute as repo } from './repo';
+export { default as tokenCommand, execute as token } from './token';

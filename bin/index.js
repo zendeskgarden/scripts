@@ -12,6 +12,7 @@ const PALETTE = require('@zendeskgarden/react-theming').PALETTE;
 const textSync = require('figlet').textSync;
 
 console.log(chalk.hex(PALETTE.green[400])(textSync('garden')));
+console.log();
 
 const Command = require('commander').Command;
 const program = new Command();
@@ -21,8 +22,15 @@ const netlify = require('../dist/netlify');
 
 program
   .version(version)
+  .addCommand(github.branchCommand())
+  .addCommand(github.commitCommand())
   .addCommand(github.deploymentCommand())
   .addCommand(github.deploymentStatusCommand())
+  .addCommand(github.ownerCommand())
   .addCommand(github.pagesCommand())
+  .addCommand(github.repoCommand())
+  .addCommand(github.tokenCommand())
   .addCommand(netlify.deployCommand())
-  .parse(process.argv);
+  .addCommand(netlify.siteIdCommand())
+  .addCommand(netlify.tokenCommand())
+  .parse();

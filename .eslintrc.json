@@ -10,8 +10,10 @@
   "rules": {
     "no-console": "off",
     "require-jsdoc": "off",
+    "valid-jsdoc": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/camelcase": ["error", { "properties": "never" }],
+    "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-var-requires": "off"
   }
 }

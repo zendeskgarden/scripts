@@ -6,3 +6,5 @@
  */
 
 export { default as deployCommand, execute as deploy } from './deploy';
+export { default as siteIdCommand, execute as siteId } from './siteId';
+export { default as tokenCommand, execute as token } from './token';

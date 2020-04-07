@@ -5,53 +5,61 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { owner as getOwner, repo as getRepo, token as getToken } from '.';
 import { Command } from 'commander';
-import { execSync } from 'child_process';
 import { publish } from 'gh-pages';
+import { red } from 'chalk';
 
-export const execute = (
-  token: string,
-  dir: string,
-  owner?: string,
-  repo?: string,
-  message?: string
-) => {
-  publish(dir, {
-    repo: `https://${token}@github.com/${owner || 'zendeskgarden'}/${
-      repo || execSync('basename `git rev-parse --show-toplevel`')
-    }.git`,
-    user: {
-      name: 'Zendesk Garden',
-      email: 'garden@zendesk.com'
-    },
-    message: message || 'Updates [skip ci]',
-    silent: true
-  });
+type ARGS = {
+  dir: string;
+  message?: string;
+  token?: string;
+  owner?: string;
+  repo?: string;
+};
+
+/**
+ * Execute the `github-pages` command.
+ *
+ * @param {string} args.dir Folder to publish.
+ * @param {string} [args.message] Commit message.
+ * @param {string} [args.token] GitHub personal access token.
+ * @param {string} [args.owner] GitHub repository owner.
+ * @param {string} [args.repo] GitHub repository name.
+ */
+export const execute = async (args: ARGS = { dir: '' }) => {
+  const token = args.token || (await getToken());
+  const owner = args.owner || (await getOwner(args.dir));
+  const repo = args.repo || (await getRepo(args.dir));
+  const message = args.message || 'Updates [skip ci]';
+
+  if (token && owner && repo) {
+    publish(args.dir, {
+      repo: `https://${token}@github.com/${owner}/${repo}.git`,
+      user: {
+        name: 'Zendesk Garden',
+        email: 'garden@zendesk.com'
+      },
+      message,
+      silent: true
+    });
+  } else {
+    throw new Error('Invalid git repository');
+  }
 };
 
 export default () => {
   const command = new Command('github-pages');
-  let ownerDefault;
-  let repoDefault;
-
-  if (process.env.TRAVIS_REPO_SLUG) {
-    [ownerDefault, repoDefault] = process.env.TRAVIS_REPO_SLUG.split('/');
-  } else {
-    ownerDefault = process.env.CIRCLE_PROJECT_USERNAME;
-    repoDefault = process.env.CIRCLE_PROJECT_REPONAME;
-  }
 
   return command
-    .requiredOption('-t, --token <token>', 'access token', process.env.GITHUB_TOKEN)
-    .requiredOption('-d, --dir <dir>', 'folder to publish')
-    .option('-o, --owner [owner]', 'github owner', ownerDefault)
-    .option('-r, --repo [repo]', 'github repo', repoDefault)
-    .option('-m, --message [message]', 'deploy message')
-    .action(() => {
+    .description('publish to a GitHub "gh-pages" branch')
+    .arguments('<dir>')
+    .option('-m, --message [message]', 'commit message')
+    .action(async dir => {
       try {
-        execute(command.token, command.dir, command.owner, command.repo, command.message);
+        await execute({ dir });
       } catch (error) {
-        console.error(error);
+        console.error(red(error));
         process.exit(1);
       }
     });

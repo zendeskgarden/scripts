@@ -6,8 +6,13 @@
  */
 
 export {
+  branch as githubBranch,
+  commit as githubCommit,
   deployment as githubDeployment,
   deploymentStatus as githubDeploymentStatus,
-  pages as githubPages
+  owner as githubOwner,
+  pages as githubPages,
+  repo as githubRepo,
+  token as githubToken
 } from './github';
-export { deploy as netlifyDeploy } from './netlify';
+export { deploy as netlifyDeploy, siteId as netlifySiteId, token as netlifyToken } from './netlify';
