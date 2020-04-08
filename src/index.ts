@@ -8,8 +8,7 @@
 export {
   branch as githubBranch,
   commit as githubCommit,
-  deployment as githubDeployment,
-  deploymentStatus as githubDeploymentStatus,
+  deploy as githubDeploy,
   owner as githubOwner,
   pages as githubPages,
   repo as githubRepo,

@@ -30,6 +30,8 @@ type ARGS = {
 export const execute = async (
   args: ARGS = { dir: '', production: false }
 ): Promise<string | undefined> => {
+  let retVal: string | undefined;
+
   try {
     const token = args.token || (await getToken());
     const client = new NetlifyAPI(token);
@@ -41,10 +43,12 @@ export const execute = async (
       message: args.message
     });
 
-    return response.deploy.deploy_ssl_url;
+    retVal = args.production ? response.deploy.ssl_url : response.deploy.deploy_ssl_url;
   } catch (error) {
     console.error(red(error));
   }
+
+  return retVal;
 };
 
 export default () => {
@@ -56,7 +60,7 @@ export default () => {
     .option('-t, --token <token>', 'access token')
     .option('-i, --id <id>', 'site API ID')
     .option('-p, --production', 'production deploy')
-    .option('-m, --message [message]', 'deploy message')
+    .option('-m, --message <message>', 'deploy message')
     .action(async dir => {
       const url = await execute({
         dir,

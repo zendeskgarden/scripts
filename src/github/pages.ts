@@ -54,7 +54,7 @@ export default () => {
   return command
     .description('publish to a GitHub "gh-pages" branch')
     .arguments('<dir>')
-    .option('-m, --message [message]', 'commit message')
+    .option('-m, --message <message>', 'commit message')
     .action(async dir => {
       try {
         await execute({ dir });
