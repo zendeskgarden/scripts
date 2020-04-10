@@ -62,7 +62,7 @@ export default (spinner: Ora) => {
   const command = new Command('github-commit');
 
   return command
-    .description('latest GitHub commit SHA for the repo branch')
+    .description('output latest GitHub commit SHA for the repo branch')
     .arguments('[path]')
     .action(async path => {
       try {

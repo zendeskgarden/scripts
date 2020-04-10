@@ -9,8 +9,10 @@
 
 > :seedling: Garden is a design system for Zendesk
 
-This repo contains a set of CLI scripts leveraged throughout the Garden
+This repo contains a set of CLI scripts leveraged throughout Garden
 repositories for common tasks and CI automation.
+
+![Garden CLI](.github/image.png)
 
 ## Installation
 

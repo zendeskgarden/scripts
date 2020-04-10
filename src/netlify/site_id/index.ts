@@ -38,7 +38,7 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
 export default (spinner: Ora) => {
   const command = new Command('netlify-site-id');
 
-  return command.description('show Netlify site API ID').action(async () => {
+  return command.description('output Netlify site API ID').action(async () => {
     try {
       spinner.start();
 

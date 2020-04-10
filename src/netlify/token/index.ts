@@ -39,7 +39,7 @@ export default (spinner: Ora) => {
   const command = new Command('netlify-token');
 
   return command
-    .description('show Netlify personal access token')
+    .description('output Netlify personal access token')
     .option('--no-mask', 'display unobscured token')
     .action(async () => {
       try {

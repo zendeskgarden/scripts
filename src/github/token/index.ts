@@ -39,7 +39,7 @@ export default (spinner: Ora) => {
   const command = new Command('github-token');
 
   return command
-    .description('show GitHub personal access token')
+    .description('output GitHub personal access token')
     .option('--no-mask', 'display unobscured token')
     .action(async () => {
       try {

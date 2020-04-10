@@ -34,7 +34,6 @@
     "@octokit/rest": "17.1.4",
     "chalk": "4.0.0",
     "commander": "5.0.0",
-    "envalid": "6.0.1",
     "execa": "4.0.0",
     "figlet": "1.3.0",
     "gh-pages": "2.2.0",
