@@ -9,6 +9,13 @@ import { bgRed, red } from 'chalk';
 import { Ora } from 'ora';
 import isInteractive from 'is-interactive';
 
+/**
+ * Handle error message output.
+ *
+ * @param error The error to output.
+ * @param {string} command The current command.
+ * @param {Ora} [spinner] Terminal spinner.
+ */
 export const handleErrorMessage = (error: any, command?: string, spinner?: Ora) => {
   let message = red(error);
 
@@ -25,6 +32,12 @@ export const handleErrorMessage = (error: any, command?: string, spinner?: Ora) 
   }
 };
 
+/**
+ * Handle success message output.
+ *
+ * @param message The message to output.
+ * @param {Ora} [spinner] Terminal spinner.
+ */
 export const handleSuccessMessage = (message: string, spinner?: Ora) => {
   if (spinner && isInteractive()) {
     spinner.succeed(message);
