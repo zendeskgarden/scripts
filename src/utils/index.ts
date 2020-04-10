@@ -7,12 +7,13 @@
 
 import { bgRed, red } from 'chalk';
 import { Ora } from 'ora';
+import isInteractive from 'is-interactive';
 
 export const handleErrorMessage = (error: any, command?: string, spinner?: Ora) => {
   let message = red(error);
 
   if (command) {
-    const prefix = process.stdout.isTTY ? bgRed(command) : `[${command}]`;
+    const prefix = isInteractive() ? bgRed(command) : `[${command}]`;
 
     message = `${prefix} ${message}`;
   }
@@ -25,7 +26,7 @@ export const handleErrorMessage = (error: any, command?: string, spinner?: Ora) 
 };
 
 export const handleSuccessMessage = (message: string, spinner?: Ora) => {
-  if (spinner && process.stdout.isTTY) {
+  if (spinner && isInteractive()) {
     spinner.succeed(message);
   } else {
     console.log(message);
