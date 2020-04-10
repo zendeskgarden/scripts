@@ -6,9 +6,10 @@
  */
 
 import { owner as getOwner, repo as getRepo, token as getToken } from '.';
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
+import { Ora } from 'ora';
 import { publish } from 'gh-pages';
-import { red } from 'chalk';
 
 type ARGS = {
   dir: string;
@@ -16,6 +17,7 @@ type ARGS = {
   token?: string;
   owner?: string;
   repo?: string;
+  spinner?: Ora;
 };
 
 /**
@@ -26,29 +28,42 @@ type ARGS = {
  * @param {string} [args.token] GitHub personal access token.
  * @param {string} [args.owner] GitHub repository owner.
  * @param {string} [args.repo] GitHub repository name.
+ * @param {Ora} [args.spinner] Terminal spinner.
+ *
+ * @returns {Promise<string>} The GitHub pages URL.
  */
-export const execute = async (args: ARGS = { dir: '' }) => {
-  const token = args.token || (await getToken());
-  const owner = args.owner || (await getOwner(args.dir));
-  const repo = args.repo || (await getRepo(args.dir));
-  const message = args.message || 'Updates [skip ci]';
+export const execute = async (args: ARGS = { dir: '' }): Promise<string | undefined> => {
+  let retVal: string | undefined;
 
-  if (token && owner && repo) {
-    publish(args.dir, {
-      repo: `https://${token}@github.com/${owner}/${repo}.git`,
-      user: {
-        name: 'Zendesk Garden',
-        email: 'garden@zendesk.com'
-      },
-      message,
-      silent: true
-    });
-  } else {
-    throw new Error('Invalid git repository');
+  try {
+    const token = args.token || (await getToken(args.spinner));
+    const owner = args.owner || (await getOwner(args.dir, args.spinner));
+    const repo = args.repo || (await getRepo(args.dir, args.spinner));
+    const message = args.message || 'Updates [skip ci]';
+
+    if (token && owner && repo) {
+      publish(args.dir, {
+        repo: `https://${token}@github.com/${owner}/${repo}.git`,
+        user: {
+          name: 'Zendesk Garden',
+          email: 'garden@zendesk.com'
+        },
+        message,
+        silent: true
+      });
+
+      retVal = `https://${owner}.github.io/${repo}/`;
+    } else {
+      throw new Error('Invalid git repository');
+    }
+  } catch (error) {
+    handleErrorMessage(error, 'github-pages', args.spinner);
   }
+
+  return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('github-pages');
 
   return command
@@ -57,10 +72,18 @@ export default () => {
     .option('-m, --message <message>', 'commit message')
     .action(async dir => {
       try {
-        await execute({ dir });
-      } catch (error) {
-        console.error(red(error));
-        process.exit(1);
+        spinner.start();
+
+        const url = await execute({ dir, message: command.message, spinner });
+
+        if (url) {
+          handleSuccessMessage(url, spinner);
+        } else {
+          spinner.fail('Invalid git repository');
+          process.exit(1);
+        }
+      } finally {
+        spinner.stop();
       }
     });
 };

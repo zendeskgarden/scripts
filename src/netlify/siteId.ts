@@ -5,18 +5,21 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
+import { Ora } from 'ora';
 import execa from 'execa';
-import { red } from 'chalk';
 
 /**
  * Execute the `netlify-site-id` command.
+ *
+ * @param {Ora} [spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The value provided by the `NETLIFY_SITE_ID`
  * environment variable or the value of the `netlify.siteid` git configuration
  * option.
  */
-export const execute = async (): Promise<string | undefined> => {
+export const execute = async (spinner?: Ora): Promise<string | undefined> => {
   let retVal = process.env.NETLIFY_SITE_ID;
 
   if (!retVal) {
@@ -25,24 +28,30 @@ export const execute = async (): Promise<string | undefined> => {
 
       retVal = siteId.stdout.toString();
     } catch (error) {
-      console.error(red(error));
+      handleErrorMessage(error, 'netlify-site-id', spinner);
     }
   }
 
   return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('netlify-site-id');
 
   return command.description('show Netlify site API ID').action(async () => {
-    const siteId = await execute();
+    try {
+      spinner.start();
 
-    if (siteId) {
-      console.log(siteId);
-    } else {
-      console.error(red('Netlify site ID not found'));
-      process.exit(1);
+      const siteId = await execute();
+
+      if (siteId) {
+        handleSuccessMessage(siteId, spinner);
+      } else {
+        spinner.fail('Netlify site ID not found');
+        process.exit(1);
+      }
+    } finally {
+      spinner.stop();
     }
   });
 };

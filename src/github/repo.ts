@@ -5,19 +5,21 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
+import { Ora } from 'ora';
 import execa from 'execa';
-import { red } from 'chalk';
 
 /**
  * Execute the `github-repo` command.
  *
  * @param {string} [path] Path to a git directory.
+ * @param {Ora} [spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The repo name provided by a CI environment
  * variable or extracted from the given git repository.
  */
-export const execute = async (path?: string): Promise<string | undefined> => {
+export const execute = async (path?: string, spinner?: Ora): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   if (process.env.TRAVIS_REPO_SLUG) {
@@ -39,27 +41,33 @@ export const execute = async (path?: string): Promise<string | undefined> => {
 
       retVal = repo.stdout.toString();
     } catch (error) {
-      console.error(red(error));
+      handleErrorMessage(error, 'github-repo', spinner);
     }
   }
 
   return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('github-repo');
 
   return command
     .description('show GitHub repo name')
     .arguments('[path]')
     .action(async path => {
-      const repo = await execute(path);
+      try {
+        spinner.start();
 
-      if (repo) {
-        console.log(repo);
-      } else {
-        console.error(red('GitHub repo not found'));
-        process.exit(1);
+        const repo = await execute(path, spinner);
+
+        if (repo) {
+          handleSuccessMessage(repo, spinner);
+        } else {
+          spinner.fail('GitHub repo not found');
+          process.exit(1);
+        }
+      } finally {
+        spinner.stop();
       }
     });
 };

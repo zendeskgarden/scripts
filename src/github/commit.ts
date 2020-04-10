@@ -6,9 +6,10 @@
  */
 
 import { branch as getBranch, owner as getOwner, repo as getRepo, token as getToken } from '.';
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
-import { red } from 'chalk';
+import { Ora } from 'ora';
 
 type ARGS = {
   path?: string;
@@ -16,6 +17,7 @@ type ARGS = {
   owner?: string;
   repo?: string;
   branch?: string;
+  spinner?: Ora;
 };
 
 /**
@@ -25,6 +27,7 @@ type ARGS = {
  * @param {string} [args.token] GitHub personal access token.
  * @param {string} [args.owner] GitHub repository owner.
  * @param {string} [args.repo] GitHub repository name.
+ * @param {string} [args.spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The latest commit SHA provided by a CI
  * environment variable or remote GitHub commits for the given git repository.
@@ -34,11 +37,11 @@ export const execute = async (args: ARGS = {}): Promise<string | undefined> => {
 
   if (!retVal) {
     try {
-      const auth = args.token || (await getToken());
+      const auth = args.token || (await getToken(args.spinner));
       const github = new Octokit({ auth });
-      const owner = (args.owner || (await getOwner(args.path)))!;
-      const repo = (args.repo || (await getRepo(args.path)))!;
-      const sha = (args.branch || (await getBranch(args.path)))!;
+      const owner = (args.owner || (await getOwner(args.path, args.spinner)))!;
+      const repo = (args.repo || (await getRepo(args.path, args.spinner)))!;
+      const sha = (args.branch || (await getBranch(args.path, args.spinner)))!;
 
       /* https://octokit.github.io/rest.js/v17#repos-list-commits */
       const commits = await github.repos.listCommits({
@@ -53,27 +56,33 @@ export const execute = async (args: ARGS = {}): Promise<string | undefined> => {
         retVal = undefined;
       }
     } catch (error) {
-      console.error(red(error));
+      handleErrorMessage(error, 'github-commit', args.spinner);
     }
   }
 
   return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('github-commit');
 
   return command
     .description('latest GitHub commit SHA for the repo branch')
     .arguments('[path]')
     .action(async path => {
-      const commit = await execute({ path });
+      try {
+        spinner.start();
 
-      if (commit) {
-        console.log(commit);
-      } else {
-        console.error(red('Commit not found'));
-        process.exit(1);
+        const commit = await execute({ path, spinner });
+
+        if (commit) {
+          handleSuccessMessage(commit, spinner);
+        } else {
+          spinner.fail('Commit not found');
+          process.exit(1);
+        }
+      } finally {
+        spinner.stop();
       }
     });
 };

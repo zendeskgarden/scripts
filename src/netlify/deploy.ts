@@ -6,9 +6,10 @@
  */
 
 import { siteId as getSiteId, token as getToken } from '.';
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
 import NetlifyAPI from 'netlify';
-import { red } from 'chalk';
+import { Ora } from 'ora';
 
 type ARGS = {
   dir: string;
@@ -16,6 +17,12 @@ type ARGS = {
   token?: string;
   siteId?: string;
   message?: string;
+  spinner?: Ora;
+};
+
+type RETVAL = {
+  url: string;
+  logUrl: string;
 };
 
 /**
@@ -26,16 +33,19 @@ type ARGS = {
  * @param {string} [args.message] Deploy message.
  * @param {string} [args.token] Netlify personal access token.
  * @param {string} [args.siteId] Netlify site API ID.
+ * @param {Ora} [args.spinner] Terminal spinner.
+ *
+ * @returns {object} The Netlify deployment and log URLs.
  */
 export const execute = async (
   args: ARGS = { dir: '', production: false }
-): Promise<string | undefined> => {
-  let retVal: string | undefined;
+): Promise<RETVAL | undefined> => {
+  let retVal: RETVAL | undefined;
 
   try {
-    const token = args.token || (await getToken());
+    const token = args.token || (await getToken(args.spinner));
     const client = new NetlifyAPI(token);
-    const siteId = args.siteId || (await getSiteId());
+    const siteId = args.siteId || (await getSiteId(args.spinner));
 
     /* https://open-api.netlify.com/#operation/createSiteDeploy */
     const response = await client.deploy(siteId, args.dir, {
@@ -43,38 +53,47 @@ export const execute = async (
       message: args.message
     });
 
-    retVal = args.production ? response.deploy.ssl_url : response.deploy.deploy_ssl_url;
+    const url = args.production ? response.deploy.ssl_url : response.deploy.deploy_ssl_url;
+    const logUrl = `${response.deploy.admin_url}/deploys/${response.deploy.id}`;
+
+    retVal = { url, logUrl };
   } catch (error) {
-    console.error(red(error));
+    handleErrorMessage(error, 'netlify-deploy', args.spinner);
   }
 
   return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('netlify-deploy');
 
   return command
     .description('deploy to a Netlify site')
     .arguments('<dir>')
+    .option('-p, --production', 'production deploy')
     .option('-t, --token <token>', 'access token')
     .option('-i, --id <id>', 'site API ID')
-    .option('-p, --production', 'production deploy')
     .option('-m, --message <message>', 'deploy message')
     .action(async dir => {
-      const url = await execute({
-        dir,
-        production: command.production,
-        token: command.token,
-        siteId: command.id,
-        message: command.message
-      });
+      try {
+        spinner.start();
 
-      if (url) {
-        console.log(url);
-      } else {
-        console.error(red(`Unable to deploy ${dir}`));
-        process.exit(1);
+        const result = await execute({
+          dir,
+          production: command.production,
+          token: command.token,
+          siteId: command.id,
+          message: command.message
+        });
+
+        if (result) {
+          handleSuccessMessage(result.url, spinner);
+        } else {
+          spinner.fail(`Unable to deploy ${dir}`);
+          process.exit(1);
+        }
+      } finally {
+        spinner.stop();
       }
     });
 };

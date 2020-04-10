@@ -5,18 +5,21 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
+import { Ora } from 'ora';
 import execa from 'execa';
-import { red } from 'chalk';
 
 /**
  * Execute the `github-token` command.
+ *
+ * @param {Ora} [spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The token provided by the `GITHUB_TOKEN`
  * environment variable or the value of the `github.token` git configuration
  * option.
  */
-export const execute = async (): Promise<string | undefined> => {
+export const execute = async (spinner?: Ora): Promise<string | undefined> => {
   let retVal: string | undefined = process.env.GITHUB_TOKEN;
 
   if (!retVal) {
@@ -25,27 +28,36 @@ export const execute = async (): Promise<string | undefined> => {
 
       retVal = token.stdout.toString();
     } catch (error) {
-      console.error(red(error));
+      handleErrorMessage(error, 'github-token', spinner);
     }
   }
 
   return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('github-token');
 
   return command
     .description('show GitHub personal access token')
     .option('--no-mask', 'display unobscured token')
     .action(async () => {
-      const token = await execute();
+      try {
+        spinner.start();
 
-      if (token) {
-        console.log(command.mask ? `${token.slice(0, 4)}......${token.slice(-4)}` : token);
-      } else {
-        console.error(red('GitHub token not found'));
-        process.exit(1);
+        const token = await execute(spinner);
+
+        if (token) {
+          handleSuccessMessage(
+            command.mask ? `${token.slice(0, 4)}......${token.slice(-4)}` : token,
+            spinner
+          );
+        } else {
+          spinner.fail('GitHub token not found');
+          process.exit(1);
+        }
+      } finally {
+        spinner.stop();
       }
     });
 };

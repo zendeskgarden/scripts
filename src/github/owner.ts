@@ -5,19 +5,21 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
+import { Ora } from 'ora';
 import execa from 'execa';
-import { red } from 'chalk';
 
 /**
  * Execute the `github-owner` command.
  *
  * @param {string} [path] Path to a git directory.
+ * @param {Ora} [spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The owner provided by a CI environment variable
  * or extracted from the given git repository.
  */
-export const execute = async (path?: string): Promise<string | undefined> => {
+export const execute = async (path?: string, spinner?: Ora): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   if (process.env.TRAVIS_REPO_SLUG) {
@@ -40,27 +42,33 @@ export const execute = async (path?: string): Promise<string | undefined> => {
 
       retVal = owner.stdout.toString();
     } catch (error) {
-      console.error(red(error));
+      handleErrorMessage(error, 'github-owner', spinner);
     }
   }
 
   return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('github-owner');
 
   return command
     .description('show GitHub repository owner')
     .arguments('[path]')
     .action(async path => {
-      const owner = await execute(path);
+      try {
+        spinner.start();
 
-      if (owner) {
-        console.log(owner);
-      } else {
-        console.error(red('GitHub owner not found'));
-        process.exit(1);
+        const owner = await execute(path, spinner);
+
+        if (owner) {
+          handleSuccessMessage(owner, spinner);
+        } else {
+          spinner.fail('GitHub owner not found');
+          process.exit(1);
+        }
+      } finally {
+        spinner.stop();
       }
     });
 };

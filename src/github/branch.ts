@@ -5,19 +5,21 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { handleErrorMessage, handleSuccessMessage } from '../utils';
 import { Command } from 'commander';
+import { Ora } from 'ora';
 import execa from 'execa';
-import { red } from 'chalk';
 
 /**
  * Execute the `github-branch` command.
  *
  * @param {string} [path] Path to a git directory.
+ * @param {Ora} [spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The branch name provided by a CI environment
  * variable or extracted from the given git repository.
  */
-export const execute = async (path?: string): Promise<string | undefined> => {
+export const execute = async (path?: string, spinner?: Ora): Promise<string | undefined> => {
   let retVal: string | undefined = process.env.CIRCLE_BRANCH || process.env.TRAVIS_BRANCH;
 
   if (!retVal) {
@@ -32,27 +34,33 @@ export const execute = async (path?: string): Promise<string | undefined> => {
 
       retVal = branch.stdout.toString();
     } catch (error) {
-      console.error(red(error));
+      handleErrorMessage(error, 'github-branch', spinner);
     }
   }
 
   return retVal;
 };
 
-export default () => {
+export default (spinner: Ora) => {
   const command = new Command('github-branch');
 
   return command
     .description('show GitHub branch name')
     .arguments('[path]')
     .action(async path => {
-      const branch = await execute(path);
+      try {
+        spinner.start();
 
-      if (branch) {
-        console.log(branch);
-      } else {
-        console.error(red('GitHub branch not found'));
-        process.exit(1);
+        const branch = await execute(path, spinner);
+
+        if (branch) {
+          handleSuccessMessage(branch, spinner);
+        } else {
+          spinner.fail('GitHub branch not found');
+          process.exit(1);
+        }
+      } finally {
+        spinner.stop();
       }
     });
 };
