@@ -5,7 +5,7 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { owner as getOwner, repo as getRepo, token as getToken } from '..';
+import { repository as getRepository, token as getToken } from '..';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Ora } from 'ora';
@@ -15,8 +15,7 @@ type ARGS = {
   dir: string;
   message?: string;
   token?: string;
-  owner?: string;
-  repo?: string;
+  repository?: [string, string];
   spinner?: Ora;
 };
 
@@ -26,8 +25,7 @@ type ARGS = {
  * @param {string} args.dir Folder to publish.
  * @param {string} [args.message] Commit message.
  * @param {string} [args.token] GitHub personal access token.
- * @param {string} [args.owner] GitHub repository owner.
- * @param {string} [args.repo] GitHub repository name.
+ * @param {Array} [args.repository] GitHub repository.
  * @param {Ora} [args.spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The GitHub pages URL.
@@ -37,11 +35,12 @@ export const execute = async (args: ARGS = { dir: '' }): Promise<string | undefi
 
   try {
     const token = args.token || (await getToken(args.spinner));
-    const owner = args.owner || (await getOwner(args.dir, args.spinner));
-    const repo = args.repo || (await getRepo(args.dir, args.spinner));
+    const repository = args.repository || (await getRepository(args.dir, args.spinner));
     const message = args.message || 'Updates [skip ci]';
 
-    if (token && owner && repo) {
+    if (token && repository) {
+      const [owner, repo] = repository;
+
       publish(args.dir, {
         repo: `https://${token}@github.com/${owner}/${repo}.git`,
         user: {
@@ -79,7 +78,7 @@ export default (spinner: Ora) => {
         if (url) {
           handleSuccessMessage(url, spinner);
         } else {
-          spinner.fail('Invalid git repository');
+          spinner.fail(`Unable to publish '${dir}'`);
           process.exit(1);
         }
       } finally {

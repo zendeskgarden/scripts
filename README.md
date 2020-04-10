@@ -21,7 +21,7 @@ npm install --save-dev @zendeskgarden/tool-shed
 ... or for one-off execution
 
 ```sh
-npx -p @zendeskgarden/tool-shed garden [command]
+npx --package @zendeskgarden/tool-shed garden [command]
 ```
 
 ## Usage
@@ -34,9 +34,8 @@ the individual command README for details:
 - [`garden github-branch`](src/github/branch)
 - [`garden github-commit`](src/github/commit)
 - [`garden github-deploy`](src/github/deploy)
-- [`garden github-owner`](src/github/owner)
 - [`garden github-pages`](src/github/pages)
-- [`garden github-repo`](src/github/repo)
+- [`garden github-repository`](src/github/repository)
 - [`garden github-token`](src/github/token)
 - [`garden netlify-deploy`](src/netlify/deploy)
 - [`garden netlify-site-id`](src/netlify/site_id)

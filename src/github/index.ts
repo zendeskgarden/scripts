@@ -8,7 +8,6 @@
 export { default as branchCommand, execute as branch } from './branch';
 export { default as commitCommand, execute as commit } from './commit';
 export { default as deployCommand, execute as deploy } from './deploy';
-export { default as ownerCommand, execute as owner } from './owner';
 export { default as pagesCommand, execute as pages } from './pages';
-export { default as repoCommand, execute as repo } from './repo';
+export { default as repositoryCommand, execute as repository } from './repository';
 export { default as tokenCommand, execute as token } from './token';

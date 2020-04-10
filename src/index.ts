@@ -9,9 +9,8 @@ export {
   branch as githubBranch,
   commit as githubCommit,
   deploy as githubDeploy,
-  owner as githubOwner,
   pages as githubPages,
-  repo as githubRepo,
+  repository as githubRepository,
   token as githubToken
 } from './github';
 export { deploy as netlifyDeploy, siteId as netlifySiteId, token as netlifyToken } from './netlify';

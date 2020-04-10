@@ -5,7 +5,7 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { commit as getCommit, owner as getOwner, repo as getRepo, token as getToken } from '..';
+import { commit as getCommit, repository as getRepository, token as getToken } from '..';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
@@ -16,8 +16,7 @@ type ARGS = {
   command: (...args: any[]) => Promise<string | { url: string; logUrl: string } | undefined>;
   path?: string;
   token?: string;
-  owner?: string;
-  repo?: string;
+  repository?: [string, string];
   ref?: string;
   environment?: 'staging' | 'production';
   description?: string;
@@ -30,8 +29,7 @@ type ARGS = {
  * @param {function} args.command Deployment command to execute.
  * @param {string} [args.path] Path to a git directory.
  * @param {string} [args.token] GitHub personal access token.
- * @param {string} [args.owner] GitHub repo owner.
- * @param {string} [args.repo] GitHub repo name.
+ * @param {Array} [args.repository] GitHub repository.
  * @param {string} [args.ref] GitHub ref (commit SHA, branch, tag).
  * @param {string} [args.environment] Deployment environment.
  * @param {string} [args.description] Deployment description.
@@ -45,15 +43,14 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
   try {
     const auth = args.token || (await getToken(args.spinner));
     const github = new Octokit({ auth });
-    const owner = (args.owner || (await getOwner(args.path, args.spinner)))!;
-    const repo = (args.repo || (await getRepo(args.path, args.spinner)))!;
+    const repository = (args.repository || (await getRepository(args.path, args.spinner)))!;
     const ref = (args.ref || (await getCommit({ ...args })))!;
     const environment = args.environment || 'staging';
 
     /* https://octokit.github.io/rest.js/v17#repos-create-deployment */
     const deployment = await github.repos.createDeployment({
-      owner,
-      repo,
+      owner: repository[0],
+      repo: repository[1],
       ref,
       environment,
       description: args.description,
@@ -74,8 +71,8 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
 
     /* https://octokit.github.io/rest.js/v17#repos-create-deployment-status */
     await github.repos.createDeploymentStatus({
-      owner,
-      repo,
+      owner: repository[0],
+      repo: repository[1],
       deployment_id: deployment.data.id,
       state,
       environment_url: typeof result === 'object' ? result.url : result,
@@ -100,8 +97,7 @@ export default (spinner: Ora) => {
     .arguments('<command> [args...]')
     .option('-p, --path <path>', 'git directory')
     .option('-t, --token <token>', 'access token')
-    .option('-o, --owner <owner>', 'GitHub repository owner')
-    .option('-r, --repo <repo>', 'GitHub repository name')
+    .option('-r, --repository <repository>', 'GitHub repository name')
     .option('-c, --commit <commit>', 'GitHub commit SHA')
     .option('-p, --production', 'production deploy')
     .option('-m, --message <message>', 'deployment message')
@@ -126,8 +122,7 @@ export default (spinner: Ora) => {
           },
           path: command.path,
           token: command.token,
-          owner: command.owner,
-          repo: command.repo,
+          repository: command.repository,
           ref: command.commit,
           environment: command.production ? 'production' : 'staging',
           description: command.message,

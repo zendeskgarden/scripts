@@ -5,7 +5,7 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { branch as getBranch, owner as getOwner, repo as getRepo, token as getToken } from '..';
+import { branch as getBranch, repository as getRepository, token as getToken } from '..';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
@@ -14,8 +14,7 @@ import { Ora } from 'ora';
 type ARGS = {
   path?: string;
   token?: string;
-  owner?: string;
-  repo?: string;
+  repository?: [string, string];
   branch?: string;
   spinner?: Ora;
 };
@@ -25,8 +24,7 @@ type ARGS = {
  *
  * @param {string} [args.path] Path to a git directory.
  * @param {string} [args.token] GitHub personal access token.
- * @param {string} [args.owner] GitHub repository owner.
- * @param {string} [args.repo] GitHub repository name.
+ * @param {Array} [args.repository] GitHub repository.
  * @param {string} [args.spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The latest commit SHA provided by a CI
@@ -39,21 +37,18 @@ export const execute = async (args: ARGS = {}): Promise<string | undefined> => {
     try {
       const auth = args.token || (await getToken(args.spinner));
       const github = new Octokit({ auth });
-      const owner = (args.owner || (await getOwner(args.path, args.spinner)))!;
-      const repo = (args.repo || (await getRepo(args.path, args.spinner)))!;
+      const repository = (args.repository || (await getRepository(args.path, args.spinner)))!;
       const sha = (args.branch || (await getBranch(args.path, args.spinner)))!;
 
       /* https://octokit.github.io/rest.js/v17#repos-list-commits */
       const commits = await github.repos.listCommits({
-        owner,
-        repo,
+        owner: repository[0],
+        repo: repository[1],
         sha
       });
 
       if (commits && commits.data) {
         retVal = commits.data[0].sha;
-      } else {
-        retVal = undefined;
       }
     } catch (error) {
       handleErrorMessage(error, 'github-commit', args.spinner);
