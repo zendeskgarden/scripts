@@ -5,8 +5,8 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { commit as getCommit, owner as getOwner, repo as getRepo, token as getToken } from '.';
-import { handleErrorMessage, handleSuccessMessage } from '../utils';
+import { commit as getCommit, owner as getOwner, repo as getRepo, token as getToken } from '..';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';

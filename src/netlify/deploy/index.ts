@@ -5,8 +5,8 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { siteId as getSiteId, token as getToken } from '.';
-import { handleErrorMessage, handleSuccessMessage } from '../utils';
+import { siteId as getSiteId, token as getToken } from '..';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import NetlifyAPI from 'netlify';
 import { Ora } from 'ora';

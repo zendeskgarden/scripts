@@ -5,44 +5,43 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { handleErrorMessage, handleSuccessMessage } from '../utils';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Ora } from 'ora';
 import execa from 'execa';
 
 /**
- * Execute the `github-owner` command.
+ * Execute the `github-repo` command.
  *
  * @param {string} [path] Path to a git directory.
  * @param {Ora} [spinner] Terminal spinner.
  *
- * @returns {Promise<string>} The owner provided by a CI environment variable
- * or extracted from the given git repository.
+ * @returns {Promise<string>} The repo name provided by a CI environment
+ * variable or extracted from the given git repository.
  */
 export const execute = async (path?: string, spinner?: Ora): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   if (process.env.TRAVIS_REPO_SLUG) {
-    retVal = process.env.TRAVIS_REPO_SLUG[0];
+    retVal = process.env.TRAVIS_REPO_SLUG.split('/')[1];
   } else {
-    retVal = process.env.CIRCLE_PROJECT_USERNAME as string;
+    retVal = process.env.CIRCLE_PROJECT_REPONAME as string;
   }
 
   if (!retVal) {
-    const args = ['ls-remote', '--get-url'];
+    const args = ['rev-parse', '--show-toplevel'];
 
     if (path) {
       args.unshift('-C', path);
     }
 
     try {
-      const remote = await execa('git', args);
-      const url = await execa('dirname', [remote.stdout]);
-      const owner = await execa('basename', [url.stdout]);
+      const workingTree = await execa('git', args);
+      const repo = await execa('basename', [workingTree.stdout]);
 
-      retVal = owner.stdout.toString();
+      retVal = repo.stdout.toString();
     } catch (error) {
-      handleErrorMessage(error, 'github-owner', spinner);
+      handleErrorMessage(error, 'github-repo', spinner);
     }
   }
 
@@ -50,21 +49,21 @@ export const execute = async (path?: string, spinner?: Ora): Promise<string | un
 };
 
 export default (spinner: Ora) => {
-  const command = new Command('github-owner');
+  const command = new Command('github-repo');
 
   return command
-    .description('show GitHub repository owner')
+    .description('show GitHub repo name')
     .arguments('[path]')
     .action(async path => {
       try {
         spinner.start();
 
-        const owner = await execute(path, spinner);
+        const repo = await execute(path, spinner);
 
-        if (owner) {
-          handleSuccessMessage(owner, spinner);
+        if (repo) {
+          handleSuccessMessage(repo, spinner);
         } else {
-          spinner.fail('GitHub owner not found');
+          spinner.fail('GitHub repo not found');
           process.exit(1);
         }
       } finally {

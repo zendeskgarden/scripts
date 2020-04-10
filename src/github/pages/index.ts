@@ -5,8 +5,8 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { owner as getOwner, repo as getRepo, token as getToken } from '.';
-import { handleErrorMessage, handleSuccessMessage } from '../utils';
+import { owner as getOwner, repo as getRepo, token as getToken } from '..';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Ora } from 'ora';
 import { publish } from 'gh-pages';

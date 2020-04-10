@@ -5,7 +5,7 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { handleErrorMessage, handleSuccessMessage } from '../utils';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Ora } from 'ora';
 import execa from 'execa';

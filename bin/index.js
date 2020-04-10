@@ -10,7 +10,6 @@
 const Command = require('commander').Command;
 const program = new Command();
 const chalk = require('chalk');
-const PALETTE = require('@zendeskgarden/react-theming').PALETTE;
 const textSync = require('figlet').textSync;
 const ora = require('ora');
 const version = require('../package.json').version;
@@ -32,7 +31,7 @@ program
   .addCommand(netlify.siteIdCommand(spinner))
   .addCommand(netlify.tokenCommand(spinner))
   .action(() => {
-    console.log(chalk.hex(PALETTE.green[400])(textSync('garden')));
+    console.log(chalk.hex('#5EAE91')(textSync('garden')));
     console.log();
     program.help();
   })
