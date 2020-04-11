@@ -39,9 +39,9 @@ const args: {
   to `'staging'`.
 - `path` optional path to a git directory; defaults to the current directory.
 - `token` optional GitHub personal access token; defaults to the value
-  provided by [`githubToken`](../token).
+  provided by [`githubToken`](../token#readme).
 - `ref` optional named branch, tag, or SHA to deploy against; defaults to the
-  value provided by [`githubCommit`](../commit).
+  value provided by [`githubCommit`](../commit#readme).
 - `message` optional deployment message.
 
 ## Command

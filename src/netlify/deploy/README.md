@@ -35,9 +35,9 @@ const args: {
 - `production` determine whether this is a production or draft deploy;
   defaults to draft.
 - `siteId` optional Netlify site API ID; defaults to the value provided by
-  [`netlifySiteId`](../site_id).
+  [`netlifySiteId`](../site_id#readme).
 - `token` optional Netlify personal access token; defaults to the value
-  provided by [`netlifyToken`](../token).
+  provided by [`netlifyToken`](../token#readme).
 - `message` optional deployment message.
 
 ## Command

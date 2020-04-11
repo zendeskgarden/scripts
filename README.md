@@ -31,7 +31,7 @@ npx --package @zendeskgarden/tool-shed garden [command]
 All commands are available via the `garden` executable. Commands may be
 chained so that the output from one command provides input to another. Each
 command also provides a functional equivalent for programmatic usage. See
-the individual command README for details:
+the individual command README for details.
 
 - [`garden github-branch`](src/github/branch)
 - [`garden github-commit`](src/github/commit)

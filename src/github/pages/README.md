@@ -30,7 +30,7 @@ const args: {
 - `path` optional path to a git directory; defaults to `dir`.
 - `message` optional commit message.
 - `token` optional GitHub personal access token; defaults to the value
-  provided by [`githubToken`](../token).
+  provided by [`githubToken`](../token#readme).
 
 ## Command
 

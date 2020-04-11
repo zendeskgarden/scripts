@@ -27,9 +27,9 @@ const args: {
 
 - `path` optional path to a git directory; defaults to the current directory.
 - `branch` optional GitHub branch name; defaults to the value provided by
-  [`githubBranch`](../branch).
+  [`githubBranch`](../branch#readme).
 - `token` optional GitHub personal access token; defaults to the value
-  provided by [`githubToken`](../token).
+  provided by [`githubToken`](../token#readme).
 
 ## Command
 
