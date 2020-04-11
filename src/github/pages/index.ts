@@ -47,8 +47,7 @@ export const execute = async (args: ARGS = { dir: '' }): Promise<string | undefi
           name: 'Zendesk Garden',
           email: 'garden@zendesk.com'
         },
-        message,
-        silent: true
+        message
       });
 
       retVal = `https://${owner}.github.io/${repo}/`;

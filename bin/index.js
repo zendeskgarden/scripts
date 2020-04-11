@@ -16,6 +16,8 @@ const version = require('../package.json').version;
 const github = require('../dist/github');
 const netlify = require('../dist/netlify');
 
+require('dotenv').config();
+
 const spinner = ora();
 
 program

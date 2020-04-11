@@ -37,3 +37,9 @@ const args: {
 ```sh
 garden github-pages [--path <path>] [--message <message>] [--token <token>] <dir>
 ```
+
+To get debug output:
+
+```sh
+NODE_DEBUG=gh-pages garden github-pages
+```

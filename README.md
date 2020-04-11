@@ -43,6 +43,9 @@ the individual command README for details.
 - [`garden netlify-site-id`](src/netlify/site_id#readme)
 - [`garden netlify-token`](src/netlify/token#readme)
 
+Note that command environment variables may be provided by a project-level
+[`.env`](https://www.npmjs.com/package/dotenv) file.
+
 ## Contribution
 
 Thanks for your interest in Garden! Community involvement helps make our
