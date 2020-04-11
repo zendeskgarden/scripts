@@ -10,28 +10,32 @@ import { Command } from 'commander';
 import { Ora } from 'ora';
 import execa from 'execa';
 
+type RETVAL = {
+  owner: string;
+  repo: string;
+};
+
 /**
  * Execute the `github-repository` command.
  *
  * @param {string} [path] Path to a git directory.
  * @param {Ora} [spinner] Terminal spinner.
  *
- * @returns {Promise<Array>} The repository [owner, name] provided by CI
+ * @returns {Promise<object>} The repository {owner, name} provided by CI
  * environment variables or extracted from the given git repository.
  */
-export const execute = async (
-  path?: string,
-  spinner?: Ora
-): Promise<[string, string] | undefined> => {
-  let retVal: [string, string] | undefined;
+export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | undefined> => {
+  let retVal: RETVAL | undefined;
 
   if (process.env.TRAVIS_REPO_SLUG) {
-    retVal = process.env.TRAVIS_REPO_SLUG.split('/') as [string, string];
+    const [owner, repo] = process.env.TRAVIS_REPO_SLUG.split('/') as [string, string];
+
+    retVal = { owner, repo };
   } else if (process.env.CIRCLECI) {
-    retVal = [
-      process.env.CIRCLE_PROJECT_REPONAME as string,
-      process.env.CIRCLE_PROJECT_USERNAME as string
-    ];
+    const owner = process.env.CIRCLE_PROJECT_USERNAME as string;
+    const repo = process.env.CIRCLE_PROJECT_REPONAME as string;
+
+    retVal = { owner, repo };
   }
 
   if (!retVal) {
@@ -46,11 +50,11 @@ export const execute = async (
     try {
       const remote = await execa('git', lsRemoteArgs);
       const url = await execa('dirname', [remote.stdout]);
-      const owner = await execa('basename', [url.stdout]);
+      const gitOwner = await execa('basename', [url.stdout]);
       const workingTree = await execa('git', revParseArgs);
-      const repo = await execa('basename', [workingTree.stdout]);
+      const gitRepo = await execa('basename', [workingTree.stdout]);
 
-      retVal = [owner.stdout.toString(), repo.stdout.toString()];
+      retVal = { owner: gitOwner.stdout.toString(), repo: gitRepo.stdout.toString() };
     } catch (error) {
       handleErrorMessage(error, 'github-repository', spinner);
     }
@@ -72,7 +76,7 @@ export default (spinner: Ora) => {
         const repository = await execute(path, spinner);
 
         if (repository) {
-          handleSuccessMessage(`${repository[0]}/${repository[1]}`, spinner);
+          handleSuccessMessage(`${repository.owner}/${repository.repo}`, spinner);
         } else {
           spinner.fail('GitHub repository not found');
           process.exit(1);

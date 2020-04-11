@@ -41,8 +41,8 @@ export const execute = async (args: ARGS = {}): Promise<string | undefined> => {
 
       /* https://octokit.github.io/rest.js/v17#repos-list-commits */
       const commits = await github.repos.listCommits({
-        owner: repository[0],
-        repo: repository[1],
+        owner: repository.owner,
+        repo: repository.repo,
         sha
       });
 

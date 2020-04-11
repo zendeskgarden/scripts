@@ -39,7 +39,7 @@ export const execute = async (args: ARGS = { dir: '' }): Promise<string | undefi
     const message = args.message || 'Updates [skip ci]';
 
     if (token && repository) {
-      const [owner, repo] = repository;
+      const { owner, repo } = repository;
 
       clean();
       await publish(

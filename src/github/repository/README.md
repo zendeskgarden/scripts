@@ -12,7 +12,7 @@ import { githubRepository } from '@zendeskgarden/tool-shed';
   const repository = await githubRepository(path?: string);
 
   if (repository) {
-    const [owner, repo] = repository;
+    const { owner, repo } = repository;
 
     console.log(`${owner}/${repo}`);
   }

@@ -47,8 +47,8 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
 
     /* https://octokit.github.io/rest.js/v17#repos-create-deployment */
     const deployment = await github.repos.createDeployment({
-      owner: repository[0],
-      repo: repository[1],
+      owner: repository.owner,
+      repo: repository.repo,
       ref,
       environment,
       description: args.message,
@@ -69,8 +69,8 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
 
     /* https://octokit.github.io/rest.js/v17#repos-create-deployment-status */
     await github.repos.createDeploymentStatus({
-      owner: repository[0],
-      repo: repository[1],
+      owner: repository.owner,
+      repo: repository.repo,
       deployment_id: deployment.data.id,
       state,
       environment_url: typeof result === 'object' ? result.url : result,
