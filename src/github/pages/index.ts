@@ -13,9 +13,9 @@ import { publish } from 'gh-pages';
 
 type ARGS = {
   dir: string;
+  path?: string;
   message?: string;
   token?: string;
-  repository?: [string, string];
   spinner?: Ora;
 };
 
@@ -23,9 +23,9 @@ type ARGS = {
  * Execute the `github-pages` command.
  *
  * @param {string} args.dir Folder to publish.
+ * @param {string} [args.path] Path to a git directory.
  * @param {string} [args.message] Commit message.
  * @param {string} [args.token] GitHub personal access token.
- * @param {Array} [args.repository] GitHub repository.
  * @param {Ora} [args.spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The GitHub pages URL.
@@ -35,7 +35,7 @@ export const execute = async (args: ARGS = { dir: '' }): Promise<string | undefi
 
   try {
     const token = args.token || (await getToken(args.spinner));
-    const repository = args.repository || (await getRepository(args.dir, args.spinner));
+    const repository = await getRepository(args.path || args.dir, args.spinner);
     const message = args.message || 'Updates [skip ci]';
 
     if (token && repository) {
@@ -68,12 +68,20 @@ export default (spinner: Ora) => {
   return command
     .description('publish to a GitHub "gh-pages" branch')
     .arguments('<dir>')
+    .option('-p, --path <path>', 'git directory')
+    .option('-t, --token <token>', 'access token')
     .option('-m, --message <message>', 'commit message')
     .action(async dir => {
       try {
         spinner.start();
 
-        const url = await execute({ dir, message: command.message, spinner });
+        const url = await execute({
+          dir,
+          path: command.path,
+          message: command.message,
+          token: command.token,
+          spinner
+        });
 
         if (url) {
           handleSuccessMessage(url, spinner);

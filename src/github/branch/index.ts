@@ -45,7 +45,7 @@ export default (spinner: Ora) => {
   const command = new Command('github-branch');
 
   return command
-    .description('output GitHub branch name')
+    .description('output GitHub branch name for the repo')
     .arguments('[path]')
     .action(async path => {
       try {

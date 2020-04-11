@@ -14,7 +14,6 @@ import { Ora } from 'ora';
 type ARGS = {
   path?: string;
   token?: string;
-  repository?: [string, string];
   branch?: string;
   spinner?: Ora;
 };
@@ -24,7 +23,7 @@ type ARGS = {
  *
  * @param {string} [args.path] Path to a git directory.
  * @param {string} [args.token] GitHub personal access token.
- * @param {Array} [args.repository] GitHub repository.
+ * @param {string} [args.branch] GitHub branch.
  * @param {string} [args.spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The latest commit SHA provided by a CI
@@ -37,8 +36,8 @@ export const execute = async (args: ARGS = {}): Promise<string | undefined> => {
     try {
       const auth = args.token || (await getToken(args.spinner));
       const github = new Octokit({ auth });
-      const repository = (args.repository || (await getRepository(args.path, args.spinner)))!;
-      const sha = (args.branch || (await getBranch(args.path, args.spinner)))!;
+      const repository = (await getRepository(args.path, args.spinner))!;
+      const sha = args.branch || (await getBranch(args.path, args.spinner));
 
       /* https://octokit.github.io/rest.js/v17#repos-list-commits */
       const commits = await github.repos.listCommits({
@@ -64,11 +63,18 @@ export default (spinner: Ora) => {
   return command
     .description('output latest GitHub commit SHA for the repo branch')
     .arguments('[path]')
+    .option('-b, --branch <branch>', 'GitHub branch name')
+    .option('-t, --token <token>', 'access token')
     .action(async path => {
       try {
         spinner.start();
 
-        const commit = await execute({ path, spinner });
+        const commit = await execute({
+          path,
+          branch: command.branch,
+          token: command.token,
+          spinner
+        });
 
         if (commit) {
           handleSuccessMessage(commit, spinner);

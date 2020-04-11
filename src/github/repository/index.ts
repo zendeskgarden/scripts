@@ -63,7 +63,7 @@ export default (spinner: Ora) => {
   const command = new Command('github-repository');
 
   return command
-    .description('output GitHub repository')
+    .description('output GitHub repository name for the repo')
     .arguments('[path]')
     .action(async path => {
       try {

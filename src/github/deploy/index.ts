@@ -16,7 +16,6 @@ type ARGS = {
   command: (...args: any[]) => Promise<string | { url: string; logUrl: string } | undefined>;
   path?: string;
   token?: string;
-  repository?: [string, string];
   ref?: string;
   environment?: 'staging' | 'production';
   description?: string;
@@ -29,7 +28,6 @@ type ARGS = {
  * @param {function} args.command Deployment command to execute.
  * @param {string} [args.path] Path to a git directory.
  * @param {string} [args.token] GitHub personal access token.
- * @param {Array} [args.repository] GitHub repository.
  * @param {string} [args.ref] GitHub ref (commit SHA, branch, tag).
  * @param {string} [args.environment] Deployment environment.
  * @param {string} [args.description] Deployment description.
@@ -43,7 +41,7 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
   try {
     const auth = args.token || (await getToken(args.spinner));
     const github = new Octokit({ auth });
-    const repository = (args.repository || (await getRepository(args.path, args.spinner)))!;
+    const repository = (await getRepository(args.path, args.spinner))!;
     const ref = (args.ref || (await getCommit({ ...args })))!;
     const environment = args.environment || 'staging';
 
@@ -95,12 +93,11 @@ export default (spinner: Ora) => {
   return command
     .description('execute a GitHub deployment based on a <command> that outputs a URL')
     .arguments('<command> [args...]')
-    .option('-p, --path <path>', 'git directory')
-    .option('-t, --token <token>', 'access token')
-    .option('-r, --repository <repository>', 'GitHub repository name')
-    .option('-c, --commit <commit>', 'GitHub commit SHA')
     .option('-p, --production', 'production deploy')
-    .option('-m, --message <message>', 'deployment message')
+    .option('-p, --path <path>', 'git directory')
+    .option('-c, --commit <commit>', 'GitHub commit SHA')
+    .option('-t, --token <token>', 'access token')
+    .option('-m, --message <description>', 'deployment description')
     .action(async (subcommand, args) => {
       try {
         spinner.start();
@@ -122,7 +119,6 @@ export default (spinner: Ora) => {
           },
           path: command.path,
           token: command.token,
-          repository: command.repository,
           ref: command.commit,
           environment: command.production ? 'production' : 'staging',
           description: command.message,

@@ -13,7 +13,7 @@ import { Ora } from 'ora';
 
 type ARGS = {
   dir: string;
-  production: boolean;
+  production?: boolean;
   token?: string;
   siteId?: string;
   message?: string;
