@@ -38,10 +38,10 @@ const args: {
 - `environment` optional `'staging'` or `'production'` environment; defaults
   to `'staging'`.
 - `path` optional path to a git directory; defaults to the current directory.
-- `token` optional GitHub personal access token; defaults to the value
-  provided by [`githubToken`](../token#readme).
 - `ref` optional named branch, tag, or SHA to deploy against; defaults to the
   value provided by [`githubCommit`](../commit#readme).
+- `token` optional GitHub personal access token; defaults to the value
+  provided by [`githubToken`](../token#readme).
 - `message` optional deployment message.
 
 ## Command
@@ -50,8 +50,8 @@ const args: {
 garden github-deploy \
        [--production] \
        [--path <path>] \
-       [--token <token>] \
        [--commit <commit>] \
+       [--token <token>] \
        [--message <message>] \
        <command>
 ```
