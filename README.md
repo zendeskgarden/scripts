@@ -33,15 +33,15 @@ chained so that the output from one command provides input to another. Each
 command also provides a functional equivalent for programmatic usage. See
 the individual command README for details.
 
-- [`garden github-branch`](src/github/branch)
-- [`garden github-commit`](src/github/commit)
-- [`garden github-deploy`](src/github/deploy)
-- [`garden github-pages`](src/github/pages)
-- [`garden github-repository`](src/github/repository)
-- [`garden github-token`](src/github/token)
-- [`garden netlify-deploy`](src/netlify/deploy)
-- [`garden netlify-site-id`](src/netlify/site_id)
-- [`garden netlify-token`](src/netlify/token)
+- [`garden github-branch`](src/github/branch#readme)
+- [`garden github-commit`](src/github/commit#readme)
+- [`garden github-deploy`](src/github/deploy#readme)
+- [`garden github-pages`](src/github/pages#readme)
+- [`garden github-repository`](src/github/repository#readme)
+- [`garden github-token`](src/github/token#readme)
+- [`garden netlify-deploy`](src/netlify/deploy#readme)
+- [`garden netlify-site-id`](src/netlify/site_id#readme)
+- [`garden netlify-token`](src/netlify/token#readme)
 
 ## Contribution
 
