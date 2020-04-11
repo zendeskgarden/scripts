@@ -18,7 +18,7 @@ type ARGS = {
   token?: string;
   ref?: string;
   environment?: 'staging' | 'production';
-  description?: string;
+  message?: string;
   spinner?: Ora;
 };
 
@@ -30,7 +30,7 @@ type ARGS = {
  * @param {string} [args.token] GitHub personal access token.
  * @param {string} [args.ref] GitHub ref (commit SHA, branch, tag).
  * @param {string} [args.environment] Deployment environment.
- * @param {string} [args.description] Deployment description.
+ * @param {string} [args.message] Deployment message.
  * @param {Ora} [args.spinner] Terminal spinner.
  *
  * @returns {Promise<string>} The result of the deployment command.
@@ -51,7 +51,7 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
       repo: repository[1],
       ref,
       environment,
-      description: args.description,
+      description: args.message,
       required_contexts: [],
       transient_environment: environment !== 'production'
     });
@@ -76,7 +76,7 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
       environment_url: typeof result === 'object' ? result.url : result,
       log_url: typeof result === 'object' ? result.logUrl : undefined,
       environment,
-      description: args.description
+      description: args.message
     });
 
     retVal = typeof result === 'object' ? result.url : result;
@@ -97,7 +97,7 @@ export default (spinner: Ora) => {
     .option('-p, --path <path>', 'git directory')
     .option('-c, --commit <commit>', 'GitHub commit SHA')
     .option('-t, --token <token>', 'access token')
-    .option('-m, --message <description>', 'deployment description')
+    .option('-m, --message <message>', 'deployment message')
     .action(async (subcommand, args) => {
       try {
         spinner.start();
@@ -121,7 +121,7 @@ export default (spinner: Ora) => {
           token: command.token,
           ref: command.commit,
           environment: command.production ? 'production' : 'staging',
-          description: command.message,
+          message: command.message,
           spinner
         });
 

@@ -15,7 +15,7 @@ const args: {
   path?: string;
   token?: string;
   ref?: string;
-  description?: string;
+  message?: string;
 } = {
   command: async () => {
     const result = await netlifyDeploy({ dir: __dirname });
@@ -42,7 +42,7 @@ const args: {
   provided by [`githubToken`](../token).
 - `ref` optional named branch, tag, or SHA to deploy against; defaults to the
   value provided by [`githubCommit`](../commit).
-- `description` optional deployment description.
+- `message` optional deployment message.
 
 ## Command
 
@@ -52,6 +52,6 @@ garden github-deploy \
        [--path <path>] \
        [--token <token>] \
        [--commit <commit>] \
-       [--message <description>] \
+       [--message <message>] \
        <command>
 ```

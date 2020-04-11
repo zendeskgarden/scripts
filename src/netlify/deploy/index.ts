@@ -71,8 +71,8 @@ export default (spinner: Ora) => {
     .description('deploy to a Netlify site')
     .arguments('<dir>')
     .option('-p, --production', 'production deploy')
-    .option('-t, --token <token>', 'access token')
     .option('-i, --id <id>', 'site API ID')
+    .option('-t, --token <token>', 'access token')
     .option('-m, --message <message>', 'deploy message')
     .action(async dir => {
       try {
