@@ -5,11 +5,11 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { clean, publish } from 'gh-pages';
 import { repository as getRepository, token as getToken } from '..';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Ora } from 'ora';
-import { publish } from 'gh-pages';
 
 type ARGS = {
   dir: string;
@@ -41,16 +41,25 @@ export const execute = async (args: ARGS = { dir: '' }): Promise<string | undefi
     if (token && repository) {
       const [owner, repo] = repository;
 
-      publish(args.dir, {
-        repo: `https://${token}@github.com/${owner}/${repo}.git`,
-        user: {
-          name: 'Zendesk Garden',
-          email: 'garden@zendesk.com'
+      clean();
+      await publish(
+        args.dir,
+        {
+          repo: `https://${token}@github.com/${owner}/${repo}.git`,
+          user: {
+            name: 'Zendesk Garden',
+            email: 'garden@zendesk.com'
+          },
+          message
         },
-        message
-      });
-
-      retVal = `https://${owner}.github.io/${repo}/`;
+        error => {
+          if (error) {
+            handleErrorMessage(error, 'github-pages', args.spinner);
+          } else {
+            retVal = `https://${owner}.github.io/${repo}/`;
+          }
+        }
+      );
     } else {
       throw new Error('Invalid git repository');
     }
