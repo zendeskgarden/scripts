@@ -11,14 +11,19 @@ import { githubDeploy, netlifyDeploy } from '@zendeskgarden/tool-shed';
 
 const args: {
   command: (...args: any[]) => Promise<string | { url: string; logUrl: string }>;
-  environment?: 'staging' | 'production';
+  production?: boolean;
   path?: string;
   token?: string;
   ref?: string;
   message?: string;
 } = {
   command: async () => {
-    const result = await netlifyDeploy({ dir: __dirname });
+    const result = await netlifyDeploy({
+      dir: __dirname,
+      production: args.production,
+      token: args.token,
+      message: args.message
+    });
 
     return result;
   }
@@ -35,8 +40,8 @@ const args: {
 ### Arguments
 
 - `command` deployment command to execute; returns a URL (or `{ url, logUrl }` pair) if successful.
-- `environment` optional `'staging'` or `'production'` environment; defaults
-  to `'staging'`.
+- `production` determine whether this is a production or staging deployment;
+  defaults to staging.
 - `path` optional path to a git directory; defaults to the current directory.
 - `ref` optional named branch, tag, or SHA to deploy against; defaults to the
   value provided by [`githubCommit`](../commit#readme).

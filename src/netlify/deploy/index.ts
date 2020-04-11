@@ -29,7 +29,7 @@ type RETVAL = {
  * Execute the `netlify-deploy` command.
  *
  * @param {string} args.dir Folder to deploy.
- * @param {string} args.production Determine whether this is a production deploy.
+ * @param {boolean} args.production Determine whether this is a production deploy.
  * @param {string} [args.message] Deploy message.
  * @param {string} [args.token] Netlify personal access token.
  * @param {string} [args.siteId] Netlify site API ID.

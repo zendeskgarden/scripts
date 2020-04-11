@@ -15,9 +15,9 @@ import execa from 'execa';
 type ARGS = {
   command: (...args: any[]) => Promise<string | { url: string; logUrl: string } | undefined>;
   path?: string;
+  production?: boolean;
   token?: string;
   ref?: string;
-  environment?: 'staging' | 'production';
   message?: string;
   spinner?: Ora;
 };
@@ -27,9 +27,9 @@ type ARGS = {
  *
  * @param {function} args.command Deployment command to execute.
  * @param {string} [args.path] Path to a git directory.
+ * @param {boolean} args.production Determine whether this is a production deployment.
  * @param {string} [args.token] GitHub personal access token.
  * @param {string} [args.ref] GitHub ref (commit SHA, branch, tag).
- * @param {string} [args.environment] Deployment environment.
  * @param {string} [args.message] Deployment message.
  * @param {Ora} [args.spinner] Terminal spinner.
  *
@@ -43,7 +43,7 @@ export const execute = async (args: ARGS): Promise<string | undefined> => {
     const github = new Octokit({ auth });
     const repository = (await getRepository(args.path, args.spinner))!;
     const ref = (args.ref || (await getCommit({ ...args })))!;
-    const environment = args.environment || 'staging';
+    const environment = args.production ? 'production' : 'staging';
 
     /* https://octokit.github.io/rest.js/v17#repos-create-deployment */
     const deployment = await github.repos.createDeployment({
@@ -93,7 +93,7 @@ export default (spinner: Ora) => {
   return command
     .description('execute a GitHub deployment based on a <command> that outputs a URL')
     .arguments('<command> [args...]')
-    .option('-p, --production', 'production deploy')
+    .option('-p, --production', 'production deployment')
     .option('-p, --path <path>', 'git directory')
     .option('-c, --commit <commit>', 'GitHub commit SHA')
     .option('-t, --token <token>', 'access token')
@@ -118,9 +118,9 @@ export default (spinner: Ora) => {
             return retVal;
           },
           path: command.path,
+          production: command.production,
           token: command.token,
           ref: command.commit,
-          environment: command.production ? 'production' : 'staging',
           message: command.message,
           spinner
         });
