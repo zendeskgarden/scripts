@@ -11,14 +11,12 @@ const Command = require('commander').Command;
 const program = new Command();
 const chalk = require('chalk');
 const textSync = require('figlet').textSync;
-const ora = require('ora');
+const spinner = require('ora')();
 const version = require('../package.json').version;
 const github = require('../dist/github');
 const netlify = require('../dist/netlify');
 
 require('dotenv').config();
-
-const spinner = ora();
 
 program
   .version(version)
