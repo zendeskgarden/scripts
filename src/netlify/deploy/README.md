@@ -19,7 +19,7 @@ const args: {
 };
 
 (async () => {
-  const result = await netlifyDeploy();
+  const result = await netlifyDeploy(args);
 
   if (result) {
     const { url, logUrl } = result;
