@@ -94,7 +94,7 @@ export default (spinner: Ora) => {
     .description('execute a GitHub deployment based on a <command> that outputs a URL')
     .arguments('<command> [args...]')
     .option('-p, --production', 'production deployment')
-    .option('-p, --path <path>', 'git directory')
+    .option('-d, --path <path>', 'git directory')
     .option('-c, --commit <commit>', 'GitHub commit SHA')
     .option('-t, --token <token>', 'access token')
     .option('-m, --message <message>', 'deployment message')
