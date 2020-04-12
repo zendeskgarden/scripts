@@ -14,6 +14,7 @@ const textSync = require('figlet').textSync;
 const spinner = require('ora')();
 const version = require('../package.json').version;
 const github = require('../dist/github');
+const lerna = require('../dist/lerna');
 const netlify = require('../dist/netlify');
 
 require('dotenv').config();
@@ -27,6 +28,7 @@ program
   .addCommand(github.releaseCommand(spinner))
   .addCommand(github.repositoryCommand(spinner))
   .addCommand(github.tokenCommand(spinner))
+  .addCommand(lerna.changelogCommand(spinner))
   .addCommand(netlify.deployCommand(spinner))
   .addCommand(netlify.siteIdCommand(spinner))
   .addCommand(netlify.tokenCommand(spinner))
