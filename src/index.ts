@@ -10,6 +10,7 @@ export {
   commit as githubCommit,
   deploy as githubDeploy,
   pages as githubPages,
+  release as githubRelease,
   repository as githubRepository,
   token as githubToken
 } from './github';

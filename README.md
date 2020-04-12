@@ -37,6 +37,7 @@ the individual command README for details.
 - [`garden github-commit`](src/github/commit#readme)
 - [`garden github-deploy`](src/github/deploy#readme)
 - [`garden github-pages`](src/github/pages#readme)
+- [`garden github-release`](src/github/release#readme)
 - [`garden github-repository`](src/github/repository#readme)
 - [`garden github-token`](src/github/token#readme)
 - [`garden netlify-deploy`](src/netlify/deploy#readme)

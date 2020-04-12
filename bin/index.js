@@ -24,6 +24,7 @@ program
   .addCommand(github.commitCommand(spinner))
   .addCommand(github.deployCommand(spinner))
   .addCommand(github.pagesCommand(spinner))
+  .addCommand(github.releaseCommand(spinner))
   .addCommand(github.repositoryCommand(spinner))
   .addCommand(github.tokenCommand(spinner))
   .addCommand(netlify.deployCommand(spinner))
