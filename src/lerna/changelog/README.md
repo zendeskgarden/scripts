@@ -1,6 +1,8 @@
 # `garden lerna-changelog`
 
-Generate a multi-repo markdown log of changes between two tags.
+Generate a multi-repo markdown log of changes between two tags. See [package
+configuration](https://www.npmjs.com/package/lerna-changelog#configuration)
+for details.
 
 ## Usage
 
