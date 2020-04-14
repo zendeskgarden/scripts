@@ -12,7 +12,7 @@ import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
 import execa from 'execa';
 
-type ARGS = {
+interface IGitHubDeployArgs {
   command: (...args: any[]) => Promise<string | { url: string; logUrl: string } | undefined>;
   path?: string;
   production?: boolean;
@@ -20,7 +20,7 @@ type ARGS = {
   ref?: string;
   message?: string;
   spinner?: Ora;
-};
+}
 
 /**
  * Execute the `github-deploy` command.
@@ -35,7 +35,7 @@ type ARGS = {
  *
  * @returns {Promise<string>} The result of the deployment command.
  */
-export const execute = async (args: ARGS): Promise<string | undefined> => {
+export const execute = async (args: IGitHubDeployArgs): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   try {

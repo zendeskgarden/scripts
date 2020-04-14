@@ -11,14 +11,14 @@ import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
 
-type ARGS = {
+interface IGitHubReleaseArgs {
   tag: string;
   body: string;
   published?: boolean;
   path?: string;
   token?: string;
   spinner?: Ora;
-};
+}
 
 /**
  * Execute the `github-release` command.
@@ -32,7 +32,7 @@ type ARGS = {
  *
  * @returns {Promise<string>} The GitHub release URL.
  */
-export const execute = async (args: ARGS): Promise<string | undefined> => {
+export const execute = async (args: IGitHubReleaseArgs): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   try {

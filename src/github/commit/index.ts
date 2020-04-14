@@ -11,12 +11,12 @@ import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
 
-type ARGS = {
+interface IGitHubCommitArgs {
   path?: string;
   token?: string;
   branch?: string;
   spinner?: Ora;
-};
+}
 
 /**
  * Execute the `github-commit` command.
@@ -29,7 +29,7 @@ type ARGS = {
  * @returns {Promise<string>} The latest commit SHA provided by a CI
  * environment variable or remote GitHub commits for the given git repository.
  */
-export const execute = async (args: ARGS = {}): Promise<string | undefined> => {
+export const execute = async (args: IGitHubCommitArgs): Promise<string | undefined> => {
   let retVal: string | undefined = process.env.CIRCLE_SHA1 || process.env.TRAVIS_COMMIT;
 
   if (!retVal) {

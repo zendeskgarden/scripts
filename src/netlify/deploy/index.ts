@@ -11,14 +11,14 @@ import { Command } from 'commander';
 import NetlifyAPI from 'netlify';
 import { Ora } from 'ora';
 
-type ARGS = {
+interface INetlifyDeployArgs {
   dir: string;
   production?: boolean;
   token?: string;
   siteId?: string;
   message?: string;
   spinner?: Ora;
-};
+}
 
 type RETVAL = {
   url: string;
@@ -37,9 +37,7 @@ type RETVAL = {
  *
  * @returns {object} The Netlify deployment and log URLs.
  */
-export const execute = async (
-  args: ARGS = { dir: '', production: false }
-): Promise<RETVAL | undefined> => {
+export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefined> => {
   let retVal: RETVAL | undefined;
 
   try {

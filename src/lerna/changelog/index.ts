@@ -13,13 +13,13 @@ import execa from 'execa';
 import { fromPath } from 'lerna-changelog/lib/configuration';
 import { token as getToken } from '../../github';
 
-type ARGS = {
+interface ILernaChangelogArgs {
   from?: string;
   to?: string;
   path?: string;
   token?: string;
   spinner?: Ora;
-};
+}
 
 /**
  * Execute the `lerna-changelog` command.
@@ -32,7 +32,7 @@ type ARGS = {
  *
  * @returns {Promise<string>} The markdown result of the changelog command.
  */
-export const execute = async (args: ARGS = {}): Promise<string | undefined> => {
+export const execute = async (args: ILernaChangelogArgs): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   try {

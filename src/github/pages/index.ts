@@ -11,13 +11,13 @@ import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Ora } from 'ora';
 
-type ARGS = {
+interface IGitHubPagesArgs {
   dir: string;
   path?: string;
   message?: string;
   token?: string;
   spinner?: Ora;
-};
+}
 
 /**
  * Execute the `github-pages` command.
@@ -30,7 +30,7 @@ type ARGS = {
  *
  * @returns {Promise<string>} The GitHub pages URL.
  */
-export const execute = async (args: ARGS = { dir: '' }): Promise<string | undefined> => {
+export const execute = async (args: IGitHubPagesArgs): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   try {
