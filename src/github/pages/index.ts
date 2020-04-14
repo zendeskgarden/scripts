@@ -50,7 +50,8 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
             name: 'Zendesk Garden',
             email: 'garden@zendesk.com'
           },
-          message
+          message,
+          silent: true
         },
         error => {
           if (error) {
