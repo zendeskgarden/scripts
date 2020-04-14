@@ -1,6 +1,6 @@
 # `garden github-release`
 
-Create a GitHub release.
+Create a GitHub [release](https://help.github.com/articles/about-releases/).
 
 ## Usage
 
