@@ -6,7 +6,7 @@ from a git repository.
 ## Usage
 
 ```ts
-import { githubRepository } from '@zendeskgarden/tool-shed';
+import { githubRepository } from '@zendeskgarden/scripts';
 
 (async () => {
   const repository = await githubRepository(path?: string);

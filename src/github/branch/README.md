@@ -6,7 +6,7 @@ from a git repository.
 ## Usage
 
 ```ts
-import { githubBranch } from '@zendeskgarden/tool-shed';
+import { githubBranch } from '@zendeskgarden/scripts';
 
 (async () => {
   const branch = await githubBranch(path?: string);

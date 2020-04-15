@@ -5,7 +5,7 @@ Deploy the given directory to a [Netlify](https://www.netlify.com/) site.
 ## Usage
 
 ```ts
-import { netlifyDeploy } from '@zendeskgarden/tool-shed';
+import { netlifyDeploy } from '@zendeskgarden/scripts';
 
 const args: {
   dir: string;

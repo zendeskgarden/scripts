@@ -7,7 +7,7 @@ Execute a GitHub
 ## Usage
 
 ```ts
-import { githubDeploy, netlifyDeploy } from '@zendeskgarden/tool-shed';
+import { githubDeploy, netlifyDeploy } from '@zendeskgarden/scripts';
 
 const args: {
   command: (...args: any[]) => Promise<string | { url: string; logUrl: string }>;

@@ -5,7 +5,7 @@ Create a GitHub [release](https://help.github.com/articles/about-releases/).
 ## Usage
 
 ```ts
-import { githubRelease } from '@zendeskgarden/tool-shed';
+import { githubRelease } from '@zendeskgarden/scripts';
 
 const args: {
   tag: string;

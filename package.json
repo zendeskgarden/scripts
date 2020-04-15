@@ -1,12 +1,12 @@
 {
-  "name": "@zendeskgarden/tool-shed",
-  "description": "Garden Tool Shed",
+  "name": "@zendeskgarden/scripts",
+  "description": "Garden Scripts",
   "license": "Apache-2.0",
   "author": "Zendesk Garden <garden@zendesk.com>",
   "homepage": "https://garden.zendesk.com/",
-  "repository": "https://github.com/zendeskgarden/tool-shed",
+  "repository": "https://github.com/zendeskgarden/scripts",
   "bugs": {
-    "url": "https://github.com/zendeskgarden/tool-shed/issues"
+    "url": "https://github.com/zendeskgarden/scripts/issues"
   },
   "version": "0.1.1",
   "main": "dist/index.js",

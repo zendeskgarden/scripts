@@ -7,7 +7,7 @@ for details.
 ## Usage
 
 ```ts
-import { lernaChangelog } from '@zendeskgarden/tool-shed';
+import { lernaChangelog } from '@zendeskgarden/scripts';
 
 const args: {
   from?: string;

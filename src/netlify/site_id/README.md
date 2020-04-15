@@ -7,7 +7,7 @@ option.
 ## Usage
 
 ```ts
-import { netlifySiteId } from '@zendeskgarden/tool-shed';
+import { netlifySiteId } from '@zendeskgarden/scripts';
 
 (async () => {
   const siteId = await netlifySiteId();
