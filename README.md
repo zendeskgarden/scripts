@@ -1,7 +1,9 @@
-# Garden Scripts [![Build Status][build status badge]][build status link] [![Dependency Status][dependency status badge]][dependency status link]<!-- markdownlint-disable -->
+# Garden Scripts [![npm version][npm version badge]][npm version link] [![Build Status][build status badge]][build status link] [![Dependency Status][dependency status badge]][dependency status link]<!-- markdownlint-disable -->
 
 <!-- markdownlint-enable -->
 
+[npm version badge]: https://flat.badgen.net/npm/v/@zendeskgarden/scripts
+[npm version link]: https://www.npmjs.com/package/@zendeskgarden/scripts
 [build status badge]: https://flat.badgen.net/circleci/github/zendeskgarden/scripts/master?label=build
 [build status link]: https://circleci.com/gh/zendeskgarden/scripts/tree/master
 [dependency status badge]: https://flat.badgen.net/david/dev/zendeskgarden/scripts?label=dependencies
