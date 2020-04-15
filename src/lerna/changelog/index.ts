@@ -32,7 +32,7 @@ interface ILernaChangelogArgs {
  *
  * @returns {Promise<string>} The markdown result of the changelog command.
  */
-export const execute = async (args: ILernaChangelogArgs): Promise<string | undefined> => {
+export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | undefined> => {
   let retVal: string | undefined;
 
   try {
