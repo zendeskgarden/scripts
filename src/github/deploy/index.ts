@@ -27,7 +27,7 @@ interface IGitHubDeployArgs {
  *
  * @param {function} args.command Deployment command to execute.
  * @param {string} [args.path] Path to a git directory.
- * @param {boolean} args.production Determine whether this is a production deployment.
+ * @param {boolean} [args.production] Determine whether this is a production deployment.
  * @param {string} [args.token] GitHub personal access token.
  * @param {string} [args.ref] GitHub ref (commit SHA, branch, tag).
  * @param {string} [args.message] Deployment message.

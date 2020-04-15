@@ -29,7 +29,7 @@ interface IGitHubCommitArgs {
  * @returns {Promise<string>} The latest commit SHA provided by a CI
  * environment variable or remote GitHub commits for the given git repository.
  */
-export const execute = async (args: IGitHubCommitArgs): Promise<string | undefined> => {
+export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | undefined> => {
   let retVal: string | undefined = process.env.CIRCLE_SHA1 || process.env.TRAVIS_COMMIT;
 
   if (!retVal) {
