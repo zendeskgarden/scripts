@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/zendeskgarden/tool-shed/compare/v0.1.0...v0.1.1) (2020-04-15)
+
+
+### Bug Fixes
+
+* exclude CHANGELOG.md from formatting/linting ([#2](https://github.com/zendeskgarden/tool-shed/issues/2)) ([e8c54c8](https://github.com/zendeskgarden/tool-shed/commit/e8c54c88e8976b213efa01ede3cacfdc529111e0))
+
 ## 0.1.0 (2020-04-14)
 
 
