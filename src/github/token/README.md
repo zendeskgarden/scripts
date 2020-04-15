@@ -7,7 +7,7 @@ option.
 ## Usage
 
 ```ts
-import { githubToken } from '@zendeskgarden/tool-shed';
+import { githubToken } from '@zendeskgarden/scripts';
 
 (async () => {
   const token = await githubToken();

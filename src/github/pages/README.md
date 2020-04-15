@@ -5,7 +5,7 @@ Publish the given directory to a `gh-pages` branch.
 ## Usage
 
 ```ts
-import { githubPages } from '@zendeskgarden/tool-shed';
+import { githubPages } from '@zendeskgarden/scripts';
 
 const args: {
   dir: string;

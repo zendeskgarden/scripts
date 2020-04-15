@@ -7,7 +7,7 @@ option.
 ## Usage
 
 ```ts
-import { netlifyToken } from '@zendeskgarden/tool-shed';
+import { netlifyToken } from '@zendeskgarden/scripts';
 
 (async () => {
   const token = await netlifyToken();

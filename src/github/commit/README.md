@@ -6,7 +6,7 @@ repository and branch.
 ## Usage
 
 ```ts
-import { githubCommit } from '@zendeskgarden/tool-shed';
+import { githubCommit } from '@zendeskgarden/scripts';
 
 const args: {
   path?: string;
