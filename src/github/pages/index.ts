@@ -10,6 +10,7 @@ import { repository as getRepository, token as getToken } from '..';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Command } from 'commander';
 import { Ora } from 'ora';
+import execa from 'execa';
 
 interface IGitHubPagesArgs {
   dir: string;
@@ -40,6 +41,16 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
 
     if (token && repository) {
       const { owner, repo } = repository;
+      let name: string;
+      let email: string;
+
+      try {
+        name = (await execa('git', ['config', 'user.name'])).stdout.toString();
+        email = (await execa('git', ['config', 'user.email'])).stdout.toString();
+      } catch {
+        name = 'Zendesk Garden';
+        email = 'garden@zendesk.com';
+      }
 
       clean();
       await publish(
@@ -47,8 +58,8 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
         {
           repo: `https://${token}@github.com/${owner}/${repo}.git`,
           user: {
-            name: 'Zendesk Garden',
-            email: 'garden@zendesk.com'
+            name,
+            email
           },
           message,
           silent: true
