@@ -1,13 +1,8 @@
 version: 2.1
 orbs:
-  node: circleci/node@1.1.6
+  node: circleci/node@2.0.2
 
 references:
-  executor: &executor
-    executor:
-      name: node/default
-      tag: lts
-
   workspace_root: &workspace_root ~/project
 
   attach_workspace: &attach_workspace
@@ -21,25 +16,24 @@ references:
 
 jobs:
   build:
-    <<: *executor
+    executor: node/default
     steps:
       - checkout
-      - node/with-cache:
+      - node/install-packages:
           cache-key: yarn.lock
-          steps:
-            - run: yarn --frozen-lockfile
+          pkg-manager: yarn
       - persist_to_workspace:
           root: *workspace_root
           paths: .
 
   test:
-    <<: *executor
+    executor: node/default
     steps:
       - *attach_workspace
       - run: yarn test
 
   publish:
-    <<: *executor
+    executor: node/default
     steps:
       - *attach_workspace
       - run: npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
