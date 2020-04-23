@@ -52,6 +52,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
       ref,
       environment,
       description: args.message,
+      auto_merge: false,
       required_contexts: [],
       transient_environment: environment !== 'production'
     });
