@@ -20,7 +20,10 @@ import execa from 'execa';
  * variable or extracted from the given git repository.
  */
 export const execute = async (path?: string, spinner?: Ora): Promise<string | undefined> => {
-  let retVal: string | undefined = process.env.CIRCLE_BRANCH || process.env.TRAVIS_BRANCH;
+  let retVal: string | undefined =
+    process.env.CIRCLE_BRANCH ||
+    process.env.TRAVIS_PULL_REQUEST_BRANCH ||
+    process.env.TRAVIS_BRANCH;
 
   if (!retVal) {
     const args = ['branch', '--show-current'];
