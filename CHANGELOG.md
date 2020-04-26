@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/zendeskgarden/scripts/compare/v0.1.5...v0.1.6) (2020-04-26)
+
+
+### Bug Fixes
+
+* branch retrieval for travis PR jobs ([#11](https://github.com/zendeskgarden/scripts/issues/11)) ([58548bc](https://github.com/zendeskgarden/scripts/commit/58548bcc5a0c42cdeeefe24ecf38d8be576e44f0))
+
 ### [0.1.5](https://github.com/zendeskgarden/scripts/compare/v0.1.4...v0.1.5) (2020-04-23)
 
 
