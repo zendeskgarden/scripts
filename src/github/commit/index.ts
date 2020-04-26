@@ -30,7 +30,8 @@ interface IGitHubCommitArgs {
  * environment variable or remote GitHub commits for the given git repository.
  */
 export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | undefined> => {
-  let retVal: string | undefined = process.env.CIRCLE_SHA1 || process.env.TRAVIS_COMMIT;
+  let retVal: string | undefined =
+    process.env.CIRCLE_SHA1 || process.env.TRAVIS_PULL_REQUEST_SHA || process.env.TRAVIS_COMMIT;
 
   if (!retVal) {
     try {
