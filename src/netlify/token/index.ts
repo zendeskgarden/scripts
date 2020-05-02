@@ -29,6 +29,8 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
       retVal = token.stdout.toString();
     } catch (error) {
       handleErrorMessage(error, 'netlify-token', spinner);
+
+      throw error;
     }
   }
 
@@ -52,9 +54,10 @@ export default (spinner: Ora) => {
             spinner
           );
         } else {
-          spinner.fail('Netlify token not found');
-          process.exit(1);
+          throw spinner.fail('Netlify token not found');
         }
+      } catch (error) {
+        process.exit(1);
       } finally {
         spinner.stop();
       }

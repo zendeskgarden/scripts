@@ -29,6 +29,8 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
       retVal = siteId.stdout.toString();
     } catch (error) {
       handleErrorMessage(error, 'netlify-site-id', spinner);
+
+      throw error;
     }
   }
 
@@ -42,14 +44,15 @@ export default (spinner: Ora) => {
     try {
       spinner.start();
 
-      const siteId = await execute();
+      const siteId = await execute(spinner);
 
       if (siteId) {
         handleSuccessMessage(siteId, spinner);
       } else {
-        spinner.fail('Netlify site ID not found');
-        process.exit(1);
+        throw spinner.fail('Netlify site ID not found');
       }
+    } catch (error) {
+      process.exit(1);
     } finally {
       spinner.stop();
     }
