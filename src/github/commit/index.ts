@@ -51,7 +51,11 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
         retVal = commits.data[0].sha;
       }
     } catch (error) {
-      handleErrorMessage(error, 'github-commit', args.spinner);
+      if (error.status !== 404) {
+        handleErrorMessage(error, 'github-commit', args.spinner);
+
+        throw error;
+      }
     }
   }
 
@@ -80,9 +84,10 @@ export default (spinner: Ora) => {
         if (commit) {
           handleSuccessMessage(commit, spinner);
         } else {
-          spinner.fail('Commit not found');
-          process.exit(1);
+          throw spinner.fail('Commit not found');
         }
+      } catch (error) {
+        process.exit(1);
       } finally {
         spinner.stop();
       }

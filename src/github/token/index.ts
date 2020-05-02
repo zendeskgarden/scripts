@@ -29,6 +29,8 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
       retVal = token.stdout.toString();
     } catch (error) {
       handleErrorMessage(error, 'github-token', spinner);
+
+      throw error;
     }
   }
 
@@ -53,9 +55,10 @@ export default (spinner: Ora) => {
             spinner
           );
         } else {
-          spinner.fail('GitHub token not found');
-          process.exit(1);
+          throw spinner.fail('GitHub token not found');
         }
+      } catch (error) {
+        process.exit(1);
       } finally {
         spinner.stop();
       }

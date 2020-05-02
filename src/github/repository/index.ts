@@ -57,6 +57,8 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
       retVal = { owner: gitOwner.stdout.toString(), repo: gitRepo.stdout.toString() };
     } catch (error) {
       handleErrorMessage(error, 'github-repository', spinner);
+
+      throw error;
     }
   }
 
@@ -78,9 +80,10 @@ export default (spinner: Ora) => {
         if (repository) {
           handleSuccessMessage(`${repository.owner}/${repository.repo}`, spinner);
         } else {
-          spinner.fail('GitHub repository not found');
-          process.exit(1);
+          throw spinner.fail('GitHub repository not found');
         }
+      } catch (error) {
+        process.exit(1);
       } finally {
         spinner.stop();
       }
