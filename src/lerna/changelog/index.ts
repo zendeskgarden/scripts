@@ -68,12 +68,14 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
 
     process.chdir(rootPath.stdout);
 
-    return await changelog.createMarkdown({
+    retVal = await changelog.createMarkdown({
       tagFrom,
       tagTo
     });
   } catch (error) {
     handleErrorMessage(error.message ? error.message : error, 'lerna-changelog', args.spinner);
+
+    throw error;
   }
 
   return retVal;
@@ -103,9 +105,10 @@ export default (spinner: Ora) => {
         if (markdown) {
           handleSuccessMessage(markdown, spinner);
         } else {
-          spinner.fail('Unable to generate changelog');
-          process.exit(1);
+          throw spinner.fail('Unable to generate changelog');
         }
+      } catch (error) {
+        process.exit(1);
       } finally {
         spinner.stop();
       }
