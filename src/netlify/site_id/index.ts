@@ -49,9 +49,10 @@ export default (spinner: Ora) => {
       if (siteId) {
         handleSuccessMessage(siteId, spinner);
       } else {
-        throw spinner.fail('Netlify site ID not found');
+        throw new Error();
       }
-    } catch (error) {
+    } catch {
+      spinner.fail('Netlify site ID not found');
       process.exit(1);
     } finally {
       spinner.stop();

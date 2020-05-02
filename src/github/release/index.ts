@@ -87,9 +87,10 @@ export default (spinner: Ora) => {
         if (release) {
           handleSuccessMessage(release, spinner);
         } else {
-          throw spinner.fail('Unable to release');
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail('Unable to release');
         process.exit(1);
       } finally {
         spinner.stop();

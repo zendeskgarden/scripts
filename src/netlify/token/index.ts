@@ -54,9 +54,10 @@ export default (spinner: Ora) => {
             spinner
           );
         } else {
-          throw spinner.fail('Netlify token not found');
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail('Netlify token not found');
         process.exit(1);
       } finally {
         spinner.stop();

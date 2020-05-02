@@ -80,9 +80,10 @@ export default (spinner: Ora) => {
         if (repository) {
           handleSuccessMessage(`${repository.owner}/${repository.repo}`, spinner);
         } else {
-          throw spinner.fail('GitHub repository not found');
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail('GitHub repository not found');
         process.exit(1);
       } finally {
         spinner.stop();

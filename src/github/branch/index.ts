@@ -61,9 +61,10 @@ export default (spinner: Ora) => {
         if (branch) {
           handleSuccessMessage(branch, spinner);
         } else {
-          throw spinner.fail('GitHub branch not found');
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail('GitHub branch not found');
         process.exit(1);
       } finally {
         spinner.stop();

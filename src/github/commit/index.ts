@@ -84,9 +84,10 @@ export default (spinner: Ora) => {
         if (commit) {
           handleSuccessMessage(commit, spinner);
         } else {
-          throw spinner.fail('Commit not found');
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail('Commit not found');
         process.exit(1);
       } finally {
         spinner.stop();

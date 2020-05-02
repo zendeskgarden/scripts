@@ -90,9 +90,10 @@ export default (spinner: Ora) => {
         if (result) {
           handleSuccessMessage(result.url, spinner);
         } else {
-          throw spinner.fail(`Unable to deploy ${dir}`);
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail(`Unable to deploy ${dir}`);
         process.exit(1);
       } finally {
         spinner.stop();

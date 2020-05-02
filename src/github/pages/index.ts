@@ -108,9 +108,10 @@ export default (spinner: Ora) => {
         if (url) {
           handleSuccessMessage(url, spinner);
         } else {
-          throw spinner.fail(`Unable to publish '${dir}'`);
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail(`Unable to publish '${dir}'`);
         process.exit(1);
       } finally {
         spinner.stop();

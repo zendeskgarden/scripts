@@ -131,11 +131,12 @@ export default (spinner: Ora) => {
         if (url) {
           handleSuccessMessage(url, spinner);
         } else {
-          const cmd = args.length > 0 ? `${subcommand} ${args.join(' ')}` : subcommand;
-
-          throw spinner.fail(`Unable to deploy '${cmd}'`);
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        const cmd = args.length > 0 ? `${subcommand} ${args.join(' ')}` : subcommand;
+
+        spinner.fail(`Unable to deploy '${cmd}'`);
         process.exit(1);
       } finally {
         spinner.stop();

@@ -105,9 +105,10 @@ export default (spinner: Ora) => {
         if (markdown) {
           handleSuccessMessage(markdown, spinner);
         } else {
-          throw spinner.fail('Unable to generate changelog');
+          throw new Error();
         }
-      } catch (error) {
+      } catch {
+        spinner.fail('Unable to generate changelog');
         process.exit(1);
       } finally {
         spinner.stop();
