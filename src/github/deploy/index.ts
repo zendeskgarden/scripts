@@ -137,7 +137,7 @@ export default (spinner: Ora) => {
         const cmd = args.length > 0 ? `${subcommand} ${args.join(' ')}` : subcommand;
 
         spinner.fail(`Unable to deploy '${cmd}'`);
-        process.exit(1);
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }

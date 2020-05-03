@@ -53,7 +53,7 @@ export default (spinner: Ora) => {
       }
     } catch {
       spinner.fail('Netlify site ID not found');
-      process.exit(1);
+      process.exitCode = 1;
     } finally {
       spinner.stop();
     }

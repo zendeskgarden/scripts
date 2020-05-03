@@ -84,7 +84,7 @@ export default (spinner: Ora) => {
         }
       } catch {
         spinner.fail('GitHub repository not found');
-        process.exit(1);
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }

@@ -59,7 +59,7 @@ export default (spinner: Ora) => {
         }
       } catch {
         spinner.fail('GitHub token not found');
-        process.exit(1);
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }

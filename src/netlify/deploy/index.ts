@@ -94,7 +94,7 @@ export default (spinner: Ora) => {
         }
       } catch {
         spinner.fail(`Unable to deploy ${dir}`);
-        process.exit(1);
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }
