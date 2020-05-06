@@ -57,6 +57,8 @@ export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefi
     retVal = { url, logUrl };
   } catch (error) {
     handleErrorMessage(error, 'netlify-deploy', args.spinner);
+
+    throw error;
   }
 
   return retVal;
@@ -81,15 +83,18 @@ export default (spinner: Ora) => {
           production: command.production,
           token: command.token,
           siteId: command.id,
-          message: command.message
+          message: command.message,
+          spinner
         });
 
         if (result) {
           handleSuccessMessage(result.url, spinner);
         } else {
-          spinner.fail(`Unable to deploy ${dir}`);
-          process.exit(1);
+          throw new Error();
         }
+      } catch {
+        spinner.fail(`Unable to deploy ${dir}`);
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }

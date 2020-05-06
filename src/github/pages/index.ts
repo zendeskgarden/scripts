@@ -77,6 +77,8 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
     }
   } catch (error) {
     handleErrorMessage(error, 'github-pages', args.spinner);
+
+    throw error;
   }
 
   return retVal;
@@ -106,9 +108,11 @@ export default (spinner: Ora) => {
         if (url) {
           handleSuccessMessage(url, spinner);
         } else {
-          spinner.fail(`Unable to publish '${dir}'`);
-          process.exit(1);
+          throw new Error();
         }
+      } catch {
+        spinner.fail(`Unable to publish '${dir}'`);
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }

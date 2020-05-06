@@ -83,6 +83,8 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     retVal = typeof result === 'object' ? result.url : result;
   } catch (error) {
     handleErrorMessage(error, 'github-deploy', args.spinner);
+
+    throw error;
   }
 
   return retVal;
@@ -129,11 +131,13 @@ export default (spinner: Ora) => {
         if (url) {
           handleSuccessMessage(url, spinner);
         } else {
-          const cmd = args.length > 0 ? `${subcommand} ${args.join(' ')}` : subcommand;
-
-          spinner.fail(`Unable to deploy '${cmd}'`);
-          process.exit(1);
+          throw new Error();
         }
+      } catch {
+        const cmd = args.length > 0 ? `${subcommand} ${args.join(' ')}` : subcommand;
+
+        spinner.fail(`Unable to deploy '${cmd}'`);
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }

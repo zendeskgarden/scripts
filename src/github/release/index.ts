@@ -54,6 +54,8 @@ export const execute = async (args: IGitHubReleaseArgs): Promise<string | undefi
     retVal = args.published ? url : url.replace('/tag/', '/edit/');
   } catch (error) {
     handleErrorMessage(error, 'github-release', args.spinner);
+
+    throw error;
   }
 
   return retVal;
@@ -85,9 +87,11 @@ export default (spinner: Ora) => {
         if (release) {
           handleSuccessMessage(release, spinner);
         } else {
-          spinner.fail('Unable to release');
-          process.exit(1);
+          throw new Error();
         }
+      } catch {
+        spinner.fail('Unable to release');
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }

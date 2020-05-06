@@ -38,6 +38,8 @@ export const execute = async (path?: string, spinner?: Ora): Promise<string | un
       retVal = branch.stdout.toString();
     } catch (error) {
       handleErrorMessage(error, 'github-branch', spinner);
+
+      throw error;
     }
   }
 
@@ -59,9 +61,11 @@ export default (spinner: Ora) => {
         if (branch) {
           handleSuccessMessage(branch, spinner);
         } else {
-          spinner.fail('GitHub branch not found');
-          process.exit(1);
+          throw new Error();
         }
+      } catch {
+        spinner.fail('GitHub branch not found');
+        process.exitCode = 1;
       } finally {
         spinner.stop();
       }
