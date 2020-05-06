@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/zendeskgarden/scripts/compare/v0.1.7...v0.1.8) (2020-05-06)
+
+
+### Bug Fixes
+
+* improve error handling ([#13](https://github.com/zendeskgarden/scripts/issues/13)) ([32fd059](https://github.com/zendeskgarden/scripts/commit/32fd0599472bf69eadf8e4c6a26757e9795c7a03))
+* **deps:** update all non-major dependencies ([#14](https://github.com/zendeskgarden/scripts/issues/14)) ([e033fdd](https://github.com/zendeskgarden/scripts/commit/e033fdd62ac3264ec261b2ed9ec55c0ab9404a05))
+
 ### [0.1.7](https://github.com/zendeskgarden/scripts/compare/v0.1.6...v0.1.7) (2020-04-26)
 
 
