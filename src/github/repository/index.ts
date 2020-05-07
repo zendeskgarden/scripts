@@ -40,21 +40,24 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
 
   if (!retVal) {
     const lsRemoteArgs = ['ls-remote', '--get-url'];
-    const revParseArgs = ['rev-parse', '--show-toplevel'];
 
     if (path) {
       lsRemoteArgs.unshift('-C', path);
-      revParseArgs.unshift('-C', path);
     }
 
     try {
       const remote = await execa('git', lsRemoteArgs);
-      const url = await execa('dirname', [remote.stdout]);
-      const gitOwner = await execa('basename', [url.stdout]);
-      const workingTree = await execa('git', revParseArgs);
-      const gitRepo = await execa('basename', [workingTree.stdout]);
+      const regexp = /^.+github\.com[/:](?<owner>[\w-]+)\/(?<repo>[\w.-]+)\.git$/u;
+      const match = remote.stdout.match(regexp);
 
-      retVal = { owner: gitOwner.stdout.toString(), repo: gitRepo.stdout.toString() };
+      if (match && match.groups) {
+        const owner = match.groups.owner;
+        const repo = match.groups.repo;
+
+        retVal = { owner, repo };
+      } else {
+        handleErrorMessage(`Unexpected remote: ${remote}`, 'github-repository', spinner);
+      }
     } catch (error) {
       handleErrorMessage(error, 'github-repository', spinner);
 
