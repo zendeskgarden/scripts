@@ -56,7 +56,7 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
 
         retVal = { owner, repo };
       } else {
-        handleErrorMessage(`Unexpected remote: ${remote}`, 'github-repository', spinner);
+        handleErrorMessage(`Unexpected remote URL: ${remote}`, 'github-repository', spinner);
       }
     } catch (error) {
       handleErrorMessage(error, 'github-repository', spinner);
