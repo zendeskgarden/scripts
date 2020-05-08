@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/zendeskgarden/scripts/compare/v0.1.8...v0.1.9) (2020-05-08)
+
+
+### Bug Fixes
+
+* correctly parse `github-repository` owner and repo ([#18](https://github.com/zendeskgarden/scripts/issues/18)) ([a56f91c](https://github.com/zendeskgarden/scripts/commit/a56f91ced8b988f9c01adf16ac93144adad48745))
+* **deps:** update all non-major dependencies ([#15](https://github.com/zendeskgarden/scripts/issues/15)) ([f19a356](https://github.com/zendeskgarden/scripts/commit/f19a3563b732b4a9f250de0c2051b4c669bbd2f1))
+* **deps:** update dependency @octokit/rest to v17.8.0 ([#16](https://github.com/zendeskgarden/scripts/issues/16)) ([50b320a](https://github.com/zendeskgarden/scripts/commit/50b320a23494aa3fcdea2889df576afca0643978))
+
 ### [0.1.8](https://github.com/zendeskgarden/scripts/compare/v0.1.7...v0.1.8) (2020-05-06)
 
 

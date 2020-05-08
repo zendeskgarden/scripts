@@ -8,7 +8,7 @@
   "bugs": {
     "url": "https://github.com/zendeskgarden/scripts/issues"
   },
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "dist/index.js",
   "bin": {
     "garden": "bin/index.js"
