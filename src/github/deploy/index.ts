@@ -115,7 +115,7 @@ export default (spinner: Ora) => {
               retVal = result.stdout.toString();
             } catch (error) {
               handleErrorMessage(error, subcommand, spinner);
-              process.exit(1);
+              throw error;
             }
 
             return retVal;
