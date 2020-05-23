@@ -16,6 +16,14 @@ interface ILernaConfigArgs {
   spinner?: Ora;
 }
 
+/**
+ * Execute the `lerna-config` command.
+ *
+ * @param {string} [args.path] Path to a git directory.
+ * @param {Ora} [args.spinner] Terminal spinner.
+ *
+ * @returns {Promise<any>} The object result of the config command.
+ */
 export const execute = async (args: ILernaConfigArgs = {}): Promise<any | undefined> => {
   let retVal: any | undefined;
 
