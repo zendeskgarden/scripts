@@ -14,5 +14,5 @@ export {
   repository as githubRepository,
   token as githubToken
 } from './github';
-export { changelog as lernaChangelog } from './lerna';
+export { changelog as lernaChangelog, config as lernaConfig } from './lerna';
 export { deploy as netlifyDeploy, siteId as netlifySiteId, token as netlifyToken } from './netlify';

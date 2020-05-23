@@ -5,5 +5,4 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { default as changelogCommand, execute as changelog } from './changelog';
-export { default as configCommand, execute as config } from './config';
+declare module '@lerna/project';
