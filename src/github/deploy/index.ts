@@ -72,7 +72,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     await github.repos.createDeploymentStatus({
       owner: repository.owner,
       repo: repository.repo,
-      deployment_id: deployment.data.id,
+      deployment_id: (deployment.data as any).id, // HACK for types broken in oktokit 17.9.1
       state,
       environment_url: typeof result === 'object' ? result.url : result,
       log_url: typeof result === 'object' ? result.logUrl : undefined,
