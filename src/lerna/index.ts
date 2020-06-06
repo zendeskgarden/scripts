@@ -7,3 +7,5 @@
 
 export { default as changelogCommand, execute as changelog } from './changelog';
 export { default as configCommand, execute as config } from './config';
+export { default as listCommand, execute as list } from './list';
+export { default as runCommand, execute as run } from './run';

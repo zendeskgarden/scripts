@@ -30,6 +30,8 @@ program
   .addCommand(github.tokenCommand(spinner))
   .addCommand(lerna.changelogCommand(spinner))
   .addCommand(lerna.configCommand(spinner))
+  .addCommand(lerna.listCommand(spinner))
+  .addCommand(lerna.runCommand(spinner))
   .addCommand(netlify.deployCommand(spinner))
   .addCommand(netlify.siteIdCommand(spinner))
   .addCommand(netlify.tokenCommand(spinner))
