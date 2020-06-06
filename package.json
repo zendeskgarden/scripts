@@ -37,7 +37,7 @@
     "dotenv": "8.2.0",
     "execa": "4.0.2",
     "figlet": "1.4.0",
-    "gh-pages": "2.2.0",
+    "gh-pages": "3.0.0",
     "is-interactive": "1.0.0",
     "lerna-changelog": "1.0.1",
     "netlify": "4.3.0",
