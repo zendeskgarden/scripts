@@ -16,7 +16,7 @@ import isInteractive from 'is-interactive';
  * @param {string} command The current command.
  * @param {Ora} [spinner] Terminal spinner.
  */
-export const handleErrorMessage = (error: any, command?: string, spinner?: Ora) => {
+export const handleErrorMessage = (error: unknown, command?: string, spinner?: Ora): void => {
   let message = red(error);
 
   if (command) {
@@ -38,7 +38,7 @@ export const handleErrorMessage = (error: any, command?: string, spinner?: Ora) 
  * @param message The message to output.
  * @param {Ora} [spinner] Terminal spinner.
  */
-export const handleSuccessMessage = (message: string, spinner?: Ora) => {
+export const handleSuccessMessage = (message: string, spinner?: Ora): void => {
   if (spinner && isInteractive()) {
     spinner.succeed(message);
   } else {
