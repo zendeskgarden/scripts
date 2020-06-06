@@ -5,8 +5,8 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
-import { Command } from 'commander';
 import { Ora } from 'ora';
 import execa from 'execa';
 
@@ -37,7 +37,7 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
   return retVal;
 };
 
-export default (spinner: Ora) => {
+export default (spinner: Ora): commander.Command => {
   const command = new Command('netlify-token');
 
   return command
