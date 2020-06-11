@@ -1,5 +1,5 @@
 {
   "extends": ["config:base", "group:allNonMajor"],
   "rebaseStalePrs": true,
-  "schedule": ["every 2 weeks on Wednesday"]
+  "schedule": ["on Monday every 8 weeks of the year starting on the 1st week"]
 }
