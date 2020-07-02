@@ -4,8 +4,8 @@
 
 [npm version badge]: https://flat.badgen.net/npm/v/@zendeskgarden/scripts
 [npm version link]: https://www.npmjs.com/package/@zendeskgarden/scripts
-[build status badge]: https://flat.badgen.net/circleci/github/zendeskgarden/scripts/master?label=build
-[build status link]: https://circleci.com/gh/zendeskgarden/scripts/tree/master
+[build status badge]: https://flat.badgen.net/circleci/github/zendeskgarden/scripts/main?label=build
+[build status link]: https://circleci.com/gh/zendeskgarden/scripts/tree/main
 [dependency status badge]: https://flat.badgen.net/david/dev/zendeskgarden/scripts?label=dependencies
 [dependency status link]: https://david-dm.org/zendeskgarden/scripts?type=dev
 

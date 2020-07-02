@@ -26,7 +26,7 @@
     "lint:md": "markdownlint README.md src/**/*.md",
     "prepare": "yarn build",
     "start": "bin/index.js",
-    "tag": "[ `git rev-parse --abbrev-ref HEAD` = 'master' ] && standard-version --no-verify",
+    "tag": "[ `git rev-parse --abbrev-ref HEAD` = 'main' ] && standard-version --no-verify",
     "test": "prettier-package-json --list-different && yarn format:all --check && yarn lint",
     "watch": "yarn build --watch"
   },
