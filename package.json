@@ -41,7 +41,7 @@
     "is-interactive": "1.0.0",
     "lerna-changelog": "1.0.1",
     "netlify": "4.3.11",
-    "ora": "4.1.1"
+    "ora": "5.0.0"
   },
   "devDependencies": {
     "@types/figlet": "1.2.0",
