@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/zendeskgarden/scripts/compare/v0.1.10...v0.1.11) (2020-08-22)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#22](https://github.com/zendeskgarden/scripts/issues/22)) ([490e18b](https://github.com/zendeskgarden/scripts/commit/490e18bacd45d2b48f8facd14782d66107e54940))
+* **deps:** update all non-major dependencies ([#28](https://github.com/zendeskgarden/scripts/issues/28)) ([2b83eb3](https://github.com/zendeskgarden/scripts/commit/2b83eb30f56570b8aa7e41d515c3f6694b6a44c8))
+* **deps:** update all non-major dependencies ([#33](https://github.com/zendeskgarden/scripts/issues/33)) ([b92f355](https://github.com/zendeskgarden/scripts/commit/b92f3558688072dceba8531b18ff3b26f4522f9a))
+* **deps:** update dependency @octokit/rest to v18 ([#29](https://github.com/zendeskgarden/scripts/issues/29)) ([bd2ed3b](https://github.com/zendeskgarden/scripts/commit/bd2ed3b44eedb3a3c94abaad71a2465c1d6fd2d3))
+* **deps:** update dependency commander to v6 ([#36](https://github.com/zendeskgarden/scripts/issues/36)) ([28c60a3](https://github.com/zendeskgarden/scripts/commit/28c60a36e32f12996c81f631f749b6957a8081d0))
+* **deps:** update dependency gh-pages to v3 ([#26](https://github.com/zendeskgarden/scripts/issues/26)) ([6d6bcf1](https://github.com/zendeskgarden/scripts/commit/6d6bcf1408a09aebe4e554d96adb232d904b6b6d))
+* **deps:** update dependency ora to v5 ([#37](https://github.com/zendeskgarden/scripts/issues/37)) ([b6397ba](https://github.com/zendeskgarden/scripts/commit/b6397babbeacc897572a77b879dfc4688f23b9f3))
+* **github-deploy:** prevent deployment success when <command> fails ([#40](https://github.com/zendeskgarden/scripts/issues/40)) ([9cd812e](https://github.com/zendeskgarden/scripts/commit/9cd812e2f0599233c3a29736bd0a0a9902ab4ece))
+
 ### [0.1.10](https://github.com/zendeskgarden/scripts/compare/v0.1.9...v0.1.10) (2020-05-21)
 
 
