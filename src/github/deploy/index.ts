@@ -58,14 +58,12 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     });
 
     let result;
-    let state: 'success' | 'error';
+    let error;
 
     try {
       result = await args.command();
-      state = 'success';
-    } catch (error) {
-      handleErrorMessage(error, 'github-deploy', args.spinner);
-      state = 'error';
+    } catch (err) {
+      error = err;
     }
 
     /* https://octokit.github.io/rest.js/v17#repos-create-deployment-status */
@@ -73,12 +71,16 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
       owner: repository.owner,
       repo: repository.repo,
       deployment_id: (deployment.data as any).id, // HACK for types broken in oktokit 17.9.1
-      state,
+      state: error ? 'error' : 'success',
       environment_url: typeof result === 'object' ? result.url : result,
       log_url: typeof result === 'object' ? result.logUrl : undefined,
       environment,
       description: args.message
     });
+
+    if (error) {
+      throw error;
+    }
 
     retVal = typeof result === 'object' ? result.url : result;
   } catch (error) {
