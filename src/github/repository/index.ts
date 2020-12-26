@@ -50,7 +50,7 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
       const regexp = /^.+github\.com[/:](?<owner>[\w-]+)\/(?<repo>[\w.-]+)\.git$/u;
       const match = remote.stdout.match(regexp);
 
-      if (match && match.groups) {
+      if (match?.groups) {
         const owner = match.groups.owner;
         const repo = match.groups.repo;
 
@@ -58,7 +58,7 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
       } else {
         handleErrorMessage(`Unexpected remote URL: ${remote}`, 'github-repository', spinner);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       handleErrorMessage(error, 'github-repository', spinner);
 
       throw error;

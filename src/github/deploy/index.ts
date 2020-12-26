@@ -13,7 +13,7 @@ import { Ora } from 'ora';
 import execa from 'execa';
 
 interface IGitHubDeployArgs {
-  command: (...args: any[]) => Promise<string | { url: string; logUrl: string } | undefined>;
+  command: (...args: unknown[]) => Promise<string | { url: string; logUrl: string } | undefined>;
   path?: string;
   production?: boolean;
   token?: string;
@@ -62,7 +62,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
 
     try {
       result = await args.command();
-    } catch (err) {
+    } catch (err: unknown) {
       error = err;
     }
 
@@ -70,6 +70,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     await github.repos.createDeploymentStatus({
       owner: repository.owner,
       repo: repository.repo,
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       deployment_id: (deployment.data as any).id, // HACK for types broken in oktokit 17.9.1
       state: error ? 'error' : 'success',
       environment_url: typeof result === 'object' ? result.url : result,
@@ -83,7 +84,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     }
 
     retVal = typeof result === 'object' ? result.url : result;
-  } catch (error) {
+  } catch (error: unknown) {
     handleErrorMessage(error, 'github-deploy', args.spinner);
 
     throw error;
@@ -115,7 +116,7 @@ export default (spinner: Ora): commander.Command => {
               const result = await execa(subcommand, args);
 
               retVal = result.stdout.toString();
-            } catch (error) {
+            } catch (error: unknown) {
               handleErrorMessage(error, subcommand, spinner);
               throw error;
             }

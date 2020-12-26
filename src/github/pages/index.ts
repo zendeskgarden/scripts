@@ -75,7 +75,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
     } else {
       throw new Error('Invalid git repository');
     }
-  } catch (error) {
+  } catch (error: unknown) {
     handleErrorMessage(error, 'github-pages', args.spinner);
 
     throw error;

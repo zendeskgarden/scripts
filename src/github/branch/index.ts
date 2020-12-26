@@ -36,7 +36,7 @@ export const execute = async (path?: string, spinner?: Ora): Promise<string | un
       const branch = await execa('git', args);
 
       retVal = branch.stdout.toString();
-    } catch (error) {
+    } catch (error: unknown) {
       handleErrorMessage(error, 'github-branch', spinner);
 
       throw error;

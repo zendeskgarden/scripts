@@ -55,7 +55,7 @@ export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefi
     const logUrl = `${response.deploy.admin_url}/deploys/${response.deploy.id}`;
 
     retVal = { url, logUrl };
-  } catch (error) {
+  } catch (error: unknown) {
     handleErrorMessage(error, 'netlify-deploy', args.spinner);
 
     throw error;

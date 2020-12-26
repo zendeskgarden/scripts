@@ -27,7 +27,7 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
       const token = await execa('git', ['config', '--get', 'github.token']);
 
       retVal = token.stdout.toString();
-    } catch (error) {
+    } catch (error: unknown) {
       handleErrorMessage(error, 'github-token', spinner);
 
       throw error;

@@ -52,7 +52,7 @@ export const execute = async (args: IGitHubReleaseArgs): Promise<string | undefi
     const url = release.data.html_url;
 
     retVal = args.published ? url : url.replace('/tag/', '/edit/');
-  } catch (error) {
+  } catch (error: unknown) {
     handleErrorMessage(error, 'github-release', args.spinner);
 
     throw error;
