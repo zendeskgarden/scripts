@@ -47,7 +47,8 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
         sha
       });
 
-      if (commits?.data) {
+      /* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */
+      if (commits && commits.data) {
         retVal = commits.data[0].sha;
       }
     } catch (error /* eslint-disable-line @typescript-eslint/no-implicit-any-catch */) {

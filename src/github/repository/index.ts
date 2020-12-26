@@ -32,8 +32,8 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
 
     retVal = { owner, repo };
   } else if (process.env.CIRCLECI) {
-    const owner = process.env.CIRCLE_PROJECT_USERNAME as string;
-    const repo = process.env.CIRCLE_PROJECT_REPONAME as string;
+    const owner = process.env.CIRCLE_PROJECT_USERNAME!;
+    const repo = process.env.CIRCLE_PROJECT_REPONAME!;
 
     retVal = { owner, repo };
   }
@@ -50,13 +50,13 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
       const regexp = /^.+github\.com[/:](?<owner>[\w-]+)\/(?<repo>[\w.-]+)\.git$/u;
       const match = remote.stdout.match(regexp);
 
-      if (match?.groups) {
+      if (match && match.groups) {
         const owner = match.groups.owner;
         const repo = match.groups.repo;
 
         retVal = { owner, repo };
       } else {
-        handleErrorMessage(`Unexpected remote URL: ${remote}`, 'github-repository', spinner);
+        handleErrorMessage(`Unexpected remote URL: ${remote.stdout}`, 'github-repository', spinner);
       }
     } catch (error: unknown) {
       handleErrorMessage(error, 'github-repository', spinner);

@@ -53,7 +53,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
       }
 
       clean();
-      await publish(
+      publish(
         args.dir,
         {
           repo: `https://${token}@github.com/${owner}/${repo}.git`,

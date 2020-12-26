@@ -104,7 +104,7 @@ export default (spinner: Ora): commander.Command => {
     .option('-c, --commit <commit>', 'GitHub commit SHA')
     .option('-t, --token <token>', 'access token')
     .option('-m, --message <message>', 'deployment message')
-    .action(async (subcommand, args) => {
+    .action(async (subcommand: string, args: string[]) => {
       try {
         spinner.start();
 
