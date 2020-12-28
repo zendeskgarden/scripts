@@ -1,9 +1,8 @@
 {
-  "parser": "@typescript-eslint/parser",
   "extends": [
     "@zendeskgarden",
     "@zendeskgarden/eslint-config/plugins/notice",
-    "plugin:prettier/recommended"
+    "prettier"
   ],
   "rules": {
     "no-console": "off"
