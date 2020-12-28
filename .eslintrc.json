@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "@zendeskgarden",
-    "@zendeskgarden/eslint-config/plugins/notice",
-    "prettier"
-  ],
+  "extends": ["@zendeskgarden", "@zendeskgarden/eslint-config/plugins/notice", "prettier"],
   "rules": {
     "no-console": "off"
   },
