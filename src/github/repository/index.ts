@@ -48,6 +48,7 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
     try {
       const remote = await execa('git', lsRemoteArgs);
       const regexp = /^.+github\.com[/:](?<owner>[\w-]+)\/(?<repo>[\w.-]+)\.git$/u;
+      /* eslint-disable-next-line @typescript-eslint/prefer-regexp-exec */
       const match = remote.stdout.match(regexp);
 
       if (match && match.groups) {
