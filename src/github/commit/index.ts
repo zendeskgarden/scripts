@@ -48,7 +48,7 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
       });
 
       if (commits && commits.data) {
-        retVal = commits.data[0].sha;
+        retVal = commits.data[0].sha || undefined;
       }
     } catch (error) {
       if (error.status !== 404) {
