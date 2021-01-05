@@ -53,7 +53,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
       }
 
       clean();
-      await publish(
+      publish(
         args.dir,
         {
           repo: `https://${token}@github.com/${owner}/${repo}.git`,
@@ -75,7 +75,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
     } else {
       throw new Error('Invalid git repository');
     }
-  } catch (error) {
+  } catch (error: unknown) {
     handleErrorMessage(error, 'github-pages', args.spinner);
 
     throw error;

@@ -27,7 +27,7 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
       const token = await execa('git', ['config', '--get', 'netlify.token']);
 
       retVal = token.stdout.toString();
-    } catch (error) {
+    } catch (error: unknown) {
       handleErrorMessage(error, 'netlify-token', spinner);
 
       throw error;

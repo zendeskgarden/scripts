@@ -72,7 +72,7 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
       tagFrom,
       tagTo
     });
-  } catch (error) {
+  } catch (error /* eslint-disable-line @typescript-eslint/no-implicit-any-catch */) {
     handleErrorMessage(error.message ? error.message : error, 'lerna-changelog', args.spinner);
 
     throw error;
