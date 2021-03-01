@@ -21,6 +21,7 @@
     "build": "yarn tsc",
     "format": "prettier-package-json --write && yarn format:all --write",
     "format:all": "prettier --loglevel warn '**/*.{js,ts,json,md}' '!CHANGELOG.md' '!dist/**' '!.github/ISSUE_TEMPLATE.md'",
+    "postinstall": "husky install",
     "lint": "yarn lint:js && yarn lint:md",
     "lint:js": "eslint bin/ src/ --ext js,ts --max-warnings 0",
     "lint:md": "markdownlint README.md src/**/*.md",
