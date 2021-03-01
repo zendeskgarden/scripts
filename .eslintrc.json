@@ -9,7 +9,7 @@
       "extends": [
         "@zendeskgarden/eslint-config/plugins/typescript",
         "@zendeskgarden/eslint-config/plugins/typescript-semantics",
-        "prettier/@typescript-eslint"
+        "prettier"
       ],
       "parserOptions": {
         "project": ["./tsconfig.json"]
