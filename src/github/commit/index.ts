@@ -75,10 +75,11 @@ export default (spinner: Ora): commander.Command => {
       try {
         spinner.start();
 
+        const options = command.opts();
         const commit = await execute({
           path,
-          branch: command.branch,
-          token: command.token,
+          branch: options.branch,
+          token: options.token,
           spinner
         });
 

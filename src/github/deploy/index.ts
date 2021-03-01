@@ -108,6 +108,7 @@ export default (spinner: Ora): commander.Command => {
       try {
         spinner.start();
 
+        const options = command.opts();
         const url = await execute({
           command: async () => {
             let retVal: string | undefined;
@@ -123,11 +124,11 @@ export default (spinner: Ora): commander.Command => {
 
             return retVal;
           },
-          path: command.path,
-          production: command.production,
-          token: command.token,
-          ref: command.commit,
-          message: command.message,
+          path: options.path,
+          production: options.production,
+          token: options.token,
+          ref: options.commit,
+          message: options.message,
           spinner
         });
 
