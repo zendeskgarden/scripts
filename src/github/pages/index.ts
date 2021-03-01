@@ -97,11 +97,12 @@ export default (spinner: Ora): commander.Command => {
       try {
         spinner.start();
 
+        const options = command.opts();
         const url = await execute({
           dir,
-          path: command.path,
-          message: command.message,
-          token: command.token,
+          path: options.path,
+          message: options.message,
+          token: options.token,
           spinner
         });
 

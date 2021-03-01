@@ -51,7 +51,7 @@ export default (spinner: Ora): commander.Command => {
 
         if (token) {
           handleSuccessMessage(
-            command.mask ? `${token.slice(0, 4)}......${token.slice(-4)}` : token,
+            command.opts().mask ? `${token.slice(0, 4)}......${token.slice(-4)}` : token,
             spinner
           );
         } else {

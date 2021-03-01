@@ -94,11 +94,12 @@ export default (spinner: Ora): commander.Command => {
       try {
         spinner.start();
 
+        const options = command.opts();
         const markdown = await execute({
           path,
-          from: command.from,
-          to: command.to,
-          token: command.token,
+          from: options.from,
+          to: options.to,
+          token: options.token,
           spinner
         });
 

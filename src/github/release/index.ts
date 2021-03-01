@@ -75,12 +75,13 @@ export default (spinner: Ora): commander.Command => {
       try {
         spinner.start();
 
+        const options = command.opts();
         const release = await execute({
-          tag: command.tag,
+          tag: options.tag,
           body: markdown,
-          published: command.published,
-          path: command.path,
-          token: command.token,
+          published: options.published,
+          path: options.path,
+          token: options.token,
           spinner
         });
 
