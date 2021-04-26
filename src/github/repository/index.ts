@@ -79,7 +79,7 @@ export default (spinner: Ora): commander.Command => {
       try {
         spinner.start();
 
-        const repository = await execute(path, spinner);
+        const repository = await execute(path as string, spinner);
 
         if (repository) {
           handleSuccessMessage(`${repository.owner}/${repository.repo}`, spinner);

@@ -56,7 +56,7 @@ export default (spinner: Ora): commander.Command => {
       try {
         spinner.start();
 
-        const branch = await execute(path, spinner);
+        const branch = await execute(path as string, spinner);
 
         if (branch) {
           handleSuccessMessage(branch, spinner);
