@@ -1,5 +1,6 @@
 {
   "name": "@zendeskgarden/scripts",
+  "version": "0.1.11",
   "description": "Garden Scripts",
   "license": "Apache-2.0",
   "author": "Zendesk Garden <garden@zendesk.com>",
@@ -8,7 +9,6 @@
   "bugs": {
     "url": "https://github.com/zendeskgarden/scripts/issues"
   },
-  "version": "0.1.11",
   "main": "dist/index.js",
   "bin": {
     "garden": "bin/index.js"
