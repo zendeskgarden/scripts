@@ -27,7 +27,7 @@
     "prepare": "husky install && yarn build",
     "start": "bin/index.js",
     "tag": "[ `git rev-parse --abbrev-ref HEAD` = 'main' ] && standard-version --no-verify",
-    "test": "prettier-package-json --list-different && yarn format:all --check && yarn lint",
+    "test": "prettier-package-json --list-different && yarn format:all --check && yarn lint && yarn start --version",
     "watch": "yarn build --watch"
   },
   "dependencies": {
