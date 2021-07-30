@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.12](https://github.com/zendeskgarden/scripts/compare/v0.1.11...v0.1.12) (2021-07-30)
+
+
+### Bug Fixes
+
+* **deps:** roll back is-interactive to v1 ([#76](https://github.com/zendeskgarden/scripts/issues/76)) ([c1e332a](https://github.com/zendeskgarden/scripts/commit/c1e332a7e5af8fcdeb4be2a1e1755aacec1decc0))
+* **deps:** update all non-major dependencies ([#41](https://github.com/zendeskgarden/scripts/issues/41)) ([f492ccd](https://github.com/zendeskgarden/scripts/commit/f492ccd26c5d94bd53b2b8658aecce987ee60b0e))
+* **deps:** update all non-major dependencies ([#46](https://github.com/zendeskgarden/scripts/issues/46)) ([0875685](https://github.com/zendeskgarden/scripts/commit/0875685e5e5f8643ecaf24ff80c0061cf6760d04))
+* **deps:** update all non-major dependencies ([#55](https://github.com/zendeskgarden/scripts/issues/55)) ([6453dbf](https://github.com/zendeskgarden/scripts/commit/6453dbfd56b4284cdeeca70c1eb0a9e2f1470eff))
+* **deps:** update all non-major dependencies ([#60](https://github.com/zendeskgarden/scripts/issues/60)) ([6ab0c93](https://github.com/zendeskgarden/scripts/commit/6ab0c93e9f5b715f7c46a98c1c1d2bf4a03ed19f))
+* **deps:** update all non-major dependencies ([#64](https://github.com/zendeskgarden/scripts/issues/64)) ([b3f3bd2](https://github.com/zendeskgarden/scripts/commit/b3f3bd23026909ba7e0e3e75154a8dc992597fe4))
+* **deps:** update all non-major dependencies ([#69](https://github.com/zendeskgarden/scripts/issues/69)) ([1b84875](https://github.com/zendeskgarden/scripts/commit/1b8487539dd51a108bccc93013a4c903d672d390))
+* **deps:** update dependency commander to v7 ([#59](https://github.com/zendeskgarden/scripts/issues/59)) ([0129386](https://github.com/zendeskgarden/scripts/commit/0129386fc1e925b99fdede3edd7f484a88246786))
+* **deps:** update dependency dotenv to v10 ([#71](https://github.com/zendeskgarden/scripts/issues/71)) ([64916ab](https://github.com/zendeskgarden/scripts/commit/64916abc56cd254e7d64845b0395f6227c9e53b6))
+* **deps:** update dependency execa to v5 ([#49](https://github.com/zendeskgarden/scripts/issues/49)) ([ed29f20](https://github.com/zendeskgarden/scripts/commit/ed29f200fb9b7b00421f3597e9131cb1f7a5bdb0))
+* **deps:** update dependency is-interactive to v2 ([#72](https://github.com/zendeskgarden/scripts/issues/72)) ([a675592](https://github.com/zendeskgarden/scripts/commit/a6755923f15534a7fd129eb4df6f44c6016cdc30))
+* **deps:** update dependency netlify to v6 ([#50](https://github.com/zendeskgarden/scripts/issues/50)) ([f4f60ce](https://github.com/zendeskgarden/scripts/commit/f4f60cead5823dba7599b781f4cf69ac8ce6ac67))
+* **deps:** update dependency netlify to v6.1.22 ([#66](https://github.com/zendeskgarden/scripts/issues/66)) ([c6ade21](https://github.com/zendeskgarden/scripts/commit/c6ade21073a6c186593d0df6083324b468704e6a))
+* prevent husky from running on postinstall ([#63](https://github.com/zendeskgarden/scripts/issues/63)) ([9b8d633](https://github.com/zendeskgarden/scripts/commit/9b8d633333c53304fc0005f785d92d3712284747))
+
 ### [0.1.11](https://github.com/zendeskgarden/scripts/compare/v0.1.10...v0.1.11) (2020-08-22)
 
 
