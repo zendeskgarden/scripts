@@ -40,7 +40,7 @@
     "gh-pages": "3.2.3",
     "is-interactive": "1.0.0",
     "lerna-changelog": "1.0.1",
-    "netlify": "6.1.29",
+    "netlify-cli": "5.3.1",
     "ora": "5.4.1"
   },
   "devDependencies": {

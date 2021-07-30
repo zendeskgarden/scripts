@@ -8,8 +8,8 @@
 import commander, { Command } from 'commander';
 import { siteId as getSiteId, token as getToken } from '..';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
-import NetlifyAPI from 'netlify';
 import { Ora } from 'ora';
+import execa from 'execa';
 
 interface INetlifyDeployArgs {
   dir: string;
@@ -41,20 +41,31 @@ export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefi
   let retVal: RETVAL | undefined;
 
   try {
-    const token = args.token || (await getToken(args.spinner));
-    const client = new NetlifyAPI(token);
     const siteId = args.siteId || (await getSiteId(args.spinner));
+    const token = args.token || (await getToken(args.spinner));
+    const deployArgs = [
+      'deploy',
+      `--site=${siteId}`,
+      `--auth=${token}`,
+      `--dir=${args.dir}`,
+      '--json'
+    ];
 
-    /* https://open-api.netlify.com/#operation/createSiteDeploy */
-    const response = await client.deploy(siteId, args.dir, {
-      draft: !args.production,
-      message: args.message
-    });
+    if (args.production) {
+      deployArgs.push('--prod');
+    }
 
-    const url = args.production ? response.deploy.ssl_url : response.deploy.deploy_ssl_url;
-    const logUrl = `${response.deploy.admin_url}/deploys/${response.deploy.id}`;
+    if (args.message) {
+      deployArgs.push(`--message=${args.message}`);
+    }
 
-    retVal = { url, logUrl };
+    /* https://cli.netlify.com/commands/deploy */
+    const deploy = await execa('netlify', deployArgs, { preferLocal: true });
+
+    const response = JSON.parse(deploy.stdout);
+    const url = args.production ? response.url : response.deploy_url;
+
+    retVal = { url, logUrl: response.logs };
   } catch (error: unknown) {
     handleErrorMessage(error, 'netlify-deploy', args.spinner);
 
