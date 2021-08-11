@@ -7,7 +7,7 @@
 
 import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, rename, writeFile } from 'fs/promises';
 import { Ora } from 'ora';
 import { copy } from 'fs-extra';
 import { default as handlebars } from 'handlebars';
@@ -41,11 +41,15 @@ export const execute = async (args: ILernaNewArgs): Promise<string | undefined> 
     helpers({ handlebars }); // register handlebars template helper utilities
 
     for await (const file of walk(retVal)) {
+      const path = handlebars.compile(file.path)(args.tags);
+
+      if (file.path !== path) {
+        await rename(file.path as string, path);
+      }
+
       if (!file.stats.isDirectory()) {
-        const path = file.path as string;
         const content = await readFile(path, 'utf8');
-        const template = handlebars.compile(content);
-        const data = template(args.tags);
+        const data = handlebars.compile(content)(args.tags);
 
         await writeFile(path, data, 'utf8');
       }
