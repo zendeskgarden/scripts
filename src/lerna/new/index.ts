@@ -22,25 +22,32 @@ interface ILernaNewArgs {
   spinner?: Ora;
 }
 
+type RETVAL = {
+  src: string;
+  dest: string;
+};
+
 /**
  * Execute the `lerna-new` command.
  *
  * @param {string} args.src Source directory.
  * @param {string} args.dest Destination directory.
- * @param {Object} args.tags Handlebars template name-value pairs.
+ * @param {object} args.tags Handlebars template name-value pairs.
  * @param {string} [args.spinner] Terminal spinner.
  *
- * @returns {Promise<string>} The normalized, resolved destination path.
+ * @returns {object} The resolved source and destination paths.
  */
-export const execute = async (args: ILernaNewArgs): Promise<string | undefined> => {
-  const retVal = resolve(args.dest);
-  const src = resolve(args.src);
+export const execute = async (args: ILernaNewArgs): Promise<RETVAL | undefined> => {
+  const retVal = {
+    src: resolve(args.src),
+    dest: resolve(args.dest)
+  };
 
   try {
-    await copy(src, retVal, { overwrite: false, errorOnExist: true });
+    await copy(retVal.src, retVal.dest, { overwrite: false, errorOnExist: true });
     helpers({ handlebars }); // register handlebars template helper utilities
 
-    for await (const file of walk(retVal)) {
+    for await (const file of walk(retVal.dest)) {
       const path = handlebars.compile(file.path)(args.tags);
 
       if (file.path !== path) {
@@ -67,29 +74,28 @@ export default (spinner: Ora): commander.Command => {
   const command = new Command('lerna-new');
 
   return command
-    .description('generate a new Lerna package from a template source directory')
+    .description('generate a new package from a template source directory')
     .arguments('<src> <dest>')
     .option(
       '-t --tag <tags...>',
       '{{Handlebars}} template <name>=<value> tags',
-      (tag: string, retVal: Record<string, string>) => {
+      (tag: string, retVal: Record<string, string> = {}) => {
         const [name, value] = tag.split('=');
 
         retVal[name] = value;
 
         return retVal;
-      },
-      {}
+      }
     )
     .action(async (src, dest) => {
       try {
         spinner.start();
 
         const tags = command.opts().tag;
-        const directory = await execute({ src, dest, tags, spinner });
+        const result = await execute({ src, dest, tags, spinner });
 
-        if (directory) {
-          handleSuccessMessage(directory, spinner);
+        if (result) {
+          handleSuccessMessage(`${result.src} -> ${result.dest}`, spinner);
         } else {
           throw new Error();
         }
