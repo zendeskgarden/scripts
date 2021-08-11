@@ -29,6 +29,7 @@ program
   .addCommand(github.repositoryCommand(spinner))
   .addCommand(github.tokenCommand(spinner))
   .addCommand(lerna.changelogCommand(spinner))
+  .addCommand(lerna.newCommand(spinner))
   .addCommand(netlify.deployCommand(spinner))
   .addCommand(netlify.siteIdCommand(spinner))
   .addCommand(netlify.tokenCommand(spinner))

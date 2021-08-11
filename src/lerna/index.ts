@@ -6,3 +6,4 @@
  */
 
 export { default as changelogCommand, execute as changelog } from './changelog';
+export { default as newCommand, execute as new } from './new';
