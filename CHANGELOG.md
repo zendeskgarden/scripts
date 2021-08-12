@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/zendeskgarden/scripts/compare/v0.1.12...v1.0.0) (2021-08-12)
+
+
+### Features
+
+* add `lerna-new` command ([#79](https://github.com/zendeskgarden/scripts/issues/79)) ([886399e](https://github.com/zendeskgarden/scripts/commit/886399ecfc7f29b3e89d074db31b283c45203b06))
+
 ### [0.1.12](https://github.com/zendeskgarden/scripts/compare/v0.1.11...v0.1.12) (2021-07-30)
 
 
