@@ -7,6 +7,7 @@
 
 import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { kebabCase, snakeCase, startCase } from 'lodash';
 import { readFile, rename, writeFile } from 'fs/promises';
 import { Ora } from 'ora';
 import { copy } from 'fs-extra';
@@ -14,6 +15,17 @@ import { default as handlebars } from 'handlebars';
 import { default as helpers } from 'handlebars-helpers';
 import { resolve } from 'path';
 import { default as walk } from 'klaw';
+
+/**
+ * Register handlebars helpers.
+ */
+const registerHelpers = (): void => {
+  helpers({ handlebars });
+
+  handlebars.registerHelper('kebabcase', (string: string) => kebabCase(string));
+  handlebars.registerHelper('snakecase', (string: string) => snakeCase(string));
+  handlebars.registerHelper('startcase', (string: string) => startCase(string));
+};
 
 interface ILernaNewArgs {
   src: string;
@@ -45,7 +57,7 @@ export const execute = async (args: ILernaNewArgs): Promise<RETVAL | undefined> 
 
   try {
     await copy(retVal.src, retVal.dest, { overwrite: false, errorOnExist: true });
-    helpers({ handlebars }); // register handlebars template helper utilities
+    registerHelpers();
 
     for await (const file of walk(retVal.dest)) {
       const path = handlebars.compile(file.path)(args.tags);
