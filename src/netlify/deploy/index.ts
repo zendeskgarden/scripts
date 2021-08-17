@@ -80,7 +80,7 @@ export default (spinner: Ora): commander.Command => {
 
   return command
     .description('deploy to a Netlify site')
-    .arguments('<dir>')
+    .argument('<dir>', 'directory of content to deploy')
     .option('-p, --production', 'production deploy')
     .option('-i, --id <id>', 'site API ID')
     .option('-t, --token <token>', 'access token')

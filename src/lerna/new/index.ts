@@ -87,7 +87,8 @@ export default (spinner: Ora): commander.Command => {
 
   return command
     .description('generate a new package from a template source directory')
-    .arguments('<src> <dest>')
+    .argument('<src>', 'template source directory')
+    .argument('<dest>', 'package destination directory')
     .option(
       '-t --tag <tags...>',
       '{{Handlebars}} template <name>=<value> tags',
