@@ -28,8 +28,8 @@ const args: {
 
 ### Arguments
 
+- `markdown` markdown content.
 - `tag` tag name.
-- `body` body markdown content.
 - `published` determine whether this is a published or draft release;
   defaults to draft.
 - `path` optional path to a git directory; defaults to the current directory.

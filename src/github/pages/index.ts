@@ -89,7 +89,7 @@ export default (spinner: Ora): commander.Command => {
 
   return command
     .description('publish to a GitHub "gh-pages" branch')
-    .arguments('<dir>')
+    .argument('<dir>', 'directory of web content to publish')
     .option('-p, --path <path>', 'git directory')
     .option('-t, --token <token>', 'access token')
     .option('-m, --message <message>', 'commit message')

@@ -66,7 +66,7 @@ export default (spinner: Ora): commander.Command => {
 
   return command
     .description('create a GitHub release')
-    .arguments('<markdown>')
+    .argument('<markdown>', 'markdown content')
     .requiredOption('-t, --tag <tag>', 'tag name')
     .option('-p, --published', 'published (non-draft) release')
     .option('-d, --path <path>', 'git directory')
