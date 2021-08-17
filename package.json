@@ -43,7 +43,7 @@
     "handlebars-helpers": "0.10.0",
     "is-interactive": "1.0.0",
     "klaw": "3.0.0",
-    "lerna-changelog": "1.0.1",
+    "lerna-changelog": "2.1.0",
     "lodash": "4.17.21",
     "netlify-cli": "5.4.16",
     "ora": "5.4.1"
