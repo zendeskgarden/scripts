@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/zendeskgarden/scripts/compare/v1.0.0...v1.0.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#80](https://github.com/zendeskgarden/scripts/issues/80)) ([0798f8a](https://github.com/zendeskgarden/scripts/commit/0798f8a5e4943239319bf14c95205221e7ba86a8))
+* **deps:** update dependency commander to v8 ([#82](https://github.com/zendeskgarden/scripts/issues/82)) ([1bbf44c](https://github.com/zendeskgarden/scripts/commit/1bbf44ce97ca6b623bd23c510f039c552dd1a5c9))
+* **deps:** update dependency lerna-changelog to v2 ([#83](https://github.com/zendeskgarden/scripts/issues/83)) ([34fe093](https://github.com/zendeskgarden/scripts/commit/34fe0933d023f367066ebc1968eb1c1072334bb8))
+* **deps:** update dependency netlify-cli to v6 ([#84](https://github.com/zendeskgarden/scripts/issues/84)) ([aa80ca1](https://github.com/zendeskgarden/scripts/commit/aa80ca1e1ba81e9f5bf50e82c122807e0901204d))
+
 ## [1.0.0](https://github.com/zendeskgarden/scripts/compare/v0.1.12...v1.0.0) (2021-08-12)
 
 
