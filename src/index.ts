@@ -15,4 +15,9 @@ export {
   token as githubToken
 } from './github';
 export { changelog as lernaChangelog, new as lernaNew } from './lerna';
-export { deploy as netlifyDeploy, siteId as netlifySiteId, token as netlifyToken } from './netlify';
+export {
+  bandwidth as netlifyBandwidth,
+  deploy as netlifyDeploy,
+  siteId as netlifySiteId,
+  token as netlifyToken
+} from './netlify';
