@@ -44,6 +44,7 @@ the individual command README for details.
 - [`garden github-token`](src/github/token#readme)
 - [`garden lerna-changelog`](src/lerna/changelog#readme)
 - [`garden lerna-new`](src/lerna/new#readme)
+- [`garden netlify-bandwidth`](src/netlify/bandwidth#readme)
 - [`garden netlify-deploy`](src/netlify/deploy#readme)
 - [`garden netlify-site-id`](src/netlify/site_id#readme)
 - [`garden netlify-token`](src/netlify/token#readme)
