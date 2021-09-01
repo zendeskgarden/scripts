@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/zendeskgarden/scripts/compare/v1.0.1...v1.1.0) (2021-09-01)
+
+
+### Features
+
+* add `netlify-bandwidth` command ([#86](https://github.com/zendeskgarden/scripts/issues/86)) ([a84b02a](https://github.com/zendeskgarden/scripts/commit/a84b02a0d5fd0e588bb2d7e5e7b6c5804639180b))
+
 ### [1.0.1](https://github.com/zendeskgarden/scripts/compare/v1.0.0...v1.0.1) (2021-08-17)
 
 
