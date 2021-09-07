@@ -48,10 +48,10 @@ export default (spinner: Ora): commander.Command => {
     .action(async (dir: string) => {
       try {
         spinner.start();
-        const size = await execute(dir, spinner);
+        const usage = await execute(dir, spinner);
 
-        if (size > 0) {
-          handleSuccessMessage(size.toString(), spinner);
+        if (usage > 0) {
+          handleSuccessMessage(usage.toString(), spinner);
         } else {
           throw new Error();
         }
