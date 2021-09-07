@@ -14,7 +14,7 @@ import { default as walk } from 'klaw';
 /**
  * Execute the `cmd-du` command.
  *
- * @param {string} [dir] Folder to publish.
+ * @param {string} [dir] Directory to calculate size for.
  * @param {Ora} [spinner] Terminal spinner.
  *
  * @returns {Promise<number>} The disk usage, in bytes, for the given directory.
