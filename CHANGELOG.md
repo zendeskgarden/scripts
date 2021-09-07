@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/zendeskgarden/scripts/compare/v1.1.0...v1.2.0) (2021-09-07)
+
+
+### Features
+
+* add `cmd-du` command ([#87](https://github.com/zendeskgarden/scripts/issues/87)) ([864cd64](https://github.com/zendeskgarden/scripts/commit/864cd641ec2733340eb575213076ffc36a66b50a))
+
 ## [1.1.0](https://github.com/zendeskgarden/scripts/compare/v1.0.1...v1.1.0) (2021-09-01)
 
 
