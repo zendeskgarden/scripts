@@ -32,7 +32,7 @@ type RETVAL = {
  *
  * @returns {object} The Netlify available and used bandwidth byte counts.
  */
-export const execute = async (args: INetlifyBandwidthArgs): Promise<RETVAL | undefined> => {
+export const execute = async (args: INetlifyBandwidthArgs = {}): Promise<RETVAL | undefined> => {
   let retVal: RETVAL | undefined;
 
   try {
