@@ -13,6 +13,7 @@ const chalk = require('chalk');
 const textSync = require('figlet').textSync;
 const spinner = require('ora')();
 const version = require('../package.json').version;
+const cmd = require('../dist/cmd');
 const github = require('../dist/github');
 const lerna = require('../dist/lerna');
 const netlify = require('../dist/netlify');
@@ -21,6 +22,7 @@ require('dotenv').config();
 
 program
   .version(version)
+  .addCommand(cmd.duCommand(spinner))
   .addCommand(github.branchCommand(spinner))
   .addCommand(github.commitCommand(spinner))
   .addCommand(github.deployCommand(spinner))

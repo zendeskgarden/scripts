@@ -5,6 +5,7 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+export { du as cmdDu } from './cmd';
 export {
   branch as githubBranch,
   commit as githubCommit,
