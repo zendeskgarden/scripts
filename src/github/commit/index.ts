@@ -10,6 +10,7 @@ import { branch as getBranch, repository as getRepository, token as getToken } f
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
+import { RequestError } from '@octokit/request-error';
 
 interface IGitHubCommitArgs {
   path?: string;
@@ -52,7 +53,7 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
         retVal = commits.data[0].sha || undefined;
       }
     } catch (error /* eslint-disable-line @typescript-eslint/no-implicit-any-catch */) {
-      if (error.status !== 404) {
+      if ((error as RequestError).status !== 404) {
         handleErrorMessage(error, 'github-commit', args.spinner);
 
         throw error;
