@@ -42,7 +42,7 @@
     "handlebars": "4.7.7",
     "handlebars-helpers": "0.10.0",
     "is-interactive": "1.0.0",
-    "klaw": "3.0.0",
+    "klaw": "4.0.1",
     "lerna-changelog": "2.1.0",
     "lodash": "4.17.21",
     "netlify": "8.0.0",
