@@ -22,6 +22,7 @@ require('dotenv').config();
 
 program
   .version(version)
+  .addCommand(cmd.docgenCommand(spinner))
   .addCommand(cmd.duCommand(spinner))
   .addCommand(github.branchCommand(spinner))
   .addCommand(github.commitCommand(spinner))
