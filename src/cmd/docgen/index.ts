@@ -5,55 +5,133 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { ParserOptions, withCustomConfig } from 'react-docgen-typescript';
+import { ParserOptions, withCustomConfig, withDefaultConfig } from 'react-docgen-typescript';
 import commander, { Command } from 'commander';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { findConfigFile, sys } from 'typescript';
+import globby, { GlobbyOptions } from 'globby';
+import { handleErrorMessage, handleSuccessMessage, handleWarningMessage } from '../../utils';
 import { Ora } from 'ora';
 import { parse as parseComment } from 'comment-parser';
-import { parse } from 'react-docgen';
 import { resolve } from 'path';
 
 type TAGS = Record<string, string>;
 
-interface IDocgenProp {
-  description: string;
-  defaultValue: string;
-  required: boolean;
-  type: string;
-  params: TAGS;
-  returns?: string;
-}
+type PROPS = Record<
+  string,
+  {
+    description: string;
+    defaultValue: string;
+    required: boolean;
+    type: string;
+    params: TAGS;
+    returns?: string;
+  }
+>;
 
-type PROPS = Record<string, IDocgenProp>;
-
-interface IDocgenComponent {
+type RETVAL = {
   name: string;
   description: string;
   extends: string;
   props: PROPS;
+}[];
+
+interface ICommandDocgenArgs {
+  extensions?: string[];
+  ignore?: string[];
+  spinner?: Ora;
 }
 
-const TSCONFIG_PATH = resolve(__dirname, '../../../..', 'react-components', 'tsconfig.json');
+const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'];
+const DEFAULT_IGNORE = ['**/*.spec.*', '**/dist/**', '**/node_modules/**'];
 
-const docgen = (files: string[]) => {
-  let retVal;
-
-  try {
-    files.forEach(file => console.log(parse(resolve(file))));
-  } catch (error) {
-    handleErrorMessage(error, 'cmd-docgen');
+export const execute = async (
+  paths: string[],
+  args: ICommandDocgenArgs = {
+    extensions: DEFAULT_EXTENSIONS,
+    ignore: DEFAULT_IGNORE
   }
-
-  return retVal;
-};
-
-export const execute = async (files: string[], spinner?: Ora): Promise<IDocgenComponent[]> => {
-  let retVal: IDocgenComponent[] = [];
+): Promise<RETVAL | undefined> => {
+  let retVal: RETVAL | undefined;
 
   try {
-    //
+    const parserOptions: ParserOptions = {
+      propFilter: props =>
+        !(
+          props.description.includes('@ignore') ||
+          (props.parent && props.parent.fileName.includes('node_modules'))
+        ),
+      shouldRemoveUndefinedFromOptional: true
+    };
+    const globbyOptions: GlobbyOptions = {
+      expandDirectories: {
+        extensions: args.extensions
+      },
+      ignore: args.ignore
+    };
+
+    for await (const path of paths) {
+      const resolvedPath = resolve(path);
+      /* eslint-disable-next-line @typescript-eslint/unbound-method */
+      const tsconfigPath = findConfigFile(resolvedPath, sys.fileExists);
+      const parser = tsconfigPath
+        ? withCustomConfig(tsconfigPath, parserOptions)
+        : withDefaultConfig(parserOptions);
+      const filePaths = await globby(resolvedPath, globbyOptions);
+      const components = parser.parse(filePaths);
+
+      retVal = components.map(component => {
+        const props: PROPS = {};
+
+        Object.keys(component.props)
+          .sort(undefined)
+          .forEach(key => {
+            const prop = component.props[key];
+            const type = prop.type.name.replace(/"/gu, "'");
+            let defaultValue =
+              prop.defaultValue && prop.defaultValue.value && prop.defaultValue.value.toString();
+
+            if (
+              (type === 'string' && defaultValue !== null) ||
+              type.includes(`'${defaultValue}'`)
+            ) {
+              // Surround default string literals with quotes.
+              defaultValue = `'${defaultValue}'`;
+            }
+
+            const params: TAGS = {};
+            let description;
+            let returns;
+
+            if (prop.description) {
+              description = parseComment(`/** ${prop.description} */`)[0];
+              description.tags
+                .filter(tag => tag.tag === 'param')
+                .forEach(param => {
+                  params[param.name] = param.description;
+                });
+              returns = description.tags.find(tag => tag.tag.startsWith('return'));
+            }
+
+            props[key] = {
+              description: description ? description.description : '',
+              defaultValue,
+              required: prop.required,
+              type,
+              params,
+              returns: returns ? returns.description : undefined
+            };
+          });
+
+        return {
+          name: component.displayName,
+          description: component.description,
+          extends: component.tags ? (component.tags as TAGS).extends : '',
+          props
+        };
+      });
+    }
   } catch (error: unknown) {
-    handleErrorMessage(error, 'cmd-docgen', spinner);
+    handleErrorMessage(error, 'cmd-docgen', args.spinner);
 
     throw error;
   }
@@ -65,79 +143,40 @@ export default (spinner: Ora): commander.Command => {
   const command = new Command('cmd-docgen');
 
   return command
-    .argument('<files...>')
-    .description('')
-    .action((files: string[]) => {
+    .description('generate React component documentation')
+    .argument('<paths...>', 'one or more component paths')
+    .option(
+      '-x --extensions <extensions...>',
+      'file extensions to consider',
+      DEFAULT_EXTENSIONS as unknown as string
+    )
+    .option('-i --ignore <ignore...>', 'paths to ignore', DEFAULT_IGNORE as unknown as string)
+    .option('--pretty', 'pretty-print JSON')
+    .action(async (paths: string[]) => {
       try {
         spinner.start();
 
-        console.log(docgen(files));
-
-        const options: ParserOptions = {
-          propFilter: props =>
-            !(
-              props.description.includes('@ignore') ||
-              (props.parent && props.parent.fileName.includes('node_modules'))
-            ),
-          shouldRemoveUndefinedFromOptional: true
-        };
-        const parser = withCustomConfig(TSCONFIG_PATH, options);
-        const components = parser.parse(files);
-
-        const retVal = components.map(component => {
-          const props: PROPS = {};
-
-          Object.keys(component.props)
-            .sort(undefined)
-            .forEach(key => {
-              const prop = component.props[key];
-              const type = prop.type.name.replace(/"/gu, "'");
-              let defaultValue =
-                prop.defaultValue && prop.defaultValue.value && prop.defaultValue.value.toString();
-
-              if (
-                (type === 'string' && defaultValue !== null) ||
-                type.includes(`'${defaultValue}'`)
-              ) {
-                // Surround default string literals with quotes.
-                defaultValue = `'${defaultValue}'`;
-              }
-
-              const params: TAGS = {};
-              let description;
-              let returns;
-
-              if (prop.description) {
-                description = parseComment(`/** ${prop.description} */`)[0];
-                description.tags
-                  .filter(tag => tag.tag === 'param')
-                  .forEach(param => {
-                    params[param.name] = param.description;
-                  });
-                returns = description.tags.find(tag => tag.tag.startsWith('return') as boolean);
-              }
-
-              props[key] = {
-                description: description ? description.description : '',
-                defaultValue,
-                required: prop.required,
-                type,
-                params,
-                returns: returns ? returns.description : undefined
-              };
-            });
-
-          return {
-            name: component.displayName,
-            description: component.description,
-            extends: component.tags ? (component.tags as TAGS).extends : '',
-            props
-          };
+        const options = command.opts();
+        const result = await execute(paths, {
+          extensions: options.extensions,
+          ignore: options.ignore,
+          spinner
         });
 
-        console.log(JSON.stringify(retVal, null, '  '));
+        if (result) {
+          if (result.length > 0) {
+            const space = options.pretty ? 2 : undefined;
+            const message = JSON.stringify(result, undefined, space);
+
+            handleSuccessMessage(message, spinner);
+          } else {
+            handleWarningMessage('Component not found', spinner);
+          }
+        } else {
+          throw Error();
+        }
       } catch {
-        spinner.fail('');
+        spinner.fail('Unable to generate documentation');
         process.exitCode = 1;
       } finally {
         spinner.stop();
