@@ -35,6 +35,7 @@ chained so that the output from one command provides input to another. Each
 command also provides a functional equivalent for programmatic usage. See
 the individual command README for details.
 
+- [`garden cmd-docgen`](src/cmd/docgen#readme)
 - [`garden cmd-du`](src/cmd/du#readme)
 - [`garden github-branch`](src/github/branch#readme)
 - [`garden github-commit`](src/github/commit#readme)

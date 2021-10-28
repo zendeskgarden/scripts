@@ -33,9 +33,11 @@ type RETVAL = {
   description: string;
   extends: string;
   props: PROPS;
+  file: string;
 }[];
 
 interface ICommandDocgenArgs {
+  paths: string[];
   extensions?: string[];
   ignore?: string[];
   spinner?: Ora;
@@ -44,9 +46,19 @@ interface ICommandDocgenArgs {
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'];
 const DEFAULT_IGNORE = ['**/*.spec.*', '**/dist/**', '**/node_modules/**'];
 
+/**
+ * Execute the `cmd-docgen` command.
+ *
+ * @param {string[]} args.paths Component path globs.
+ * @param {string[]} [args.extensions] File extensions to consider.
+ * @param {string[]} [args.ignore] Paths to ignore.
+ * @param {Ora} [args.spinner] Terminal spinner.
+ *
+ * @returns {object} Generated component documentation information.
+ */
 export const execute = async (
-  paths: string[],
   args: ICommandDocgenArgs = {
+    paths: [],
     extensions: DEFAULT_EXTENSIONS,
     ignore: DEFAULT_IGNORE
   }
@@ -69,15 +81,15 @@ export const execute = async (
       ignore: args.ignore
     };
 
-    for await (const path of paths) {
+    for await (const path of args.paths) {
       const resolvedPath = resolve(path);
       /* eslint-disable-next-line @typescript-eslint/unbound-method */
       const tsconfigPath = findConfigFile(resolvedPath, sys.fileExists);
       const parser = tsconfigPath
         ? withCustomConfig(tsconfigPath, parserOptions)
         : withDefaultConfig(parserOptions);
-      const filePaths = await globby(resolvedPath, globbyOptions);
-      const components = parser.parse(filePaths);
+      const paths = await globby(resolvedPath, globbyOptions);
+      const components = parser.parse(paths);
 
       retVal = components.map(component => {
         const props: PROPS = {};
@@ -126,7 +138,8 @@ export const execute = async (
           name: component.displayName,
           description: component.description,
           extends: component.tags ? (component.tags as TAGS).extends : '',
-          props
+          props,
+          file: component.filePath
         };
       });
     }
@@ -143,7 +156,7 @@ export default (spinner: Ora): commander.Command => {
   const command = new Command('cmd-docgen');
 
   return command
-    .description('generate React component documentation')
+    .description('generate component documentation')
     .argument('<paths...>', 'one or more component paths')
     .option(
       '-x --extensions <extensions...>',
@@ -157,7 +170,8 @@ export default (spinner: Ora): commander.Command => {
         spinner.start();
 
         const options = command.opts();
-        const result = await execute(paths, {
+        const result = await execute({
+          paths,
           extensions: options.extensions,
           ignore: options.ignore,
           spinner

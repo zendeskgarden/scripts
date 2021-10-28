@@ -5,5 +5,5 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { default as docgenCommand } from './docgen';
+export { default as docgenCommand, execute as docgen } from './docgen';
 export { default as duCommand, execute as du } from './du';
