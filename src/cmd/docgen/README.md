@@ -8,11 +8,11 @@ Generate component documentation from the given paths.
 import { cmdDocgen } from '@zendeskgarden/scripts';
 
 const args: {
-  paths: string[];
+  paths: string[] | string;
   extensions?: string[];
   ignore?: string[];
 } = {
-  paths: [__dirname]
+  paths: __dirname
   /* optional overrides */
 };
 

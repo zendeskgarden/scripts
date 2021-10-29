@@ -37,7 +37,7 @@ type RETVAL = {
 }[];
 
 interface ICommandDocgenArgs {
-  paths: string[];
+  paths: string[] | string;
   extensions?: string[];
   ignore?: string[];
   spinner?: Ora;
@@ -49,7 +49,7 @@ const DEFAULT_IGNORE = ['**/*.spec.*', '**/dist/**', '**/node_modules/**'];
 /**
  * Execute the `cmd-docgen` command.
  *
- * @param {string[]} args.paths Component path globs.
+ * @param {string[] | string} args.paths Component path globs.
  * @param {string[]} [args.extensions] File extensions to consider.
  * @param {string[]} [args.ignore] Paths to ignore.
  * @param {Ora} [args.spinner] Terminal spinner.
@@ -76,12 +76,12 @@ export const execute = async (
     };
     const globbyOptions: GlobbyOptions = {
       expandDirectories: {
-        extensions: args.extensions
+        extensions: args.extensions || DEFAULT_EXTENSIONS
       },
-      ignore: args.ignore
+      ignore: args.ignore || DEFAULT_IGNORE
     };
 
-    for await (const path of args.paths) {
+    for await (const path of Array.isArray(args.paths) ? args.paths : [args.paths]) {
       const resolvedPath = resolve(path);
       /* eslint-disable-next-line @typescript-eslint/unbound-method */
       const tsconfigPath = findConfigFile(resolvedPath, sys.fileExists);
