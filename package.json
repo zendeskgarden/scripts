@@ -52,6 +52,7 @@
     "ora": "5.4.1"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "7.16.0",
     "@types/figlet": "1.5.4",
     "@types/fs-extra": "9.0.13",
     "@types/gh-pages": "3.2.0",
@@ -59,10 +60,9 @@
     "@types/klaw": "3.0.2",
     "@types/lodash": "4.14.175",
     "@types/node": "14.17.26",
-    "@typescript-eslint/eslint-plugin": "5.0.0",
-    "@typescript-eslint/parser": "5.0.0",
-    "@zendeskgarden/eslint-config": "22.0.0",
-    "babel-eslint": "10.1.0",
+    "@typescript-eslint/eslint-plugin": "5.2.0",
+    "@typescript-eslint/parser": "5.2.0",
+    "@zendeskgarden/eslint-config": "24.0.0",
     "eslint": "8.1.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-node": "11.1.0",
