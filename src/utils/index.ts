@@ -45,3 +45,17 @@ export const handleSuccessMessage = (message: string, spinner?: Ora): void => {
     console.log(message);
   }
 };
+
+/**
+ * Handle warning message output.
+ *
+ * @param message The message to output.
+ * @param {Ora} [spinner] Terminal spinner.
+ */
+export const handleWarningMessage = (message: string, spinner?: Ora): void => {
+  if (spinner && isInteractive()) {
+    spinner.warn(message);
+  } else {
+    console.log(message);
+  }
+};
