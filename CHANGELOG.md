@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/zendeskgarden/scripts/compare/v1.2.1...v1.3.0) (2021-11-02)
+
+
+### Features
+
+* add `cmd-docgen` command ([#96](https://github.com/zendeskgarden/scripts/issues/96)) ([3d7ba99](https://github.com/zendeskgarden/scripts/commit/3d7ba993258354bb8333207655b8445622819883))
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#89](https://github.com/zendeskgarden/scripts/issues/89)) ([a22f231](https://github.com/zendeskgarden/scripts/commit/a22f2310d77714b9ee8cdac6797422e1113ba0b6))
+* **deps:** update dependency klaw to v4 ([#92](https://github.com/zendeskgarden/scripts/issues/92)) ([5bad041](https://github.com/zendeskgarden/scripts/commit/5bad041388ee33335caa34da53662a757b94acb7))
+
 ### [1.2.1](https://github.com/zendeskgarden/scripts/compare/v1.2.0...v1.2.1) (2021-09-08)
 
 
