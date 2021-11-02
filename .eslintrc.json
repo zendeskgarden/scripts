@@ -1,5 +1,8 @@
 {
   "extends": ["@zendeskgarden", "@zendeskgarden/eslint-config/plugins/notice", "prettier"],
+  "parserOptions": {
+    "requireConfigFile": false
+  },
   "rules": {
     "no-console": "off"
   },
