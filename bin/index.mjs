@@ -7,18 +7,22 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-const Command = require('commander').Command;
-const program = new Command();
-const chalk = require('chalk');
-const textSync = require('figlet').textSync;
-const spinner = require('ora')();
-const version = require('../package.json').version;
-const cmd = require('../dist/cmd');
-const github = require('../dist/github');
-const lerna = require('../dist/lerna');
-const netlify = require('../dist/netlify');
+import { Command } from 'commander';
+import chalk from 'chalk';
+import cmd from '../dist/cmd/index.js';
+import { createRequire } from 'module';
+import dotenv from 'dotenv';
+import figlet from 'figlet';
+import github from '../dist/github/index.js';
+import lerna from '../dist/lerna/index.js';
+import netlify from '../dist/netlify/index.js';
+import ora from 'ora';
 
-require('dotenv').config();
+const program = new Command();
+const spinner = ora();
+const version = createRequire(import.meta.url)('../package.json').version;
+
+dotenv.config();
 
 program
   .version(version)
@@ -38,7 +42,7 @@ program
   .addCommand(netlify.siteIdCommand(spinner))
   .addCommand(netlify.tokenCommand(spinner))
   .action(() => {
-    console.log(chalk.hex('#5EAE91')(textSync('garden')));
+    console.log(chalk.hex('#5EAE91')(figlet.textSync('garden')));
     console.log();
     program.help();
   })
