@@ -63,7 +63,7 @@
     "@types/handlebars-helpers": "0.5.3",
     "@types/klaw": "3.0.2",
     "@types/lodash": "4.14.175",
-    "@types/node": "14.17.26",
+    "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "5.2.0",
     "@typescript-eslint/parser": "5.2.0",
     "@zendeskgarden/eslint-config": "25.0.0",
