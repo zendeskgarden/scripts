@@ -63,7 +63,7 @@ export const execute = async (args: ILernaNewArgs): Promise<RETVAL | undefined> 
       const path = handlebars.compile(file.path)(args.tags);
 
       if (file.path !== path) {
-        await rename(file.path as string, path);
+        await rename(file.path, path);
       }
 
       if (!file.stats.isDirectory()) {
