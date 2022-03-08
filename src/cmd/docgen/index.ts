@@ -5,10 +5,10 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { Options, globby } from 'globby';
 import { ParserOptions, withCustomConfig, withDefaultConfig } from 'react-docgen-typescript';
 import commander, { Command } from 'commander';
 import { findConfigFile, sys } from 'typescript';
-import globby, { GlobbyOptions } from 'globby';
 import { handleErrorMessage, handleSuccessMessage, handleWarningMessage } from '../../utils';
 import { Ora } from 'ora';
 import { parse as parseComment } from 'comment-parser';
@@ -74,7 +74,7 @@ export const execute = async (
         ),
       shouldRemoveUndefinedFromOptional: true
     };
-    const globbyOptions: GlobbyOptions = {
+    const globbyOptions: Options = {
       expandDirectories: {
         extensions: args.extensions || DEFAULT_EXTENSIONS
       },
