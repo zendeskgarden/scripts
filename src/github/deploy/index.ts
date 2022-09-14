@@ -80,7 +80,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     });
 
     if (error) {
-      throw error;
+      throw error as Error;
     }
 
     retVal = typeof result === 'object' ? result.url : result;
