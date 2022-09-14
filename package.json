@@ -48,7 +48,7 @@
     "klaw": "4.0.1",
     "lerna-changelog": "2.2.0",
     "lodash": "4.17.21",
-    "netlify": "9.0.0",
+    "netlify": "12.0.1",
     "netlify-cli": "9.16.7",
     "node-fetch": "2.6.7",
     "ora": "5.4.1",
