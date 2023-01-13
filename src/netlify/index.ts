@@ -5,7 +5,21 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { default as bandwidthCommand, execute as bandwidth } from './bandwidth';
-export { default as deployCommand, execute as deploy } from './deploy';
-export { default as siteIdCommand, execute as siteId } from './site_id';
-export { default as tokenCommand, execute as token } from './token';
+import { execute as bandwidth, default as bandwidthCommand } from './bandwidth/index.js';
+import { execute as deploy, default as deployCommand } from './deploy/index.js';
+import { execute as siteId, default as siteIdCommand } from './site_id/index.js';
+import { execute as token, default as tokenCommand } from './token/index.js';
+
+const commands = { bandwidthCommand, deployCommand, siteIdCommand, tokenCommand };
+
+export {
+  commands as default,
+  bandwidth,
+  bandwidthCommand,
+  deploy,
+  deployCommand,
+  siteId,
+  siteIdCommand,
+  token,
+  tokenCommand
+};

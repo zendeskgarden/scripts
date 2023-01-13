@@ -6,10 +6,10 @@
  */
 
 import commander, { Command } from 'commander';
-import { siteId as getSiteId, token as getToken } from '..';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { siteId as getSiteId, token as getToken } from '../index.js';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Ora } from 'ora';
-import execa from 'execa';
+import { execa } from 'execa';
 
 interface INetlifyDeployArgs {
   dir: string;

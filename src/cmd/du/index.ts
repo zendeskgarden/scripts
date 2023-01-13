@@ -6,9 +6,10 @@
  */
 
 import commander, { Command } from 'commander';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { dirname, resolve } from 'path';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Ora } from 'ora';
-import { resolve } from 'path';
+import { fileURLToPath } from 'url';
 import { default as walk } from 'klaw';
 
 /**
@@ -23,7 +24,8 @@ export const execute = async (dir?: string, spinner?: Ora): Promise<number> => {
   let retVal = 0;
 
   try {
-    const root = resolve(dir || __dirname);
+    const _dirname = dirname(fileURLToPath(import.meta.url));
+    const root = resolve(dir || _dirname);
 
     for await (const file of walk(root)) {
       if (file.path !== root) {

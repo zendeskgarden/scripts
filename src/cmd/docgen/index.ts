@@ -5,14 +5,19 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+import { GlobTask, globby } from 'globby';
 import { ParserOptions, withCustomConfig, withDefaultConfig } from 'react-docgen-typescript';
 import commander, { Command } from 'commander';
-import { findConfigFile, sys } from 'typescript';
-import globby, { GlobbyOptions } from 'globby';
-import { handleErrorMessage, handleSuccessMessage, handleWarningMessage } from '../../utils';
+import {
+  handleErrorMessage,
+  handleSuccessMessage,
+  handleWarningMessage
+} from '../../utils/index.js';
+import { Block } from 'comment-parser/primitives';
 import { Ora } from 'ora';
 import { parse as parseComment } from 'comment-parser';
 import { resolve } from 'path';
+import ts from 'typescript';
 
 type TAGS = Record<string, string>;
 
@@ -74,7 +79,7 @@ export const execute = async (
         ),
       shouldRemoveUndefinedFromOptional: true
     };
-    const globbyOptions: GlobbyOptions = {
+    const globbyOptions: GlobTask['options'] = {
       expandDirectories: {
         extensions: args.extensions || DEFAULT_EXTENSIONS
       },
@@ -84,7 +89,7 @@ export const execute = async (
     for await (const path of Array.isArray(args.paths) ? args.paths : [args.paths]) {
       const resolvedPath = resolve(path);
       /* eslint-disable-next-line @typescript-eslint/unbound-method */
-      const tsconfigPath = findConfigFile(resolvedPath, sys.fileExists);
+      const tsconfigPath = ts.findConfigFile(resolvedPath, ts.sys.fileExists);
       const parser = tsconfigPath
         ? withCustomConfig(tsconfigPath, parserOptions)
         : withDefaultConfig(parserOptions);
@@ -115,7 +120,7 @@ export const execute = async (
             let returns;
 
             if (prop.description) {
-              description = parseComment(`/** ${prop.description} */`)[0];
+              description = parseComment(`/** ${prop.description} */`)[0] as Block;
               description.tags
                 .filter(tag => tag.tag === 'param')
                 .forEach(param => {

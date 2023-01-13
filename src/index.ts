@@ -5,7 +5,7 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { docgen as cmdDocgen, du as cmdDu } from './cmd';
+export { docgen as cmdDocgen, du as cmdDu } from './cmd/index.js';
 export {
   branch as githubBranch,
   commit as githubCommit,
@@ -14,11 +14,11 @@ export {
   release as githubRelease,
   repository as githubRepository,
   token as githubToken
-} from './github';
-export { changelog as lernaChangelog, new as lernaNew } from './lerna';
+} from './github/index.js';
+export { changelog as lernaChangelog, new as lernaNew } from './lerna/index.js';
 export {
   bandwidth as netlifyBandwidth,
   deploy as netlifyDeploy,
   siteId as netlifySiteId,
   token as netlifyToken
-} from './netlify';
+} from './netlify/index.js';

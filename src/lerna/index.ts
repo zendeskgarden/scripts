@@ -5,5 +5,9 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { default as changelogCommand, execute as changelog } from './changelog';
-export { default as newCommand, execute as new } from './new';
+import { execute as changelog, default as changelogCommand } from './changelog/index.js';
+import { execute, default as newCommand } from './new/index.js';
+
+const commands = { changelogCommand, newCommand };
+
+export { commands as default, changelog, changelogCommand, execute as new, newCommand };

@@ -6,8 +6,8 @@
  */
 
 import commander, { Command } from 'commander';
-import { branch as getBranch, repository as getRepository, token as getToken } from '..';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { branch as getBranch, repository as getRepository, token as getToken } from '../index.js';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
 import { RequestError } from '@octokit/request-error';

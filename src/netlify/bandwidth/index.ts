@@ -6,11 +6,10 @@
  */
 
 import commander, { Command } from 'commander';
-import { siteId as getSiteId, token as getToken } from '..';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
-import NetlifyAPI from 'netlify';
+import { siteId as getSiteId, token as getToken } from '../index.js';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { NetlifyAPI } from 'netlify';
 import { Ora } from 'ora';
-import fetch from 'node-fetch';
 
 interface INetlifyBandwidthArgs {
   token?: string;

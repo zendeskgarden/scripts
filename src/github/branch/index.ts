@@ -6,9 +6,9 @@
  */
 
 import commander, { Command } from 'commander';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Ora } from 'ora';
-import execa from 'execa';
+import { execa } from 'execa';
 
 /**
  * Execute the `github-branch` command.

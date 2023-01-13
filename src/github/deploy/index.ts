@@ -6,11 +6,11 @@
  */
 
 import commander, { Command } from 'commander';
-import { commit as getCommit, repository as getRepository, token as getToken } from '..';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { commit as getCommit, repository as getRepository, token as getToken } from '../index.js';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
-import execa from 'execa';
+import { execa } from 'execa';
 
 interface IGitHubDeployArgs {
   command: (...args: unknown[]) => Promise<string | { url: string; logUrl: string } | undefined>;
