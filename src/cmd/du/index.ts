@@ -24,8 +24,8 @@ export const execute = async (dir?: string, spinner?: Ora): Promise<number> => {
   let retVal = 0;
 
   try {
-    const _dirname = dirname(fileURLToPath(import.meta.url));
-    const root = resolve(dir || _dirname);
+    const currentDir = dirname(fileURLToPath(import.meta.url));
+    const root = resolve(dir || currentDir);
 
     for await (const file of walk(root)) {
       if (file.path !== root) {
