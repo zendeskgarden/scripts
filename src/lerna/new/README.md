@@ -3,7 +3,13 @@
 Generate a new Lerna package based on a template source directory. All source
 file names and content are evaluated for [Handlebars](https://handlebarsjs.com/)
 (with registered [helpers](https://github.com/helpers/handlebars-helpers)) tag
-expressions.
+expressions. The following custom helpers are also available:
+
+- `kebabcase` – convert string to [kebab case](https://lodash.com/docs#kebabCase)
+- `pluralize` – convert word to plural form
+- `singularize` – convert word to singular form
+- `snakecase` – convert string to [snake case](https://lodash.com/docs#snakeCase)
+- `startcase` – convert string to [start case](https://lodash.com/docs#startCase)
 
 ## Usage
 

@@ -8,6 +8,7 @@
 import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { kebabCase, snakeCase, startCase } from 'lodash';
+import { plural, singular } from 'pluralize';
 import { readFile, rename, writeFile } from 'fs/promises';
 import { Ora } from 'ora';
 import { copy } from 'fs-extra';
@@ -23,6 +24,8 @@ const registerHelpers = (): void => {
   helpers({ handlebars });
 
   handlebars.registerHelper('kebabcase', (string: string) => kebabCase(string));
+  handlebars.registerHelper('pluralize', (string: string) => plural(string));
+  handlebars.registerHelper('singularize', (string: string) => singular(string));
   handlebars.registerHelper('snakecase', (string: string) => snakeCase(string));
   handlebars.registerHelper('startcase', (string: string) => startCase(string));
 };
@@ -63,7 +66,7 @@ export const execute = async (args: ILernaNewArgs): Promise<RETVAL | undefined> 
       const path = handlebars.compile(file.path)(args.tags);
 
       if (file.path !== path) {
-        await rename(file.path as string, path);
+        await rename(file.path, path);
       }
 
       if (!file.stats.isDirectory()) {
