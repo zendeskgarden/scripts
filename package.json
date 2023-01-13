@@ -12,7 +12,7 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "garden": "bin/index.mjs"
+    "garden": "bin/index.js"
   },
   "files": [
     "bin",
@@ -21,12 +21,12 @@
   "scripts": {
     "build": "yarn tsc",
     "format": "prettier-package-json --write && yarn format:all --write",
-    "format:all": "prettier --loglevel warn '**/*.{mjs,ts,json,md}' '!CHANGELOG.md' '!dist/**' '!.github/ISSUE_TEMPLATE.md'",
+    "format:all": "prettier --loglevel warn '**/*.{js,ts,json,md}' '!CHANGELOG.md' '!dist/**' '!.github/ISSUE_TEMPLATE.md'",
     "lint": "yarn lint:js && yarn lint:md",
-    "lint:js": "eslint bin/ src/ --ext mjs,ts --max-warnings 0",
+    "lint:js": "eslint bin/ src/ --ext js,ts --max-warnings 0",
     "lint:md": "markdownlint README.md src/**/*.md",
     "prepare": "husky install && yarn build",
-    "start": "bin/index.mjs",
+    "start": "bin/index.js",
     "tag": "[ `git rev-parse --abbrev-ref HEAD` = 'main' ] && standard-version --no-verify",
     "test": "prettier-package-json --list-different && yarn format:all --check && yarn lint && yarn start --version",
     "watch": "yarn build --watch"
