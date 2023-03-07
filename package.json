@@ -68,7 +68,7 @@
     "@types/pluralize": "0.0.29",
     "@typescript-eslint/eslint-plugin": "5.54.1",
     "@typescript-eslint/parser": "5.54.1",
-    "@zendeskgarden/eslint-config": "30.0.0",
+    "@zendeskgarden/eslint-config": "32.0.0",
     "eslint": "8.35.0",
     "eslint-config-prettier": "8.7.0",
     "eslint-plugin-node": "11.1.0",
