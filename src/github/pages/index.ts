@@ -10,7 +10,7 @@ import commander, { Command } from 'commander';
 import { repository as getRepository, token as getToken } from '..';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Ora } from 'ora';
-import execa from 'execa';
+import { execa } from 'execa';
 
 interface IGitHubPagesArgs {
   dir: string;

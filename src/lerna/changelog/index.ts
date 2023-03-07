@@ -9,7 +9,7 @@ import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Changelog } from 'lerna-changelog';
 import { Ora } from 'ora';
-import execa from 'execa';
+import { execa } from 'execa';
 import { fromPath } from 'lerna-changelog/lib/configuration';
 import { token as getToken } from '../../github';
 

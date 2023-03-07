@@ -8,7 +8,7 @@
 import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils';
 import { Ora } from 'ora';
-import execa from 'execa';
+import { execa } from 'execa';
 
 /**
  * Execute the `netlify-token` command.
