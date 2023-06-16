@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@5.0.3
+  node: circleci/node@5.1.0
 
 references:
   executor: &executor
@@ -26,6 +26,7 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
+          cache-version: '{{ .Environment.CACHE_VERSION }}'
       - persist_to_workspace:
           root: *workspace_root
           paths: .

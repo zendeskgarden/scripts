@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/zendeskgarden/scripts/compare/v1.4.0...v1.4.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#145](https://github.com/zendeskgarden/scripts/issues/145)) ([c3e70c9](https://github.com/zendeskgarden/scripts/commit/c3e70c975fdae4a32700ccc295e63c141232fbb3))
+* **deps:** update all non-major dependencies ([#158](https://github.com/zendeskgarden/scripts/issues/158)) ([dbaf7b6](https://github.com/zendeskgarden/scripts/commit/dbaf7b6818ccf6e65704be77279f31c41165c262))
+* **deps:** update dependency @octokit/request-error to v3 ([#137](https://github.com/zendeskgarden/scripts/issues/137)) ([1bb5aaf](https://github.com/zendeskgarden/scripts/commit/1bb5aaf43435b797ad8061e45b3a3bdde94420c8))
+* **deps:** update dependency @octokit/rest to v19 ([#138](https://github.com/zendeskgarden/scripts/issues/138)) ([68f37e0](https://github.com/zendeskgarden/scripts/commit/68f37e09ab498a2b84fa3c6335e225283dc7a0a2))
+* **deps:** update dependency commander to v10 ([#160](https://github.com/zendeskgarden/scripts/issues/160)) ([8d3e378](https://github.com/zendeskgarden/scripts/commit/8d3e3785777f75a27982636561e0a163cb7386f4))
+* **deps:** update dependency commander to v9 ([#124](https://github.com/zendeskgarden/scripts/issues/124)) ([91931a7](https://github.com/zendeskgarden/scripts/commit/91931a778c7ca6e2d51108b630b0a73385eedada))
+* **deps:** update dependency dotenv to v16 ([#125](https://github.com/zendeskgarden/scripts/issues/125)) ([69a5df5](https://github.com/zendeskgarden/scripts/commit/69a5df590a1a95619ae1ad70e157562a836ff69c))
+* **deps:** update dependency fs-extra to v11 ([#155](https://github.com/zendeskgarden/scripts/issues/155)) ([d8e75fc](https://github.com/zendeskgarden/scripts/commit/d8e75fc85b51b74b783af1fc647c35ec2da29953))
+* **deps:** update dependency gh-pages to v4 ([#139](https://github.com/zendeskgarden/scripts/issues/139)) ([06f079d](https://github.com/zendeskgarden/scripts/commit/06f079dc210cdbec3c1c33a41705a9a3646ff36a))
+* **deps:** update dependency gh-pages to v5 ([#162](https://github.com/zendeskgarden/scripts/issues/162)) ([002d543](https://github.com/zendeskgarden/scripts/commit/002d54326ec03fc79821a6f15a7be6bfb28272cd))
+* **deps:** update dependency netlify to v9 ([#112](https://github.com/zendeskgarden/scripts/issues/112)) ([a1df85e](https://github.com/zendeskgarden/scripts/commit/a1df85e005c877c79fcd9d6c2085349c847e42da))
+* **deps:** update dependency netlify-cli to v8 ([#113](https://github.com/zendeskgarden/scripts/issues/113)) ([1eef3fc](https://github.com/zendeskgarden/scripts/commit/1eef3fcf9830d4957dd8370266374ef8c64162a8))
+* **deps:** update dependency netlify-cli to v9 ([#128](https://github.com/zendeskgarden/scripts/issues/128)) ([d12091b](https://github.com/zendeskgarden/scripts/commit/d12091bdf7f62e5afc47b90a4dd5aca15c9bab86))
+* **deps:** update dependency node-fetch to v2.6.7 [security] ([#120](https://github.com/zendeskgarden/scripts/issues/120)) ([97c6604](https://github.com/zendeskgarden/scripts/commit/97c6604ee6f36a3ef9e5d84f8fb93388fe54d137))
+
 ## [1.4.0](https://github.com/zendeskgarden/scripts/compare/v1.3.0...v1.4.0) (2021-11-22)
 
 
