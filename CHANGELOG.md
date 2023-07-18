@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/zendeskgarden/scripts/compare/v1.4.1...v1.4.2) (2023-07-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency commander to v11 ([#173](https://github.com/zendeskgarden/scripts/issues/173)) ([2844efd](https://github.com/zendeskgarden/scripts/commit/2844efd14ebfc1f3f2938da76391ef6ba4eb7fe2))
+* **deps:** update dependency typescript to v5 ([#168](https://github.com/zendeskgarden/scripts/issues/168)) ([1e16786](https://github.com/zendeskgarden/scripts/commit/1e16786420d641cb24564458e3060826e0a804da))
+* **deps:** update octokit monorepo ([#172](https://github.com/zendeskgarden/scripts/issues/172)) ([5b926e8](https://github.com/zendeskgarden/scripts/commit/5b926e8ee91527c885965cba3de1603acf1827bb))
+
 ### [1.4.1](https://github.com/zendeskgarden/scripts/compare/v1.4.0...v1.4.1) (2023-03-17)
 
 
