@@ -59,7 +59,7 @@ export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefi
       deployArgs.push(`--message=${args.message}`);
     }
 
-    /* https://cli.netlify.com/commands/deploy */
+    /* https://cli.netlify.com/commands/deploy requires netlify-cli */
     const deploy = await execa('netlify', deployArgs, { preferLocal: true });
 
     const response = JSON.parse(deploy.stdout);
