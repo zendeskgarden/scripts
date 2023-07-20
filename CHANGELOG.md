@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://github.com/zendeskgarden/scripts/compare/v1.4.2...v1.4.3) (2023-07-20)
+
+
+### Bug Fixes
+
+* **netlify-deploy:** restore missing netlify-cli dependency ([#179](https://github.com/zendeskgarden/scripts/issues/179)) ([57a1066](https://github.com/zendeskgarden/scripts/commit/57a1066212e12a41e60d5a4f83fe38698c8381de))
+
 ### [1.4.2](https://github.com/zendeskgarden/scripts/compare/v1.4.1...v1.4.2) (2023-07-18)
 
 
