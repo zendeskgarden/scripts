@@ -52,7 +52,7 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
       if (commits && commits.data) {
         retVal = commits.data[0].sha || undefined;
       }
-    } catch (error /* eslint-disable-line @typescript-eslint/no-implicit-any-catch */) {
+    } catch (error) {
       if ((error as RequestError).status !== 404) {
         handleErrorMessage(error, 'github-commit', args.spinner);
 
