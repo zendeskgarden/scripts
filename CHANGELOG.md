@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/zendeskgarden/scripts/compare/v1.4.3...v2.0.0) (2023-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* convert to ESM (#180)
+
+### Features
+
+* convert to ESM ([#180](https://github.com/zendeskgarden/scripts/issues/180)) ([16b1f5a](https://github.com/zendeskgarden/scripts/commit/16b1f5adbe92328b4d521bdc5214a56a07942f08))
+
 ### [1.4.3](https://github.com/zendeskgarden/scripts/compare/v1.4.2...v1.4.3) (2023-07-20)
 
 
