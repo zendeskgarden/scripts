@@ -5,13 +5,12 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Changelog } from 'lerna-changelog';
+import { Command } from 'commander';
 import { Ora } from 'ora';
-import execa from 'execa';
-import { fromPath } from 'lerna-changelog/lib/configuration';
-import { token as getToken } from '../../github';
+import { execa } from 'execa';
+import { token as getToken } from '../../github/index.js';
 
 interface ILernaChangelogArgs {
   from?: string;
@@ -46,6 +45,7 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
       describeArgs.unshift('-C', args.path);
     }
 
+    const fromPath = (await import('lerna-changelog/lib/configuration')).fromPath;
     const rootPath = await execa('git', revParseArgs);
     const config = fromPath(rootPath.stdout);
     const changelog = new Changelog(config);
@@ -85,7 +85,7 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('lerna-changelog');
 
   return command

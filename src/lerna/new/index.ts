@@ -5,15 +5,15 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
-import { kebabCase, snakeCase, startCase } from 'lodash';
-import { plural, singular } from 'pluralize';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { readFile, rename, writeFile } from 'fs/promises';
+import { Command } from 'commander';
 import { Ora } from 'ora';
 import { copy } from 'fs-extra';
 import { default as handlebars } from 'handlebars';
 import { default as helpers } from 'handlebars-helpers';
+import lodash from 'lodash';
+import pluralize from 'pluralize';
 import { resolve } from 'path';
 import { default as walk } from 'klaw';
 
@@ -23,11 +23,11 @@ import { default as walk } from 'klaw';
 const registerHelpers = (): void => {
   helpers({ handlebars });
 
-  handlebars.registerHelper('kebabcase', (string: string) => kebabCase(string));
-  handlebars.registerHelper('pluralize', (string: string) => plural(string));
-  handlebars.registerHelper('singularize', (string: string) => singular(string));
-  handlebars.registerHelper('snakecase', (string: string) => snakeCase(string));
-  handlebars.registerHelper('startcase', (string: string) => startCase(string));
+  handlebars.registerHelper('kebabcase', (string: string) => lodash.kebabCase(string));
+  handlebars.registerHelper('pluralize', (string: string) => pluralize.plural(string));
+  handlebars.registerHelper('singularize', (string: string) => pluralize.singular(string));
+  handlebars.registerHelper('snakecase', (string: string) => lodash.snakeCase(string));
+  handlebars.registerHelper('startcase', (string: string) => lodash.startCase(string));
 };
 
 interface ILernaNewArgs {
@@ -85,7 +85,7 @@ export const execute = async (args: ILernaNewArgs): Promise<RETVAL | undefined> 
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('lerna-new');
 
   return command

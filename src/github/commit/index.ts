@@ -5,9 +5,9 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
-import { branch as getBranch, repository as getRepository, token as getToken } from '..';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { branch as getBranch, repository as getRepository, token as getToken } from '../index.js';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
 import { RequestError } from '@octokit/request-error';
@@ -64,7 +64,7 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('github-commit');
 
   return command

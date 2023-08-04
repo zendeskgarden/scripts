@@ -5,8 +5,8 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { bgRed, red } from 'chalk';
 import { Ora } from 'ora';
+import chalk from 'chalk';
 import isInteractive from 'is-interactive';
 
 /**
@@ -17,10 +17,10 @@ import isInteractive from 'is-interactive';
  * @param {Ora} [spinner] Terminal spinner.
  */
 export const handleErrorMessage = (error: unknown, command?: string, spinner?: Ora): void => {
-  let message = red(error);
+  let message = chalk.red(error);
 
   if (command) {
-    const prefix = isInteractive() ? bgRed(command) : `[${command}]`;
+    const prefix = isInteractive() ? chalk.bgRed(command) : `[${command}]`;
 
     message = `${prefix} ${message}`;
   }

@@ -5,12 +5,12 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
-import { commit as getCommit, repository as getRepository, token as getToken } from '..';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { commit as getCommit, repository as getRepository, token as getToken } from '../index.js';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { Command } from 'commander';
 import { Octokit } from '@octokit/rest';
 import { Ora } from 'ora';
-import execa from 'execa';
+import { execa } from 'execa';
 
 interface IGitHubDeployArgs {
   command: (...args: unknown[]) => Promise<string | { url: string; logUrl: string } | undefined>;
@@ -93,7 +93,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('github-deploy');
 
   return command

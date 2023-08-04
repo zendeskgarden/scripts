@@ -5,10 +5,11 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
+import { dirname, resolve } from 'path';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { Command } from 'commander';
 import { Ora } from 'ora';
-import { resolve } from 'path';
+import { fileURLToPath } from 'url';
 import { default as walk } from 'klaw';
 
 /**
@@ -23,7 +24,8 @@ export const execute = async (dir?: string, spinner?: Ora): Promise<number> => {
   let retVal = 0;
 
   try {
-    const root = resolve(dir || __dirname);
+    const currentDir = dirname(fileURLToPath(import.meta.url));
+    const root = resolve(dir || currentDir);
 
     for await (const file of walk(root)) {
       if (file.path !== root) {
@@ -39,7 +41,7 @@ export const execute = async (dir?: string, spinner?: Ora): Promise<number> => {
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('cmd-du');
 
   return command

@@ -5,12 +5,11 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
-import { siteId as getSiteId, token as getToken } from '..';
-import { handleErrorMessage, handleSuccessMessage } from '../../utils';
-import NetlifyAPI from 'netlify';
+import { siteId as getSiteId, token as getToken } from '../index.js';
+import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { Command } from 'commander';
+import { NetlifyAPI } from 'netlify';
 import { Ora } from 'ora';
-import fetch from 'node-fetch';
 
 interface INetlifyBandwidthArgs {
   token?: string;
@@ -66,7 +65,7 @@ export const execute = async (args: INetlifyBandwidthArgs = {}): Promise<RETVAL 
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('netlify-bandwidth');
 
   return command

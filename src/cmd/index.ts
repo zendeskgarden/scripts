@@ -5,5 +5,9 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { default as docgenCommand, execute as docgen } from './docgen';
-export { default as duCommand, execute as du } from './du';
+import { execute as docgen, default as docgenCommand } from './docgen/index.js';
+import { execute as du, default as duCommand } from './du/index.js';
+
+const commands = { docgenCommand, duCommand };
+
+export { commands as default, docgen, docgenCommand, du, duCommand };
