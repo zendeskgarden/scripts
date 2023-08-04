@@ -5,8 +5,8 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { Command } from 'commander';
 import { Ora } from 'ora';
 import { execa } from 'execa';
 
@@ -37,7 +37,7 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('github-token');
 
   return command

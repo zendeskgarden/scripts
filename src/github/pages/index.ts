@@ -6,9 +6,9 @@
  */
 
 import { clean, publish } from 'gh-pages';
-import commander, { Command } from 'commander';
 import { repository as getRepository, token as getToken } from '../index.js';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { Command } from 'commander';
 import { Ora } from 'ora';
 import { execa } from 'execa';
 
@@ -86,7 +86,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('github-pages');
 
   return command

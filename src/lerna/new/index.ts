@@ -5,9 +5,9 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { readFile, rename, writeFile } from 'fs/promises';
+import { Command } from 'commander';
 import { Ora } from 'ora';
 import { copy } from 'fs-extra';
 import { default as handlebars } from 'handlebars';
@@ -85,7 +85,7 @@ export const execute = async (args: ILernaNewArgs): Promise<RETVAL | undefined> 
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('lerna-new');
 
   return command

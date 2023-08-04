@@ -7,13 +7,12 @@
 
 import { GlobTask, globby } from 'globby';
 import { ParserOptions, withCustomConfig, withDefaultConfig } from 'react-docgen-typescript';
-import commander, { Command } from 'commander';
 import {
   handleErrorMessage,
   handleSuccessMessage,
   handleWarningMessage
 } from '../../utils/index.js';
-import { Block } from 'comment-parser/primitives';
+import { Command } from 'commander';
 import { Ora } from 'ora';
 import { parse as parseComment } from 'comment-parser';
 import { resolve } from 'path';
@@ -120,7 +119,7 @@ export const execute = async (
             let returns;
 
             if (prop.description) {
-              description = parseComment(`/** ${prop.description} */`)[0] as Block;
+              description = parseComment(`/** ${prop.description} */`)[0];
               description.tags
                 .filter(tag => tag.tag === 'param')
                 .forEach(param => {
@@ -157,7 +156,7 @@ export const execute = async (
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('cmd-docgen');
 
   return command

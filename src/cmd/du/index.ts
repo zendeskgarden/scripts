@@ -5,9 +5,9 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import commander, { Command } from 'commander';
 import { dirname, resolve } from 'path';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
+import { Command } from 'commander';
 import { Ora } from 'ora';
 import { fileURLToPath } from 'url';
 import { default as walk } from 'klaw';
@@ -41,7 +41,7 @@ export const execute = async (dir?: string, spinner?: Ora): Promise<number> => {
   return retVal;
 };
 
-export default (spinner: Ora): commander.Command => {
+export default (spinner: Ora): Command => {
   const command = new Command('cmd-du');
 
   return command
