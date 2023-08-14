@@ -6,4 +6,4 @@
  */
 
 declare module 'lerna-changelog';
-declare module 'lerna-changelog/lib/configuration';
+declare module 'lerna-changelog/lib/configuration.js';

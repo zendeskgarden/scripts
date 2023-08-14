@@ -45,7 +45,7 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
       describeArgs.unshift('-C', args.path);
     }
 
-    const fromPath = (await import('lerna-changelog/lib/configuration')).fromPath;
+    const fromPath = (await import('lerna-changelog/lib/configuration.js')).fromPath;
     const rootPath = await execa('git', revParseArgs);
     const config = fromPath(rootPath.stdout);
     const changelog = new Changelog(config);
