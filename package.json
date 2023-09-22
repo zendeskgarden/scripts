@@ -51,7 +51,7 @@
     "lerna-changelog": "2.2.0",
     "lodash": "4.17.21",
     "netlify": "13.1.10",
-    "netlify-cli": "15.11.0",
+    "netlify-cli": "16.4.2",
     "ora": "7.0.1",
     "pluralize": "8.0.0",
     "react-docgen-typescript": "2.2.2",
