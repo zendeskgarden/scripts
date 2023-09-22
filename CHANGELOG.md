@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/zendeskgarden/scripts/compare/v2.0.1...v2.0.2) (2023-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency execa to v8 ([#184](https://github.com/zendeskgarden/scripts/issues/184)) ([7dc19a8](https://github.com/zendeskgarden/scripts/commit/7dc19a880f8a8f551243760283c59d4a8a79f04f))
+* **deps:** update dependency gh-pages to v6 ([#185](https://github.com/zendeskgarden/scripts/issues/185)) ([98e4d54](https://github.com/zendeskgarden/scripts/commit/98e4d54983da42e543edbbc22f5c17df0aafeaeb))
+* **deps:** update dependency netlify-cli to v16 ([#186](https://github.com/zendeskgarden/scripts/issues/186)) ([5f8e4ce](https://github.com/zendeskgarden/scripts/commit/5f8e4ce9a25c0e2200cc6e65b5a1a03d9fd00218))
+
 ### [2.0.1](https://github.com/zendeskgarden/scripts/compare/v2.0.0...v2.0.1) (2023-08-14)
 
 
