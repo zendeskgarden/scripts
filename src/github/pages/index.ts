@@ -53,8 +53,6 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
       }
 
       clean();
-      // Due to the type mismatch between the latest type version for gh-pages
-      // eslint-disable-next-line @typescript-eslint/await-thenable, @typescript-eslint/no-confusing-void-expression
       await publish(
         args.dir,
         {
