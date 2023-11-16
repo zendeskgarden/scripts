@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.3](https://github.com/zendeskgarden/scripts/compare/v2.0.2...v2.0.3) (2023-11-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency globby to v14 ([#194](https://github.com/zendeskgarden/scripts/issues/194)) ([5090992](https://github.com/zendeskgarden/scripts/commit/5090992686364b820aa154423856ad1602df8dd8))
+* **deps:** update dependency netlify-cli to v17 ([#195](https://github.com/zendeskgarden/scripts/issues/195)) ([547bdc6](https://github.com/zendeskgarden/scripts/commit/547bdc682c9545bf0c8ba6902ebcb42781df572c))
+
 ### [2.0.2](https://github.com/zendeskgarden/scripts/compare/v2.0.1...v2.0.2) (2023-09-22)
 
 
