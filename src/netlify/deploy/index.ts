@@ -47,6 +47,7 @@ export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefi
       'deploy',
       `--site=${siteId}`,
       `--auth=${token}`,
+      `--cwd=${args.dir}`,
       `--dir=${args.dir}`,
       '--json'
     ];
