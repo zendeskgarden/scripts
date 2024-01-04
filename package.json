@@ -62,7 +62,7 @@
     "@babel/eslint-parser": "7.23.3",
     "@types/figlet": "1.5.8",
     "@types/fs-extra": "11.0.4",
-    "@types/gh-pages": "5.0.1",
+    "@types/gh-pages": "6.1.0",
     "@types/handlebars-helpers": "0.5.6",
     "@types/klaw": "3.0.6",
     "@types/lodash": "4.14.202",
