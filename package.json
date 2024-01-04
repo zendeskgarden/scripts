@@ -52,7 +52,7 @@
     "lodash": "4.17.21",
     "netlify": "13.1.11",
     "netlify-cli": "17.11.0",
-    "ora": "7.0.1",
+    "ora": "8.0.1",
     "pluralize": "8.0.0",
     "react-docgen-typescript": "2.2.2",
     "typescript": "5.3.3"
