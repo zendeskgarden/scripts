@@ -27,9 +27,12 @@ type RETVAL = {
 export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | undefined> => {
   let retVal: RETVAL | undefined;
 
-  if (process.env.TRAVIS_REPO_SLUG || process.env.REPO_SLUG) {
-    const slug = process.env.TRAVIS_REPO_SLUG || process.env.REPO_SLUG;
-    const [owner, repo] = slug!.split('/') as [string, string];
+  if (process.env.TRAVIS_REPO_SLUG) {
+    const [owner, repo] = process.env.TRAVIS_REPO_SLUG.split('/') as [string, string];
+
+    retVal = { owner, repo };
+  } else if (process.env.GITHUB_ACTIONS) {
+    const [owner, repo] = process.env.GITHUB_REPOSITORY!.split('/') as [string, string];
 
     retVal = { owner, repo };
   } else if (process.env.CIRCLECI) {
