@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/zendeskgarden/scripts/compare/v2.0.4...v2.1.0) (2024-06-17)
+
+
+### Features
+
+* **githubRepository:** support Github Actions env vars to return owner + repo values ([#215](https://github.com/zendeskgarden/scripts/issues/215)) ([c353eba](https://github.com/zendeskgarden/scripts/commit/c353eba7c6fd2403e7b353e849e3d2bb20dbf92f))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @octokit/request-error to v6 ([#206](https://github.com/zendeskgarden/scripts/issues/206)) ([c13a9b5](https://github.com/zendeskgarden/scripts/commit/c13a9b5a64c3dd4ce8cf98de32922d9c0eea1ad6))
+* **deps:** update dependency commander to v12 ([#207](https://github.com/zendeskgarden/scripts/issues/207)) ([8bfb294](https://github.com/zendeskgarden/scripts/commit/8bfb294f62c806be746e2817cf74ab38a90144cd))
+* **deps:** update dependency ora to v8 ([#200](https://github.com/zendeskgarden/scripts/issues/200)) ([df49a66](https://github.com/zendeskgarden/scripts/commit/df49a66be69f6e6f7836cbaca1624a6b36463d97))
+
 ### [2.0.4](https://github.com/zendeskgarden/scripts/compare/v2.0.3...v2.0.4) (2023-11-20)
 
 
