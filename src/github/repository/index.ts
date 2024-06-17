@@ -31,6 +31,10 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
     const [owner, repo] = process.env.TRAVIS_REPO_SLUG.split('/') as [string, string];
 
     retVal = { owner, repo };
+  } else if (process.env.GITHUB_ACTIONS) {
+    const [owner, repo] = process.env.GITHUB_REPOSITORY!.split('/') as [string, string];
+
+    retVal = { owner, repo };
   } else if (process.env.CIRCLECI) {
     const owner = process.env.CIRCLE_PROJECT_USERNAME!;
     const repo = process.env.CIRCLE_PROJECT_REPONAME!;
