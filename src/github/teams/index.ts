@@ -20,6 +20,17 @@ interface IGitHubTeamsArgs {
   spinner?: Ora;
 }
 
+/**
+ * Execute the `github-teams` command.
+ *
+ * @param {string} [args.org] GitHub organization name.
+ * @param {string} [args.user] GitHub user name or `true` for current user.
+ * @param {string} [args.path] Path to a git directory.
+ * @param {string} [args.token] GitHub personal access token.
+ * @param {string} [args.spinner] Terminal spinner.
+ *
+ * @returns {Promise<string[]>} A list of GitHub teams.
+ */
 export const execute = async (args: IGitHubTeamsArgs): Promise<string[] | undefined> => {
   let retVal: string[] | undefined;
 
@@ -90,7 +101,7 @@ export default (spinner: Ora): Command => {
     .argument('[org]', 'GitHub organization name; defaults to repository owner')
     .option('-u --user [user]', 'user to get team membership for; defaults to current')
     .option('-p, --path <path>', 'git directory')
-    .option('-a, --token <token>', 'access token')
+    .option('-t, --token <token>', 'access token')
     .action(async org => {
       try {
         spinner.start();

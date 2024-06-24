@@ -43,6 +43,7 @@ the individual command README for details.
 - [`garden github-pages`](src/github/pages#readme)
 - [`garden github-release`](src/github/release#readme)
 - [`garden github-repository`](src/github/repository#readme)
+- [`garden github-teams`](src/github/teams#readme)
 - [`garden github-token`](src/github/token#readme)
 - [`garden lerna-changelog`](src/lerna/changelog#readme)
 - [`garden lerna-new`](src/lerna/new#readme)
