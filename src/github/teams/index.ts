@@ -99,7 +99,7 @@ export default (spinner: Ora): Command => {
   return command
     .description('output GitHub organization teams')
     .argument('[org]', 'GitHub organization name; defaults to repository owner')
-    .option('-u --user [user]', 'user to get team membership for; defaults to current')
+    .option('-u, --user [user]', 'user to get team membership for; defaults to current')
     .option('-p, --path <path>', 'git directory')
     .option('-t, --token <token>', 'access token')
     .action(async org => {
