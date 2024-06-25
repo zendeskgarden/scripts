@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/zendeskgarden/scripts/compare/v2.1.0...v2.2.0) (2024-06-25)
+
+
+### Features
+
+* new `github-teams` script ([#216](https://github.com/zendeskgarden/scripts/issues/216)) ([e3f1662](https://github.com/zendeskgarden/scripts/commit/e3f16621d1172ee3a34ab7f168fc8557706105ad))
+
 ## [2.1.0](https://github.com/zendeskgarden/scripts/compare/v2.0.4...v2.1.0) (2024-06-17)
 
 
