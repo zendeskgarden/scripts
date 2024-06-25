@@ -34,6 +34,7 @@ program
   .addCommand(github.pagesCommand(spinner))
   .addCommand(github.releaseCommand(spinner))
   .addCommand(github.repositoryCommand(spinner))
+  .addCommand(github.teamsCommand(spinner))
   .addCommand(github.tokenCommand(spinner))
   .addCommand(lerna.changelogCommand(spinner))
   .addCommand(lerna.newCommand(spinner))

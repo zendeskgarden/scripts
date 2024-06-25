@@ -13,6 +13,7 @@ export {
   pages as githubPages,
   release as githubRelease,
   repository as githubRepository,
+  teams as githubTeams,
   token as githubToken
 } from './github/index.js';
 export { changelog as lernaChangelog, new as lernaNew } from './lerna/index.js';

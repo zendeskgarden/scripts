@@ -11,6 +11,7 @@ import { execute as deploy, default as deployCommand } from './deploy/index.js';
 import { execute as pages, default as pagesCommand } from './pages/index.js';
 import { execute as release, default as releaseCommand } from './release/index.js';
 import { execute as repository, default as repositoryCommand } from './repository/index.js';
+import { execute as teams, default as teamsCommand } from './teams/index.js';
 import { execute as token, default as tokenCommand } from './token/index.js';
 
 const commands = {
@@ -20,6 +21,7 @@ const commands = {
   pagesCommand,
   releaseCommand,
   repositoryCommand,
+  teamsCommand,
   tokenCommand
 };
 
@@ -37,6 +39,8 @@ export {
   releaseCommand,
   repository,
   repositoryCommand,
+  teams,
+  teamsCommand,
   token,
   tokenCommand
 };
