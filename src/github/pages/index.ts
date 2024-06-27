@@ -13,6 +13,7 @@ import { Ora } from 'ora';
 import { execa } from 'execa';
 
 interface IGitHubPagesArgs {
+  debug?: boolean;
   dir: string;
   disableJekyll?: boolean;
   path?: string;
@@ -46,12 +47,18 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
       let name: string;
       let email: string;
 
-      try {
-        name = (await execa('git', ['config', 'user.name'])).stdout.toString();
-        email = (await execa('git', ['config', 'user.email'])).stdout.toString();
-      } catch {
-        name = 'Zendesk Garden';
-        email = 'garden@zendesk.com';
+      if (process.env.GITHUB_ACTIONS) {
+        // https://github.com/tschaub/gh-pages/blob/7568804d0603a13b83d0eeffb5e5ca0ef44fe42d/readme.md#deploying-with-github-actions
+        name = 'github-actions-bot';
+        email = 'support+actions@github.com';
+      } else {
+        try {
+          name = (await execa('git', ['config', 'user.name'])).stdout.toString();
+          email = (await execa('git', ['config', 'user.email'])).stdout.toString();
+        } catch {
+          name = 'Zendesk Garden';
+          email = 'garden@zendesk.com';
+        }
       }
 
       clean();
@@ -65,7 +72,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
           },
           message,
           nojekyll: args.disableJekyll,
-          silent: true
+          silent: !args.debug
         },
         error => {
           if (error) {
@@ -97,12 +104,14 @@ export default (spinner: Ora): Command => {
     .option('-t, --token <token>', 'access token')
     .option('-m, --message <message>', 'commit message')
     .option('-n, --no-jekyll', 'disable Jekyll')
+    .option('-d, --debug', 'enables debugging mode')
     .action(async dir => {
       try {
         spinner.start();
 
         const options = command.opts();
         const url = await execute({
+          debug: options.debug,
           dir,
           disableJekyll: !options.jekyll,
           path: options.path,
