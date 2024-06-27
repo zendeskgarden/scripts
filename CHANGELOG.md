@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/zendeskgarden/scripts/compare/v2.2.0...v2.3.0) (2024-06-27)
+
+
+### Features
+
+* **github-pages:** add option for disabling Jekyll deployments ([#218](https://github.com/zendeskgarden/scripts/issues/218)) ([9397e82](https://github.com/zendeskgarden/scripts/commit/9397e823e8e60dac545d2f00a49e34744fe73869))
+
 ## [2.2.0](https://github.com/zendeskgarden/scripts/compare/v2.1.0...v2.2.0) (2024-06-25)
 
 
