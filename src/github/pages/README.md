@@ -9,6 +9,7 @@ import { githubPages } from '@zendeskgarden/scripts';
 
 const args: {
   dir: string;
+  disableJekyll?: boolean;
   path?: string;
   message?: string;
   token?: string;
@@ -27,6 +28,7 @@ const args: {
 ### Arguments
 
 - `dir` directory of web content to publish.
+- `no-jekyll` disable Jekyll by adding a `.nojekyll` file.
 - `path` optional path to a git directory; defaults to `dir`.
 - `message` optional commit message.
 - `token` optional GitHub personal access token; defaults to the value
@@ -35,7 +37,7 @@ const args: {
 ## Command
 
 ```sh
-garden github-pages [--path <path>] [--message <message>] [--token <token>] <dir>
+garden github-pages [--no-jekyll] [--path <path>] [--message <message>] [--token <token>] <dir>
 ```
 
 To get debug output:

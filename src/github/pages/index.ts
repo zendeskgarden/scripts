@@ -14,6 +14,7 @@ import { execa } from 'execa';
 
 interface IGitHubPagesArgs {
   dir: string;
+  disableJekyll?: boolean;
   path?: string;
   message?: string;
   token?: string;
@@ -24,6 +25,7 @@ interface IGitHubPagesArgs {
  * Execute the `github-pages` command.
  *
  * @param {string} args.dir Folder to publish.
+ * @param {boolean} [args.disableJekyll] Disable Jekyll.
  * @param {string} [args.path] Path to a git directory.
  * @param {string} [args.message] Commit message.
  * @param {string} [args.token] GitHub personal access token.
@@ -62,6 +64,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
             email
           },
           message,
+          nojekyll: args.disableJekyll,
           silent: true
         },
         error => {
@@ -93,6 +96,7 @@ export default (spinner: Ora): Command => {
     .option('-p, --path <path>', 'git directory')
     .option('-t, --token <token>', 'access token')
     .option('-m, --message <message>', 'commit message')
+    .option('-n, --no-jekyll', 'disable Jekyll')
     .action(async dir => {
       try {
         spinner.start();
@@ -100,6 +104,7 @@ export default (spinner: Ora): Command => {
         const options = command.opts();
         const url = await execute({
           dir,
+          disableJekyll: !options.jekyll,
           path: options.path,
           message: options.message,
           token: options.token,
