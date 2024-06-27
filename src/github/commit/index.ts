@@ -32,10 +32,10 @@ interface IGitHubCommitArgs {
  */
 export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | undefined> => {
   let retVal: string | undefined =
+    process.env.GITHUB_SHA ||
     process.env.CIRCLE_SHA1 ||
     process.env.TRAVIS_PULL_REQUEST_SHA ||
-    process.env.TRAVIS_COMMIT ||
-    process.env.GITHUB_SHA;
+    process.env.TRAVIS_COMMIT;
 
   if (!retVal) {
     try {
