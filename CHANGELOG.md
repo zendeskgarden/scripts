@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/zendeskgarden/scripts/compare/v2.3.0...v2.4.0) (2024-06-27)
+
+
+### Features
+
+* **github-branch, github-commit:** add support for GHA env variables ([#219](https://github.com/zendeskgarden/scripts/issues/219)) ([cb50eef](https://github.com/zendeskgarden/scripts/commit/cb50eefb3c8de0b1f7b0e75506e714dc1d030d1d))
+
 ## [2.3.0](https://github.com/zendeskgarden/scripts/compare/v2.2.0...v2.3.0) (2024-06-27)
 
 
