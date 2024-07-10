@@ -5,11 +5,11 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-import { dirname, resolve } from 'path';
+import { dirname, resolve } from 'node:path';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Command } from 'commander';
 import { Ora } from 'ora';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import { default as walk } from 'klaw';
 
 /**

@@ -55,7 +55,7 @@ export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | un
       /* eslint-disable-next-line @typescript-eslint/prefer-regexp-exec */
       const match = remote.stdout.match(regexp);
 
-      if (match && match.groups) {
+      if (match?.groups) {
         const owner = match.groups.owner;
         const repo = match.groups.repo;
 
