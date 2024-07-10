@@ -15,7 +15,7 @@ import {
 import { Command } from 'commander';
 import { Ora } from 'ora';
 import { parse as parseComment } from 'comment-parser';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import ts from 'typescript';
 
 type TAGS = Record<string, string>;
@@ -72,10 +72,7 @@ export const execute = async (
   try {
     const parserOptions: ParserOptions = {
       propFilter: props =>
-        !(
-          props.description.includes('@ignore') ||
-          (props.parent && props.parent.fileName.includes('node_modules'))
-        ),
+        !(props.description.includes('@ignore') || props.parent?.fileName.includes('node_modules')),
       shouldRemoveUndefinedFromOptional: true
     };
     const globbyOptions: GlobTask['options'] = {
@@ -103,8 +100,7 @@ export const execute = async (
           .forEach(key => {
             const prop = component.props[key];
             const type = prop.type.name.replace(/"/gu, "'");
-            let defaultValue =
-              prop.defaultValue && prop.defaultValue.value && prop.defaultValue.value.toString();
+            let defaultValue = prop.defaultValue?.value?.toString();
 
             if (
               (type === 'string' && defaultValue !== null) ||

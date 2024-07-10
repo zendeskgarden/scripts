@@ -6,7 +6,7 @@
  */
 
 import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
-import { readFile, rename, writeFile } from 'fs/promises';
+import { readFile, rename, writeFile } from 'node:fs/promises';
 import { Command } from 'commander';
 import { Ora } from 'ora';
 import { copy } from 'fs-extra';
@@ -14,7 +14,7 @@ import { default as handlebars } from 'handlebars';
 import { default as helpers } from 'handlebars-helpers';
 import lodash from 'lodash';
 import pluralize from 'pluralize';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import { default as walk } from 'klaw';
 
 /**

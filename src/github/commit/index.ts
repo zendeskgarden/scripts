@@ -52,7 +52,7 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
       });
 
       /* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */
-      if (commits && commits.data) {
+      if (commits?.data) {
         retVal = commits.data[0].sha || undefined;
       }
     } catch (error) {

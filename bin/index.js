@@ -10,7 +10,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import cmd from '../dist/cmd/index.js';
-import { createRequire } from 'module';
+import { createRequire } from 'node:module';
 import dotenv from 'dotenv';
 import figlet from 'figlet';
 import github from '../dist/github/index.js';
