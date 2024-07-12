@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.1](https://github.com/zendeskgarden/scripts/compare/v2.4.0...v2.4.1) (2024-07-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @octokit/rest to v21 ([#226](https://github.com/zendeskgarden/scripts/issues/226)) ([10e22c7](https://github.com/zendeskgarden/scripts/commit/10e22c773f358c89e8326fb3ede051435e8349bf))
+* **deps:** update dependency execa to v9 ([#227](https://github.com/zendeskgarden/scripts/issues/227)) ([f253f31](https://github.com/zendeskgarden/scripts/commit/f253f311afed3a4476dfc013088bd91712480699))
+* get commit SHA from API rather than GITHUB_SHA ([#228](https://github.com/zendeskgarden/scripts/issues/228)) ([c869522](https://github.com/zendeskgarden/scripts/commit/c86952265438d69e67cf72ea53f1c88b24c67811))
+
 ## [2.4.0](https://github.com/zendeskgarden/scripts/compare/v2.3.0...v2.4.0) (2024-06-27)
 
 
