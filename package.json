@@ -27,7 +27,7 @@
     "lint:md": "markdownlint README.md src/**/*.md",
     "prepare": "husky && npm run build",
     "start": "bin/index.js",
-    "tag": "[ `git rev-parse --abbrev-ref HEAD` = 'jzempel/commit-and-tag-version' ] && commit-and-tag-version --no-verify --npmPublishHint 'true'",
+    "tag": "[ `git rev-parse --abbrev-ref HEAD` = 'main' ] && commit-and-tag-version --no-verify --npmPublishHint 'true'",
     "test": "prettier-package-json --list-different && npm run format:all -- --check && npm run lint && npm start --version",
     "watch": "npm run build -- --watch"
   },
