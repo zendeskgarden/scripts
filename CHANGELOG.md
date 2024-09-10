@@ -1,6 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [2.4.2](https://github.com/zendeskgarden/scripts/compare/v2.4.1...v2.4.2) (2024-09-10)
+
+
+### Bug Fixes
+
+* **netlify-deploy:** ensure `--cwd` parameter works as expected with the latest `netlify-cli` ([#233](https://github.com/zendeskgarden/scripts/issues/233)) ([811d1fb](https://github.com/zendeskgarden/scripts/commit/811d1fbada10f9422b3962b54d48ef40e2e102c2))
 
 ### [2.4.1](https://github.com/zendeskgarden/scripts/compare/v2.4.0...v2.4.1) (2024-07-12)
 
