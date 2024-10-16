@@ -35,30 +35,6 @@ export const execute = async (args: ICommandCodemodArgs): Promise<string | undef
     ];
     const codemod = await execa('jscodeshift', codemodArgs, { preferLocal: true });
 
-    // Compensate for the lack of error handling in `jscodeshift`
-    if (codemod.stderr) {
-      if (codemod.stderr.includes('404: Not Found')) {
-        // Remote transform not found
-        throw new Error('transform not found');
-      } else if (codemod.stderr.includes('Error: Cannot find')) {
-        // Local transform not found
-        const _error = /^Error: (?<error>Cannot find.*)$/gmu.exec(codemod.stderr)?.groups?.error;
-
-        throw new Error(_error);
-      } else if (codemod.stderr.includes('[ERR_REQUIRE_ESM]')) {
-        // Unexpected transform module type
-        const _error = /^Error \[ERR_REQUIRE_ESM\]: (?<error>.*\n.*\n.*)$/gmu.exec(codemod.stderr)
-          ?.groups?.error;
-
-        throw new Error(_error?.replace(/\n/gu, ' '));
-      } else if (codemod.stderr.includes('TypeError: transform is not a function')) {
-        // Transform missing default export
-        throw new Error('transform is not a function');
-      } else {
-        throw new Error(codemod.stderr);
-      }
-    }
-
     retVal = codemod.stdout;
   } catch (error: unknown) {
     handleErrorMessage((error as ExecaError).message, 'cmd-codemod', args.spinner);
