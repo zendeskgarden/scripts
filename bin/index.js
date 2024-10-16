@@ -26,6 +26,7 @@ dotenv.config();
 
 program
   .version(version)
+  .addCommand(cmd.codemodCommand(spinner))
   .addCommand(cmd.docgenCommand(spinner))
   .addCommand(cmd.duCommand(spinner))
   .addCommand(github.branchCommand(spinner))

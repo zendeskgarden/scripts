@@ -5,7 +5,7 @@
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-export { docgen as cmdDocgen, du as cmdDu } from './cmd/index.js';
+export { codemod as cmdCodemod, docgen as cmdDocgen, du as cmdDu } from './cmd/index.js';
 export {
   branch as githubBranch,
   commit as githubCommit,
