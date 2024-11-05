@@ -103,7 +103,7 @@ export const execute = async (
             let defaultValue = prop.defaultValue?.value?.toString();
 
             if (
-              (type === 'string' && defaultValue !== null) ||
+              (type === 'string' && defaultValue !== null && defaultValue !== undefined) ||
               type.includes(`'${defaultValue}'`)
             ) {
               // Surround default string literals with quotes.
