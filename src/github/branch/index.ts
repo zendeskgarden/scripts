@@ -62,11 +62,11 @@ export default (spinner: Ora): Command => {
   return command
     .description('output GitHub branch name for the repo')
     .arguments('[path]')
-    .action(async path => {
+    .action(async (path: string) => {
       try {
         spinner.start();
 
-        const branch = await execute(path as string, spinner);
+        const branch = await execute(path, spinner);
 
         if (branch) {
           handleSuccessMessage(branch, spinner);

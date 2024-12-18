@@ -47,10 +47,15 @@ export const execute = async (args: INetlifyBandwidthArgs = {}): Promise<RETVAL 
     response = await fetch(url, { headers: client.defaultHeaders });
 
     if (response.ok) {
-      const data = await response.json();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      const data = (await response.json()) as {
+        included: number;
+        additional: number;
+        used: number;
+      };
 
       retVal = {
-        available: (data.included as number) + (data.additional as number),
+        available: data.included + data.additional,
         used: data.used
       };
     } else {

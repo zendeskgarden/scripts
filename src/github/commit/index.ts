@@ -53,6 +53,7 @@ export const execute = async (args: IGitHubCommitArgs = {}): Promise<string | un
         retVal = commits.data[0].sha || undefined;
       }
     } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       if ((error as RequestError).status !== 404) {
         handleErrorMessage(error, 'github-commit', args.spinner);
 

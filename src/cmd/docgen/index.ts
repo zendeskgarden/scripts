@@ -82,6 +82,7 @@ export const execute = async (
       ignore: args.ignore || DEFAULT_IGNORE
     };
 
+    // eslint-disable-next-line @typescript-eslint/await-thenable
     for await (const path of Array.isArray(args.paths) ? args.paths : [args.paths]) {
       const resolvedPath = resolve(path);
       /* eslint-disable-next-line @typescript-eslint/unbound-method */
@@ -158,12 +159,8 @@ export default (spinner: Ora): Command => {
   return command
     .description('generate component documentation')
     .argument('<paths...>', 'one or more component paths')
-    .option(
-      '-x --extensions <extensions...>',
-      'file extensions to consider',
-      DEFAULT_EXTENSIONS as unknown as string
-    )
-    .option('-i --ignore <ignore...>', 'paths to ignore', DEFAULT_IGNORE as unknown as string)
+    .option('-x --extensions <extensions...>', 'file extensions to consider', DEFAULT_EXTENSIONS)
+    .option('-i --ignore <ignore...>', 'paths to ignore', DEFAULT_IGNORE)
     .option('--pretty', 'pretty-print JSON')
     .action(async (paths: string[]) => {
       try {
