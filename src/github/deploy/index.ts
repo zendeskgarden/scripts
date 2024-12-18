@@ -70,7 +70,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     await github.repos.createDeploymentStatus({
       owner: repository.owner,
       repo: repository.repo,
-      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-type-assertion */
       deployment_id: (deployment.data as any).id, // HACK for types broken in oktokit 17.9.1
       state: error ? 'error' : 'success',
       environment_url: typeof result === 'object' ? result.url : result,
@@ -80,6 +80,7 @@ export const execute = async (args: IGitHubDeployArgs): Promise<string | undefin
     });
 
     if (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       throw error as Error;
     }
 

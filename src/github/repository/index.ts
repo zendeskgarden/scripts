@@ -27,12 +27,12 @@ type RETVAL = {
 export const execute = async (path?: string, spinner?: Ora): Promise<RETVAL | undefined> => {
   let retVal: RETVAL | undefined;
 
-  if (process.env.TRAVIS_REPO_SLUG) {
-    const [owner, repo] = process.env.TRAVIS_REPO_SLUG.split('/') as [string, string];
+  if (process.env.GITHUB_REPOSITORY) {
+    const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
 
     retVal = { owner, repo };
-  } else if (process.env.GITHUB_ACTIONS) {
-    const [owner, repo] = process.env.GITHUB_REPOSITORY!.split('/') as [string, string];
+  } else if (process.env.TRAVIS_REPO_SLUG) {
+    const [owner, repo] = process.env.TRAVIS_REPO_SLUG.split('/');
 
     retVal = { owner, repo };
   } else if (process.env.CIRCLECI) {
@@ -79,11 +79,11 @@ export default (spinner: Ora): Command => {
   return command
     .description('output GitHub repository name for the repo')
     .arguments('[path]')
-    .action(async path => {
+    .action(async (path: string) => {
       try {
         spinner.start();
 
-        const repository = await execute(path as string, spinner);
+        const repository = await execute(path, spinner);
 
         if (repository) {
           handleSuccessMessage(`${repository.owner}/${repository.repo}`, spinner);

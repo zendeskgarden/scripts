@@ -74,6 +74,7 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
     });
   } catch (error) {
     handleErrorMessage(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       (error as Error).message ? (error as Error).message : error,
       'lerna-changelog',
       args.spinner
