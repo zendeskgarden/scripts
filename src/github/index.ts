@@ -8,6 +8,7 @@
 import { execute as branch, default as branchCommand } from './branch/index.js';
 import { execute as commit, default as commitCommand } from './commit/index.js';
 import { execute as deploy, default as deployCommand } from './deploy/index.js';
+import { execute as membership, default as membershipCommand } from './membership/index.js';
 import { execute as pages, default as pagesCommand } from './pages/index.js';
 import { execute as release, default as releaseCommand } from './release/index.js';
 import { execute as repository, default as repositoryCommand } from './repository/index.js';
@@ -18,6 +19,7 @@ const commands = {
   branchCommand,
   commitCommand,
   deployCommand,
+  membershipCommand,
   pagesCommand,
   releaseCommand,
   repositoryCommand,
@@ -33,6 +35,8 @@ export {
   commitCommand,
   deploy,
   deployCommand,
+  membership,
+  membershipCommand,
   pages,
   pagesCommand,
   release,
