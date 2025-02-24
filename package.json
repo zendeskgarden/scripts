@@ -66,7 +66,7 @@
     "@types/handlebars-helpers": "0.5.6",
     "@types/klaw": "3.0.6",
     "@types/lodash": "4.17.13",
-    "@types/node": "22.10.1",
+    "@types/node": "22.13.5",
     "@types/pluralize": "0.0.33",
     "@zendeskgarden/eslint-config": "45.0.0",
     "commit-and-tag-version": "12.5.0",
