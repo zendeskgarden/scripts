@@ -68,7 +68,7 @@
     "@types/lodash": "4.17.13",
     "@types/node": "22.10.1",
     "@types/pluralize": "0.0.33",
-    "@zendeskgarden/eslint-config": "45.0.0",
+    "@zendeskgarden/eslint-config": "46.0.0",
     "commit-and-tag-version": "12.5.0",
     "eslint": "9.17.0",
     "eslint-config-prettier": "9.1.0",
