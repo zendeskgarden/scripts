@@ -22,7 +22,7 @@ const program = new Command();
 const spinner = ora();
 const version = createRequire(import.meta.url)('../package.json').version;
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 program
   .version(version)
