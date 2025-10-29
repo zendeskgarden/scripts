@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.4.4](https://github.com/zendeskgarden/scripts/compare/v2.4.3...v2.4.4) (2025-10-29)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#259](https://github.com/zendeskgarden/scripts/issues/259)) ([6426e65](https://github.com/zendeskgarden/scripts/commit/6426e65c34ec10502689011dbe55ec987af2a0a0))
+* **deps:** update dependency @octokit/request-error to v6.1.7 [security] ([#276](https://github.com/zendeskgarden/scripts/issues/276)) ([5c7875f](https://github.com/zendeskgarden/scripts/commit/5c7875fa82640a4bc9d96ed5b1dbbbe8061f0407))
+* **deps:** update dependency commander to v14 ([#288](https://github.com/zendeskgarden/scripts/issues/288)) ([c19a1b4](https://github.com/zendeskgarden/scripts/commit/c19a1b4b4df20c04c8e48c43e22f5c9cfcdaa92a))
+* **deps:** update dependency dotenv to v17 ([#289](https://github.com/zendeskgarden/scripts/issues/289)) ([66cf2b1](https://github.com/zendeskgarden/scripts/commit/66cf2b1fac3aff3f729a986201cdc6fdb78fce57))
+* **deps:** update dependency globby to v15 ([#303](https://github.com/zendeskgarden/scripts/issues/303)) ([dd46f55](https://github.com/zendeskgarden/scripts/commit/dd46f55581ac203cd14ce07b32f37acf7f029468))
+* **deps:** update dependency netlify to v23 ([#294](https://github.com/zendeskgarden/scripts/issues/294)) ([83805a3](https://github.com/zendeskgarden/scripts/commit/83805a3bb39b926f53f0d0adc2295c01812596df))
+* **deps:** update dependency netlify-cli to v23 ([#295](https://github.com/zendeskgarden/scripts/issues/295)) ([3b239c9](https://github.com/zendeskgarden/scripts/commit/3b239c9801ef18096c8a80f1305d402c75d3028d))
+* **deps:** update dependency ora to v9 ([#304](https://github.com/zendeskgarden/scripts/issues/304)) ([ad46f7c](https://github.com/zendeskgarden/scripts/commit/ad46f7c86e0918b36221312043a5b3e9c41b9c78))
+* **deps:** update octokit monorepo (major) ([#292](https://github.com/zendeskgarden/scripts/issues/292)) ([271a919](https://github.com/zendeskgarden/scripts/commit/271a919520ca68c2fdc5b5a32ae600ea75e8a15d))
+
 ## [2.4.3](https://github.com/zendeskgarden/scripts/compare/v2.4.2...v2.4.3) (2024-11-05)
 
 
