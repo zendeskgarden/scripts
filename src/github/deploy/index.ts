@@ -118,7 +118,7 @@ export default (spinner: Ora): Command => {
             try {
               const result = await execa(subcommand, args);
 
-              retVal = result.stdout.toString();
+              retVal = result.stdout;
             } catch (error: unknown) {
               handleErrorMessage(error, subcommand, spinner);
               throw error;

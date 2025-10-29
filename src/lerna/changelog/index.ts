@@ -55,7 +55,7 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
     if (!tagTo) {
       const describe = await execa('git', describeArgs);
 
-      tagTo = describe.stdout.toString();
+      tagTo = describe.stdout;
     }
 
     if (!tagFrom) {
@@ -63,15 +63,12 @@ export const execute = async (args: ILernaChangelogArgs = {}): Promise<string | 
 
       const describe = await execa('git', describeArgs);
 
-      tagFrom = describe.stdout.toString();
+      tagFrom = describe.stdout;
     }
 
     process.chdir(rootPath.stdout);
 
-    retVal = await changelog.createMarkdown({
-      tagFrom,
-      tagTo
-    });
+    retVal = await changelog.createMarkdown({ tagFrom, tagTo });
   } catch (error) {
     handleErrorMessage(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
