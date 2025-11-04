@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.4.5](https://github.com/zendeskgarden/scripts/compare/v2.4.4...v2.4.5) (2025-11-04)
+
+
+### Bug Fixes
+
+* **netlify-deploy:** simplify API usage ([#312](https://github.com/zendeskgarden/scripts/issues/312)) ([8d99880](https://github.com/zendeskgarden/scripts/commit/8d998801f5902fb4b8d18b7602479ae0ef08d1ed))
+
 ## [2.4.4](https://github.com/zendeskgarden/scripts/compare/v2.4.3...v2.4.4) (2025-10-29)
 
 
