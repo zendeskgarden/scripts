@@ -32,6 +32,7 @@
     "watch": "npm run build -- --watch"
   },
   "dependencies": {
+    "@netlify/api": "14.0.9",
     "@octokit/graphql": "9.0.2",
     "@octokit/request-error": "7.0.1",
     "@octokit/rest": "22.0.0",
@@ -51,8 +52,6 @@
     "klaw": "4.1.0",
     "lerna-changelog": "2.2.0",
     "lodash": "4.17.21",
-    "netlify": "23.9.5",
-    "netlify-cli": "23.9.5",
     "ora": "9.0.0",
     "pluralize": "8.0.0",
     "react-docgen-typescript": "2.4.0",

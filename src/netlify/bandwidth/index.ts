@@ -8,7 +8,7 @@
 import { siteId as getSiteId, token as getToken } from '../index.js';
 import { handleErrorMessage, handleSuccessMessage } from '../../utils/index.js';
 import { Command } from 'commander';
-import { NetlifyAPI } from 'netlify';
+import { NetlifyAPI } from '@netlify/api';
 import { Ora } from 'ora';
 
 interface INetlifyBandwidthArgs {
@@ -40,11 +40,11 @@ export const execute = async (args: INetlifyBandwidthArgs = {}): Promise<RETVAL 
     const siteId = args.siteId || (await getSiteId(args.spinner));
 
     /* https://open-api.netlify.com/#operation/getSite */
-    let response = await client.getSite({ siteId });
-    const url = `${client.basePath}/accounts/${response.account_slug}/bandwidth`;
+    const site = await client.getSite({ site_id: siteId! });
+    const url = `${client.basePath}/accounts/${site.account_slug}/bandwidth`;
 
     /* bandwidth API call not yet supported by Netlify */
-    response = await fetch(url, { headers: client.defaultHeaders });
+    const response = await fetch(url, { headers: client.defaultHeaders });
 
     if (response.ok) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
