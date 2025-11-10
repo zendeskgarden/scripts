@@ -33,7 +33,7 @@ type RETVAL = {
  * @param {string} [args.token] GitHub personal access token.
  * @param {string} [args.spinner] Terminal spinner.
  *
- * @returns {Promise<object>} TODO ...
+ * @returns {Promise<object>} The success and failure results of the membership command.
  */
 export const execute = async (args: IGitHubMembershipArgs): Promise<RETVAL> => {
   const retVal: RETVAL = { success: [], failure: [] };

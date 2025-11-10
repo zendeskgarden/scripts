@@ -40,6 +40,7 @@ the individual command README for details.
 - [`garden github-branch`](src/github/branch#readme)
 - [`garden github-commit`](src/github/commit#readme)
 - [`garden github-deploy`](src/github/deploy#readme)
+- [`garden github-membership`](src/github/membership#readme)
 - [`garden github-pages`](src/github/pages#readme)
 - [`garden github-release`](src/github/release#readme)
 - [`garden github-repository`](src/github/repository#readme)
@@ -68,6 +69,6 @@ conduct](.github/CODE_OF_CONDUCT.md). Please participate accordingly.
 
 ## License
 
-Copyright 2021 Zendesk
+Copyright 2025 Zendesk
 
 Licensed under the [Apache License, Version 2.0](LICENSE.md)
