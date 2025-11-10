@@ -47,8 +47,8 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
       let email: string;
 
       try {
-        name = (await execa('git', ['config', 'user.name'])).stdout.toString();
-        email = (await execa('git', ['config', 'user.email'])).stdout.toString();
+        name = (await execa('git', ['config', 'user.name'])).stdout;
+        email = (await execa('git', ['config', 'user.email'])).stdout;
       } catch {
         name = 'Zendesk Garden';
         email = 'garden@zendesk.com';
@@ -59,10 +59,7 @@ export const execute = async (args: IGitHubPagesArgs): Promise<string | undefine
         args.dir,
         {
           repo: `https://${token}@github.com/${owner}/${repo}.git`,
-          user: {
-            name,
-            email
-          },
+          user: { name, email },
           message,
           nojekyll: args.disableJekyll,
           silent: true

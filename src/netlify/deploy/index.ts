@@ -44,10 +44,14 @@ export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefi
     const siteId = args.siteId || (await getSiteId(args.spinner));
     const token = args.token || (await getToken(args.spinner));
     const deployArgs = [
+      'exec',
+      '--package=netlify-cli@15.11.0', // last release before monorepo crud
+      '--yes',
+      '--',
+      'netlify',
       'deploy',
       `--site=${siteId}`,
       `--auth=${token}`,
-      `--cwd=${process.cwd()}`,
       `--dir=${args.dir}`,
       '--json'
     ];
@@ -60,9 +64,8 @@ export const execute = async (args: INetlifyDeployArgs): Promise<RETVAL | undefi
       deployArgs.push(`--message=${args.message}`);
     }
 
-    /* https://cli.netlify.com/commands/deploy requires netlify-cli */
-    const deploy = await execa('netlify', deployArgs, { preferLocal: true });
-
+    /* https://cli.netlify.com/commands/deploy */
+    const deploy = await execa('npm', deployArgs);
     const response = JSON.parse(deploy.stdout);
     const url = args.production ? response.url : response.deploy_url;
 

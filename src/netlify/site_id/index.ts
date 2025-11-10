@@ -26,7 +26,7 @@ export const execute = async (spinner?: Ora): Promise<string | undefined> => {
     try {
       const siteId = await execa('git', ['config', '--get', 'netlify.siteid']);
 
-      retVal = siteId.stdout.toString();
+      retVal = siteId.stdout;
     } catch (error: unknown) {
       handleErrorMessage(error, 'netlify-site-id', spinner);
 
