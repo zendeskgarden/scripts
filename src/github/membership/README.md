@@ -17,7 +17,7 @@ const args: {
 };
 
 (async () => {
-  const { success, failure } = await githubRelease(args);
+  const { success, failure } = await githubMembership(args);
 
   console.log(success, failure);
 })();
