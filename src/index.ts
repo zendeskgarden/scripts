@@ -10,6 +10,7 @@ export {
   branch as githubBranch,
   commit as githubCommit,
   deploy as githubDeploy,
+  membership as githubMembership,
   pages as githubPages,
   release as githubRelease,
   repository as githubRepository,
