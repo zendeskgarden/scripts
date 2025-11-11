@@ -44,10 +44,9 @@ export const execute = async (args: IGitHubMembershipArgs): Promise<RETVAL> => {
     const org = (args.org || (await getRepository(args.path, args.spinner))?.owner)!;
 
     if (args.users) {
-      const users = Array.isArray(args.users) ? args.users : [args.users];
       const requests = [];
 
-      for (const user of users) {
+      for (const user of args.users) {
         /* https://octokit.github.io/rest.js/v21/#orgs-remove-member */
         const request = github.orgs.removeMember({ org, username: user });
 
