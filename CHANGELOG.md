@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.5.0](https://github.com/zendeskgarden/scripts/compare/v2.4.5...v2.5.0) (2025-11-11)
+
+
+### Features
+
+* new `github-membership` script ([#314](https://github.com/zendeskgarden/scripts/issues/314)) ([2dfadd8](https://github.com/zendeskgarden/scripts/commit/2dfadd880188978e9297781b1a03d2d867e99c3f))
+
 ## [2.4.5](https://github.com/zendeskgarden/scripts/compare/v2.4.4...v2.4.5) (2025-11-04)
 
 
