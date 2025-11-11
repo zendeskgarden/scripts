@@ -69,7 +69,7 @@
     "@types/pluralize": "0.0.33",
     "@zendeskgarden/eslint-config": "47.0.0",
     "commit-and-tag-version": "12.6.0",
-    "eslint": "9.38.0",
+    "eslint": "9.39.0",
     "eslint-config-prettier": "10.1.8",
     "husky": "9.1.7",
     "markdownlint-cli": "0.45.0",
