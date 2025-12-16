@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.5.1](https://github.com/zendeskgarden/scripts/compare/v2.5.0...v2.5.1) (2025-12-16)
+
+
+### Bug Fixes
+
+* **netlify-bandwidth:** hack to handle `null` included bytes returned by the Netlify API ([#316](https://github.com/zendeskgarden/scripts/issues/316)) ([ad4694f](https://github.com/zendeskgarden/scripts/commit/ad4694fa7af138633a7fe89639f12377cc47a078))
+
 ## [2.5.0](https://github.com/zendeskgarden/scripts/compare/v2.4.5...v2.5.0) (2025-11-11)
 
 
