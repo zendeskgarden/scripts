@@ -49,13 +49,15 @@ export const execute = async (args: INetlifyBandwidthArgs = {}): Promise<RETVAL 
     if (response.ok) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       const data = (await response.json()) as {
-        included: number;
+        included: number | null;
         additional: number;
         used: number;
       };
 
       retVal = {
-        available: data.included + data.additional,
+        /* HACK: Netlify started returning `null` on 12dec2025 for sites on the
+         * open source plan, which have a standard allotment of 100 GiB */
+        available: (data.included ?? 107374182400) + data.additional,
         used: data.used
       };
     } else {
