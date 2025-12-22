@@ -54,7 +54,7 @@
     "lodash": "4.17.21",
     "ora": "9.0.0",
     "pluralize": "8.0.0",
-    "react-docgen-typescript": "2.4.0",
+    "react-docgen-typescript": "2.2.2",
     "typescript": "5.9.3"
   },
   "devDependencies": {
