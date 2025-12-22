@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.5.2](https://github.com/zendeskgarden/scripts/compare/v2.5.1...v2.5.2) (2025-12-22)
+
+
+### Bug Fixes
+
+* **docgen:** downgrade to `react-docgen-typescript@2.2.2` for correct component name parsing ([#317](https://github.com/zendeskgarden/scripts/issues/317)) ([659d971](https://github.com/zendeskgarden/scripts/commit/659d971091ea7dccec3d06bf1b030d7fae913099))
+
 ## [2.5.1](https://github.com/zendeskgarden/scripts/compare/v2.5.0...v2.5.1) (2025-12-16)
 
 
