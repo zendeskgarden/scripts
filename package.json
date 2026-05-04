@@ -55,7 +55,7 @@
     "ora": "9.0.0",
     "pluralize": "8.0.0",
     "react-docgen-typescript": "2.2.2",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   },
   "devDependencies": {
     "@babel/core": "7.28.5",
