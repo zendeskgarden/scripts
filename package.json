@@ -58,7 +58,7 @@
     "typescript": "5.9.3"
   },
   "devDependencies": {
-    "@babel/core": "7.28.5",
+    "@babel/core": "7.29.6",
     "@types/figlet": "1.7.0",
     "@types/fs-extra": "11.0.4",
     "@types/gh-pages": "6.1.0",
