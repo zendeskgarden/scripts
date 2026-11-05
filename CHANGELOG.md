@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.5.4](https://github.com/zendeskgarden/scripts/compare/v2.5.3...v2.5.4) (2026-11-05)
+
+
+### Bug Fixes
+
+* **deps:** fix critical handlebars and tar vulnerabilities ([#332](https://github.com/zendeskgarden/scripts/issues/332)) ([9ccd88a](https://github.com/zendeskgarden/scripts/commit/9ccd88ae5f1ad167326db15b896c200e8fc5ba02))
+
 ## [2.5.3](https://github.com/zendeskgarden/scripts/compare/v2.5.2...v2.5.3) (2025-12-22)
 
 
