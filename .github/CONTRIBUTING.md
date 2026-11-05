@@ -63,6 +63,32 @@ available:
    and description as the scope, description, and body for a conventional
    commit.
 
+## Publishing Workflow
+
+Releases are cut by Garden
+[maintainers](https://github.com/orgs/zendeskgarden/teams/maintainers)
+with push access to `main`. Publishing runs in CircleCI using the
+`maintainer` context, which holds the npm credentials.
+
+1. Be sure every change for the release is merged to `main` (squash
+   merged with a [conventional commit](https://conventionalcommits.org/)
+   title).
+1. Update your local `main` and confirm a clean working tree:
+   `git switch main && git pull --ff-only && git status`.
+1. Install and verify: `npm ci && npm test`.
+1. Run `npm run tag`. This runs only on `main`. It chooses the next
+   [semantic version](https://semver.org/) from the conventional commits
+   since the last tag (`fix` is a patch, `feat` a minor, a breaking
+   change a major), updates `package.json`, `package-lock.json` and
+   `CHANGELOG.md`, commits `chore(release): X.Y.Z`, and creates the tag
+   `vX.Y.Z`. To preview without changing anything, run
+   `npx commit-and-tag-version --dry-run --no-verify`.
+1. Push the commit and tag: `git push --follow-tags origin main`.
+1. CircleCI runs `build`, then `test`, then `publish`. The `publish` job
+   runs only for tags like `vX.Y.Z` and runs `npm publish`.
+1. Verify the CircleCI workflow is green and that
+   `npm view @zendeskgarden/scripts version` shows the new version.
+
 ## License
 
 By contributing to Garden, you agree that your contributions will be
